@@ -1,5 +1,9 @@
 extends Node2D
 
+signal wave_started(wave_number: int, total_drones: int)
+signal wave_completed(wave_number: int, reward_money: int)
+signal break_timer_updated(time_remaining: float)
+
 @export var max_waves: int = 10
 @export var break_duration: float = 4.0
 
@@ -28,6 +32,7 @@ func _process(delta: float) -> void:
 		if current_wave >= max_waves:
 			return
 		break_timer -= delta
+		break_timer_updated.emit(max(0.0, break_timer))
 		if break_timer <= 0.0:
 			_start_next_wave()
 		return
@@ -59,6 +64,7 @@ func _start_next_wave() -> void:
 	spawn_timer = 0.1
 	
 	_update_hud()
+	wave_started.emit(current_wave, drones_to_spawn_this_wave)
 	print("Wave ", current_wave, " started. Spawning ", drones_to_spawn_this_wave, " drones.")
 
 func _spawn_single_drone() -> void:
@@ -97,13 +103,18 @@ func _on_wave_completed() -> void:
 	break_timer = break_duration
 	
 	# награда за завершение волны
+	var reward = 40 + (current_wave * 10)
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud and hud.has_method("add_money"):
-		hud.add_money(40 + (current_wave * 10))
+		hud.add_money(reward)
 		
+	wave_completed.emit(current_wave, reward)
 	print("Wave ", current_wave, " completed. Next wave in ", break_duration, " seconds.")
 
 func _update_hud() -> void:
 	var hud = get_tree().get_first_node_in_group("hud")
 	if hud and hud.has_method("update_wave"):
 		hud.update_wave(current_wave, max_waves)
+
+func get_active_drones_count() -> int:
+	return get_tree().get_nodes_in_group("drones").size()

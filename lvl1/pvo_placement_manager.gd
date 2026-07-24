@@ -15,7 +15,7 @@ func _connect_hud() -> void:
 		if not hud_ref.pvo_selected.is_connected(_on_pvo_selected):
 			hud_ref.pvo_selected.connect(_on_pvo_selected)
 
-func start_placement(pvo_type: String, cost: int) -> void:
+func start_placement(_pvo_type: String, cost: int) -> void:
 	if is_instance_valid(ghost_instance):
 		return
 	

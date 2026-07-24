@@ -15,3 +15,22 @@ TIP_PREFIX,"Tip:  ","Совет:  "
 "Improve your air defense.","Improve your air defense.","Улучшайте свою противовоздушную оборону."
 MONEY,Money,Деньги
 WAVE,Wave,Волна
+TABLET_HEADER,Command,Коммандование
+TABLET_CHANNEL,Radio,Рация
+TABLET_STATUS_TITLE,"Status:","Статус:"
+TABLET_TARGETS_TITLE,"Targets:","Целей:"
+TABLET_TIMER_TITLE,"Next attack:","След. атака:"
+TABLET_STATUS_ACTIVE,Hostile Raid,Воздушная атака
+TABLET_STATUS_BREAK,Intermission,Перерыв
+TABLET_STATUS_CLEARED,UAVs shot down,БПЛА сбиты
+TABLET_TARGETS,Active Targets,Активные цели
+TABLET_NEXT_WAVE,Next wave in,Следующая волна через
+TABLET_GENSTAFF,GenStaff,ГенШтаб
+TABLET_SYSTEM,System,Система
+"TABLET_DISPATCH_1","Shahed-136 UAV group detected heading towards our air space. Deploy air defense units.","Обнаружена группа БПЛА шахед-136, движущаяся в наше воздушное пространство. Разверните средства ПВО."
+"TABLET_DISPATCH_2","Warning! FPV strike drones joined the enemy attack formation.","Внимание! К атаке противника присоединились ударные FPV дроны."
+"TABLET_DISPATCH_3","Enemy raid intensity is increasing. Keep your air defense ready.","Интенсивность налета противника увеличивается. Держите средства ПВО в готовности."
+"TABLET_DISPATCH_GENERIC","Command: Enemy UAV raid detected. Protect the air space.","Штаб: Зафиксирован налет БПЛА противника. Защищайте воздушное пространство."
+"TABLET_WAVE_CLEARED_MSG","Wave %d successfully repelled. Reward: +$%d","Волна %d успешно отбита. Награда: +%d$"
+TABLET_TOGGLE_OPEN,Tablet,Планшет
+TABLET_TOGGLE_CLOSE,Hide,Скрыть

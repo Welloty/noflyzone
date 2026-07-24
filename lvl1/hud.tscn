@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bse3nc3j0q25n"]
 
 [ext_resource type="Script" uid="uid://c15ihusqcgh2i" path="res://lvl1/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://c1b4jmk6orlr1" path="res://lvl1/tablet_panel.gd" id="2_tablet"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 14.0
@@ -87,6 +88,50 @@ font_color = Color(0.29, 0.486, 0.145, 1)
 [sub_resource type="LabelSettings" id="LS_value_wave"]
 font_size = 18
 font_color = Color(0.741, 0.765, 0.78, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tablet"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.055, 0.115, 0.065, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="LabelSettings" id="LS_tablet_title"]
+font_size = 14
+font_color = Color(0.9, 0.95, 0.9, 1)
+
+[sub_resource type="LabelSettings" id="LS_tablet_channel"]
+font_size = 10
+font_color = Color(0.35, 0.85, 0.3, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tablet_inner"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.038, 0.078, 0.045, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.38, 0.14, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LS_tablet_val"]
+font_size = 12
+font_color = Color(0.85, 0.9, 0.87, 1)
 
 [node name="HUD" type="CanvasLayer" unique_id=1855121295]
 script = ExtResource("1_hud")
@@ -241,3 +286,116 @@ label_settings = SubResource("LS_header")
 layout_mode = 2
 text = "1 / 10"
 label_settings = SubResource("LS_value_wave")
+
+[node name="WaveTablet" type="Control" parent="Control" unique_id=2000000001]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -285.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 560.0
+grow_horizontal = 0
+script = ExtResource("2_tablet")
+
+[node name="ToggleButton" type="Button" parent="Control/WaveTablet" unique_id=2000000002]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = -2.0
+offset_bottom = 22.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "▶ Скрыть"
+
+[node name="TabletPanel" type="PanelContainer" parent="Control/WaveTablet" unique_id=2000000003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tablet")
+
+[node name="VBox" type="VBoxContainer" parent="Control/WaveTablet/TabletPanel" unique_id=2000000004]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeaderBox" type="HBoxContainer" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000005]
+layout_mode = 2
+
+[node name="HeaderTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/HeaderBox" unique_id=2000000006]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Командование"
+label_settings = SubResource("LS_tablet_title")
+
+[node name="ChannelLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000007]
+unique_name_in_owner = true
+layout_mode = 2
+text = "● Информация"
+label_settings = SubResource("LS_tablet_channel")
+
+[node name="StatusCard" type="PanelContainer" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000008]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tablet_inner")
+
+[node name="Grid" type="GridContainer" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard" unique_id=2000000009]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="StatusTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000010]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Статус:"
+label_settings = SubResource("LS_header")
+
+[node name="StatusValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000011]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Перерыв"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="TargetsTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000012]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Целей:"
+label_settings = SubResource("LS_header")
+
+[node name="TargetsValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000013]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="TimerTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000014]
+unique_name_in_owner = true
+layout_mode = 2
+text = "След. атака:"
+label_settings = SubResource("LS_header")
+
+[node name="TimerValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000015]
+unique_name_in_owner = true
+layout_mode = 2
+text = "--"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000016]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MessagesVBox" type="VBoxContainer" parent="Control/WaveTablet/TabletPanel/VBox/ScrollContainer" unique_id=2000000017]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6

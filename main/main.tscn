@@ -291,7 +291,7 @@ offset_left = 70.0
 offset_top = 612.0
 offset_right = 540.0
 offset_bottom = 632.0
-text = "SAAW TOWER DEFENCE  |  v0.1.1 DEV BUILD"
+text = "SAAW TOWER DEFENCE  |  v0.1.2 DEV BUILD"
 label_settings = SubResource("LS_version")
 
 [node name="SettingsOverlay" type="ColorRect" parent="." unique_id=300000001]
