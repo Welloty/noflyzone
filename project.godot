@@ -13,18 +13,24 @@ config_version=5
 config/name="saawtd"
 run/main_scene="res://loading/control.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://loading/icon.svg"
+config/icon="uid://ci4vl08fuctkj"
 
 [autoload]
 
 SettingsManager="*res://settings_manager.gd"
 Global="*uid://bvvb3ymjcjkru"
+DiscordRPCLoader="*uid://bl73nb1dnhy2b"
+Rpc="*uid://blcf7k44sfui0"
 
 [display]
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg")
 
 [internationalization]
 

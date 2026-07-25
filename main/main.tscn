@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bl24tj8bl0sfh"]
 
 [ext_resource type="Script" uid="uid://c7dmrw1ahjn5y" path="res://main/main.gd" id="1_mgd"]
+[ext_resource type="Texture2D" uid="uid://bwokapolt2lcv" path="res://main/social/github.png" id="2_c651c"]
+[ext_resource type="Texture2D" uid="uid://17hw0w3rskly" path="res://main/social/discord.png" id="3_3wy1v"]
+[ext_resource type="Texture2D" uid="uid://ddhqrl33tidcu" path="res://main/social/telegram.png" id="4_kfbq2"]
 
 [sub_resource type="LabelSettings" id="LS_title"]
 font_size = 108
@@ -271,7 +274,7 @@ offset_left = 575.0
 offset_top = 55.0
 offset_right = 1080.0
 offset_bottom = 75.0
-text = "[ Github: https://github.com/Welloty/saawtd ]"
+text = "[   Github: https://github.com/Welloty/saawtd ]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
@@ -284,6 +287,15 @@ offset_top = 4.0
 offset_right = 397.41605
 offset_bottom = 23.0
 uri = "https://github.com/Welloty/saawtd"
+
+[node name="TextureRect" type="TextureRect" parent="Github" unique_id=2068850942]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 7.000003
+offset_right = 369.0
+offset_bottom = 287.0
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_c651c")
 
 [node name="VersionLabel" type="Label" parent="." unique_id=2000052620]
 layout_mode = 0
@@ -411,7 +423,7 @@ offset_left = 575.0
 offset_top = 80.0
 offset_right = 1080.0
 offset_bottom = 102.0
-text = "[ Discord: https://discord.gg/bp9hN9rN4N ]"
+text = "[   Discord: https://discord.gg/bp9hN9rN4N ]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
@@ -425,13 +437,22 @@ offset_right = 397.41605
 offset_bottom = 22.0
 uri = "https://discord.gg/bp9hN9rN4N"
 
+[node name="TextureRect" type="TextureRect" parent="Discord" unique_id=2014223795]
+layout_mode = 0
+offset_left = 98.999985
+offset_top = 7.000004
+offset_right = 546.00006
+offset_bottom = 454.0
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("3_3wy1v")
+
 [node name="Telegram" type="Label" parent="." unique_id=720527111]
 layout_mode = 0
 offset_left = 575.0
 offset_top = 105.0
 offset_right = 1080.0
 offset_bottom = 127.0
-text = "[ Telegram: https://t.me/saawtd ]"
+text = "[   Telegram: https://t.me/saawtd ]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
@@ -444,6 +465,15 @@ offset_top = 3.0
 offset_right = 397.41605
 offset_bottom = 22.0
 uri = "https://t.me/saawtd"
+
+[node name="TextureRect" type="TextureRect" parent="Telegram" unique_id=1099002677]
+layout_mode = 0
+offset_left = 133.99997
+offset_top = 6.9999995
+offset_right = 581.00024
+offset_bottom = 454.0
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("4_kfbq2")
 
 [connection signal="pressed" from="DeployButton" to="." method="_on_deploy_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]
