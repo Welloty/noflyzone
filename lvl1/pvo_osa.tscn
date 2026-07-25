@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://crhxw4jb6bvii"]
+
+[ext_resource type="Script" uid="uid://bu7nax4wpskpw" path="res://lvl1/pvo_osa.gd" id="1_kjk6u"]
+[ext_resource type="Texture2D" uid="uid://c723yu8fnpled" path="res://lvl1/texture/pvo_osa_base.png" id="2_6l4k1"]
+[ext_resource type="Texture2D" uid="uid://b4ay7xrrga5xa" path="res://lvl1/texture/pvo_osa_head.png" id="3_kf8mv"]
+[ext_resource type="Texture2D" uid="uid://qgcuqpux1c35" path="res://lvl1/texture/pvo_osa_radar.png" id="4_6bq1l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_click"]
+radius = 28.0
+
+[node name="PvoOsa" type="Node2D" unique_id=2112447632]
+script = ExtResource("1_kjk6u")
+
+[node name="ShotLine" type="Line2D" parent="." unique_id=2080708618]
+visible = false
+width = 3.0
+default_color = Color(1, 0.85, 0.2, 1)
+
+[node name="Base" type="Node2D" parent="." unique_id=1239697976]
+
+[node name="BaseSprite" type="Sprite2D" parent="Base" unique_id=918132195]
+rotation = 4.712389
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_6l4k1")
+
+[node name="TurretHead" type="Node2D" parent="." unique_id=1604538069]
+position = Vector2(-8, -1)
+
+[node name="HeadSprite" type="Sprite2D" parent="TurretHead" unique_id=1865976766]
+position = Vector2(7.235, 1)
+rotation = 4.712389
+scale = Vector2(0.1, 0.09)
+texture = ExtResource("3_kf8mv")
+
+[node name="BarrelLeft" type="Node2D" parent="TurretHead" unique_id=1406920972]
+position = Vector2(7.1, -4.7)
+
+[node name="BarrelRight" type="Node2D" parent="TurretHead" unique_id=1133294235]
+position = Vector2(7, 8.3)
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1198476314]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1880660341]
+visible = false
+shape = SubResource("CircleShape2D_click")
+
+[node name="Radar" type="Node2D" parent="." unique_id=1398944089]
+position = Vector2(-8, 0.8)
+
+[node name="Radar" type="Sprite2D" parent="Radar" unique_id=2113658777]
+position = Vector2(8.52, -0.8)
+rotation = 4.712389
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_6bq1l")

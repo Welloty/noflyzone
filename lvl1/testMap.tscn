@@ -41,7 +41,7 @@ script = ExtResource("9_wave_mgr")
 
 [node name="PauseMenu" parent="." unique_id=1536623147 instance=ExtResource("6_pause")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=911213680]
+[node name="map" type="Sprite2D" parent="." unique_id=911213680]
 show_behind_parent = true
 texture = ExtResource("1_evo85")
 

@@ -159,9 +159,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -140.0
+offset_left = -175.0
 offset_top = 12.0
-offset_right = 140.0
+offset_right = 174.99976
 offset_bottom = 60.0
 grow_horizontal = 2
 
@@ -172,7 +172,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/TopPvoBar/PanelContainer" unique_id=619433852]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
 [node name="PvoBadge" type="PanelContainer" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=976553273]
 layout_mode = 2
@@ -193,6 +192,16 @@ tooltip_text = "МОГ (Мобильная Огневая Группа)
 Урон: 30
 Цена: 50 монет"
 text = "Strela-10 (50$)"
+
+[node name="OsaButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=406047732]
+custom_minimum_size = Vector2(140, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "МОГ (Мобильная Огневая Группа)
+Радиус: 180px
+Урон: 30
+Цена: 50 монет"
+text = "OSA SA-8 (100$)"
 
 [node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=984802702]
 layout_mode = 0

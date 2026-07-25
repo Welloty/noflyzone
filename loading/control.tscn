@@ -136,7 +136,7 @@ offset_left = 70.0
 offset_top = 612.0
 offset_right = 450.0
 offset_bottom = 632.0
-text = "SAAW TOWER DEFENCE  |  v0.1.2 DEV BUILD"
+text = "SAAW TOWER DEFENCE  |  v0.1.3 DEV BUILD"
 label_settings = SubResource("LS_version")
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1167030754]

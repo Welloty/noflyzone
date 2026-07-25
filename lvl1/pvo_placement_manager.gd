@@ -15,7 +15,7 @@ func _connect_hud() -> void:
 		if not hud_ref.pvo_selected.is_connected(_on_pvo_selected):
 			hud_ref.pvo_selected.connect(_on_pvo_selected)
 
-func start_placement(_pvo_type: String, cost: int) -> void:
+func start_placement(pvo_type: String, cost: int) -> void:
 	if is_instance_valid(ghost_instance):
 		return
 	
@@ -24,6 +24,11 @@ func start_placement(_pvo_type: String, cost: int) -> void:
 		return
 		
 	current_cost = cost
+	if pvo_type == "Оса" or pvo_type == "Osa":
+		active_pvo_scene = preload("res://lvl1/pvo_osa.tscn")
+	else:
+		active_pvo_scene = preload("res://lvl1/pvo_strela.tscn")
+
 	ghost_instance = active_pvo_scene.instantiate()
 	ghost_instance.is_ghost = true
 	ghost_instance.z_index = 25

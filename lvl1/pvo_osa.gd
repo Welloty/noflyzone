@@ -1,11 +1,13 @@
 extends Node2D
 
-@export var pvo_name: String = "Стрела-10"
-@export var cost: int = 50
-@export var range_radius: float = 180.0
-@export var damage: float = 50.0
-@export var fire_rate: float = 0.45
+@export var pvo_name: String = "Оса"
+@export var cost: int = 125
+@export var range_radius: float = 360.0
+@export var damage: float = 100.0
+@export var fire_rate: float = 1.75
 @export var missile_scene: PackedScene = preload("res://lvl1/missile.tscn")
+@export var radar_speed: float = 3.0
+
 var is_ghost: bool = false
 var is_valid_placement: bool = true
 var show_range: bool = false
@@ -15,6 +17,8 @@ var fire_timer: float = 0.0
 @onready var barrel_left: Node2D = $TurretHead/BarrelLeft
 @onready var barrel_right: Node2D = $TurretHead/BarrelRight
 @onready var click_area: Area2D = $ClickArea
+@onready var radar: Node2D = $Radar
+@onready var radar_sprite: Node2D = $Radar/Radar
 var use_left_barrel: bool = true
 
 func _ready() -> void:
@@ -26,6 +30,9 @@ func _ready() -> void:
 			click_area.input_event.connect(_on_click_area_input_event)
 
 func _process(delta: float) -> void:
+	if is_instance_valid(radar_sprite):
+		radar.rotation += radar_speed * delta
+
 	if is_ghost:
 		return
 	_update_target()
