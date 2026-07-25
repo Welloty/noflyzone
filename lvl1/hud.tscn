@@ -181,7 +181,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_pvo_badge")
 
 [node name="PvoTitle" type="Label" parent="Control/TopPvoBar/PanelContainer/HBoxContainer/PvoBadge" unique_id=1766396758]
 layout_mode = 2
-text = "ПВО"
+text = "AA"
 label_settings = SubResource("LS_pvo_badge")
 
 [node name="MogButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=1077123114]

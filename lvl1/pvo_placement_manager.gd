@@ -49,8 +49,11 @@ func _process(_delta: float) -> void:
 	if hud and hud.has_method("has_money"):
 		can_afford = hud.has_money(current_cost)
 		
+	var is_collision_free = _is_position_valid(ghost_instance)
+	var is_valid = can_afford and is_collision_free
+		
 	if ghost_instance.has_method("set_ghost_valid"):
-		ghost_instance.set_ghost_valid(can_afford)
+		ghost_instance.set_ghost_valid(is_valid)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_instance_valid(ghost_instance):
@@ -72,6 +75,15 @@ func _try_place_tower() -> void:
 		return
 		
 	var hud = _get_hud()
+	var can_afford = true
+	if hud and hud.has_method("has_money"):
+		can_afford = hud.has_money(current_cost)
+		
+	var is_collision_free = _is_position_valid(ghost_instance)
+	
+	if not can_afford or not is_collision_free:
+		return
+		
 	if hud and hud.has_method("deduct_money"):
 		if not hud.deduct_money(current_cost):
 			cancel_placement()
@@ -82,14 +94,47 @@ func _try_place_tower() -> void:
 		towers_container = get_parent()
 		
 	var new_tower = active_pvo_scene.instantiate()
-	new_tower.global_position = ghost_instance.global_position
 	new_tower.is_ghost = false
+	new_tower.global_position = ghost_instance.global_position
 	new_tower.z_index = 10
 	towers_container.add_child(new_tower)
+	new_tower.add_to_group("pvo_towers")
 	
-	# Завершаем установку, если денег на следующую башню недостаточно
 	if hud and hud.has_method("has_money") and not hud.has_money(current_cost):
 		cancel_placement()
+
+func _is_position_valid(ghost: Node2D) -> bool:
+	if not is_instance_valid(ghost):
+		return false
+		
+	var min_distance: float = 56.0
+	var click_area = ghost.get_node_or_null("ClickArea") as Area2D
+	if click_area:
+		var shape_node = click_area.get_node_or_null("CollisionShape2D") as CollisionShape2D
+		if shape_node and shape_node.shape is CircleShape2D:
+			min_distance = (shape_node.shape as CircleShape2D).radius * 2.0
+			
+	var towers_container = get_node_or_null("../TowersContainer")
+	if towers_container:
+		for child in towers_container.get_children():
+			if is_instance_valid(child) and child != ghost and child is Node2D:
+				if ghost.global_position.distance_to(child.global_position) < min_distance:
+					return false
+
+	var placed_towers = get_tree().get_nodes_in_group("pvo_towers")
+	for tower in placed_towers:
+		if is_instance_valid(tower) and tower != ghost and tower is Node2D:
+			if ghost.global_position.distance_to(tower.global_position) < min_distance:
+				return false
+
+	if click_area:
+		var overlapping_areas = click_area.get_overlapping_areas()
+		for area in overlapping_areas:
+			var parent_tower = area.get_parent()
+			if is_instance_valid(parent_tower) and parent_tower != ghost:
+				return false
+				
+	return true
 
 func _on_pvo_selected(pvo_type: String, cost: int) -> void:
 	start_placement(pvo_type, cost)

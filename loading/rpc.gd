@@ -7,7 +7,7 @@ func _ready():
 	DiscordRPC.large_image = "saawtd_logo"
 	DiscordRPC.large_image_text = "saaw tower defense"
 	DiscordRPC.small_image = "osa"
-	DiscordRPC.small_image_text = "osa"
+	DiscordRPC.small_image_text = "AA"
 	DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
 
 	DiscordRPC.refresh()

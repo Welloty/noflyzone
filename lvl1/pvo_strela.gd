@@ -19,9 +19,11 @@ var use_left_barrel: bool = true
 
 func _ready() -> void:
 	if not is_ghost:
-		click_area.mouse_entered.connect(_on_mouse_entered)
-		click_area.mouse_exited.connect(_on_mouse_exited)
-		click_area.input_event.connect(_on_click_area_input_event)
+		add_to_group("pvo_towers")
+		if click_area:
+			click_area.mouse_entered.connect(_on_mouse_entered)
+			click_area.mouse_exited.connect(_on_mouse_exited)
+			click_area.input_event.connect(_on_click_area_input_event)
 
 func _process(delta: float) -> void:
 	if is_ghost:
