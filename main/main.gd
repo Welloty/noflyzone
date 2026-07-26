@@ -50,7 +50,7 @@ func _on_btn_exited(btn: Button) -> void:
 
 func _on_deploy_pressed() -> void:
 	#lvl 1
-	_fade_and_go("res://lvl1/testMap.tscn")
+	_fade_and_go("res://lvl1/scenes/level_1.tscn")
 
 func _on_settings_pressed() -> void:
 	_update_language_dropdown()

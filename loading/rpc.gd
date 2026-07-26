@@ -2,7 +2,7 @@ extends Node
 
 func _ready():
 	DiscordRPC.app_id = 1530222816421609472
-	DiscordRPC.details = "Defense air space"
+	DiscordRPC.details = "air!"
 	DiscordRPC.state = "https://welloty.github.io/saaw/"
 	DiscordRPC.large_image = "saawtd_logo"
 	DiscordRPC.large_image_text = "saaw tower defense"

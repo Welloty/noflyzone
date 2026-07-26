@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://c30wiispn54vk"]
+
+[ext_resource type="Script" uid="uid://ctaeosvv427oo" path="res://lvl1/entities/enemies/drone_destruction.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://30yt7rwneyqk" path="res://lvl1/textures/drone-engine.png" id="2_engine"]
+[ext_resource type="Texture2D" uid="uid://dalo64we1l5bg" path="res://lvl1/textures/drone-wing.png" id="3_wing_left"]
+[ext_resource type="Texture2D" uid="uid://do7qat0sjc5w2" path="res://lvl1/textures/drone-right-wing.png" id="4_wing_right"]
+
+[sub_resource type="Gradient" id="Gradient_burst"]
+offsets = PackedFloat32Array(0, 0.25, 0.65, 1)
+colors = PackedColorArray(1, 0.95, 0.5, 1, 1, 0.5, 0.1, 0.95, 0.4, 0.1, 0.05, 0.8, 0.1, 0.1, 0.1, 0)
+
+[sub_resource type="Gradient" id="Gradient_fire"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 0.85, 0.2, 1, 1, 0.3, 0.05, 0.9, 0.15, 0.15, 0.15, 0)
+
+[node name="DroneDestruction" type="Node2D" unique_id=208144486]
+script = ExtResource("1_script")
+
+[node name="ExplosionBurst" type="CPUParticles2D" parent="." unique_id=1808372624]
+emitting = false
+amount = 40
+lifetime = 0.65
+one_shot = true
+explosiveness = 0.95
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -40)
+initial_velocity_min = 70.0
+initial_velocity_max = 200.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
+color_ramp = SubResource("Gradient_burst")
+
+[node name="Engine" type="Node2D" parent="." unique_id=865909504]
+
+[node name="Shadow" type="Sprite2D" parent="Engine" unique_id=206077638]
+modulate = Color(0, 0, 0, 0.509804)
+position = Vector2(-11, 11)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_engine")
+
+[node name="Sprite2D" type="Sprite2D" parent="Engine" unique_id=833146338]
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_engine")
+
+[node name="FireTrail" type="CPUParticles2D" parent="Engine" unique_id=843530111]
+emitting = false
+amount = 20
+lifetime = 0.4
+direction = Vector2(-1, 0)
+gravity = Vector2(0, -30)
+initial_velocity_min = 15.0
+initial_velocity_max = 45.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color_ramp = SubResource("Gradient_fire")
+
+[node name="WingLeft" type="Node2D" parent="." unique_id=1634109247]
+position = Vector2(0, -12)
+
+[node name="Shadow" type="Sprite2D" parent="WingLeft" unique_id=938773931]
+modulate = Color(0, 0, 0, 0.509804)
+position = Vector2(-11, 11)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_wing_left")
+
+[node name="Sprite2D" type="Sprite2D" parent="WingLeft" unique_id=428668642]
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_wing_left")
+
+[node name="FireTrail" type="CPUParticles2D" parent="WingLeft" unique_id=1606257167]
+emitting = false
+amount = 18
+lifetime = 0.4
+direction = Vector2(-1, 0)
+spread = 50.0
+gravity = Vector2(0, -30)
+initial_velocity_min = 12.0
+initial_velocity_max = 40.0
+scale_amount_min = 1.8
+scale_amount_max = 4.5
+color_ramp = SubResource("Gradient_fire")
+
+[node name="WingRight" type="Node2D" parent="." unique_id=1134134788]
+position = Vector2(0, 12)
+
+[node name="Shadow" type="Sprite2D" parent="WingRight" unique_id=1560803780]
+modulate = Color(0, 0, 0, 0.509804)
+position = Vector2(-11, 11)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_wing_right")
+
+[node name="Sprite2D" type="Sprite2D" parent="WingRight" unique_id=213714522]
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_wing_right")
+
+[node name="FireTrail" type="CPUParticles2D" parent="WingRight" unique_id=1650074940]
+emitting = false
+amount = 18
+lifetime = 0.4
+direction = Vector2(-1, 0)
+spread = 50.0
+gravity = Vector2(0, -30)
+initial_velocity_min = 12.0
+initial_velocity_max = 40.0
+scale_amount_min = 1.8
+scale_amount_max = 4.5
+color_ramp = SubResource("Gradient_fire")
