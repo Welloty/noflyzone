@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://2gw880i4hwgi"]
+
+[ext_resource type="Script" uid="uid://6mn5xcik3wpx" path="res://lvl1/entities/factory/factory.gd" id="1_hru48"]
+[ext_resource type="Texture2D" uid="uid://frd6rww3ybjx" path="res://lvl1/textures/factory.png" id="2_va5di"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ps0q5"]
+
+[node name="Factory" type="StaticBody2D" unique_id=2012694825]
+visible = false
+script = ExtResource("1_hru48")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=63580718]
+texture = ExtResource("2_va5di")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=546575004]
+shape = SubResource("RectangleShape2D_ps0q5")
