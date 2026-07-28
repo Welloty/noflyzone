@@ -1,17 +1,20 @@
 [gd_scene format=3 uid="uid://bgkw2aevbtbpu"]
 
 [ext_resource type="Texture2D" uid="uid://vvx5b1eo2olv" path="res://lvl1/textures/lvl1map.png" id="1_evo85"]
+[ext_resource type="Script" uid="uid://6mn5xcik3wpx" path="res://lvl1/entities/factory/factory.gd" id="3_pv2c6"]
 [ext_resource type="Script" uid="uid://ce2l0oi4m1dcj" path="res://lvl1/scripts/camera_2d.gd" id="6_lyu8i"]
 [ext_resource type="PackedScene" uid="uid://bbsrj0i7up6bm" path="res://lvl1/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" uid="uid://bse3nc3j0q25n" path="res://lvl1/ui/hud.tscn" id="7_hud"]
+[ext_resource type="Texture2D" uid="uid://frd6rww3ybjx" path="res://lvl1/textures/factory.png" id="7_rl3t3"]
+[ext_resource type="PackedScene" uid="uid://wt60prnybw2q" path="res://lvl1/ui/defeat_menu.tscn" id="7_xp86s"]
 [ext_resource type="Script" uid="uid://csg58wixkkmk1" path="res://lvl1/managers/pvo_placement_manager.gd" id="8_placement"]
 [ext_resource type="Script" uid="uid://c4dle7r8ap8bk" path="res://lvl1/managers/wave_manager.gd" id="9_wave_mgr"]
 
 [sub_resource type="Curve2D" id="Curve2D_hd237"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 656.92206, -907.1353, 0, 0, 0, 0, 459.34427, -425.87744, 0, 0, 0, 0, 230.42804, -291.49173, 0, 0, 0, 0, -191.01273, 78.38434, 0, 0, 0, 0, 221.33221, 285.7762)
+"points": PackedVector2Array(0, 0, 0, 0, 656.92206, -907.1353, 0, 0, 0, 0, 459.34427, -425.87744, 0, 0, 0, 0, 230.42804, -291.49173, 0, 0, 0, 0, -191.01273, 78.38434, 0, 0, 0, 0, 236.49194, 271.94293, 0, 0, 0, 0, 238.51324, 288.21735)
 }
-point_count = 5
+point_count = 6
 
 [sub_resource type="Curve2D" id="Curve2D_lyu8i"]
 _data = {
@@ -27,11 +30,18 @@ point_count = 7
 show_behind_parent = true
 texture = ExtResource("1_evo85")
 
+[node name="Factory" type="Sprite2D" parent="Environment" unique_id=1926544056]
+position = Vector2(295.99997, 404.99997)
+rotation = -0.24454078
+scale = Vector2(0.18359375, 0.18359375)
+texture = ExtResource("7_rl3t3")
+script = ExtResource("3_pv2c6")
+
 [node name="EnemyPaths" type="Node2D" parent="." unique_id=249879435]
 
 [node name="MainPath" type="Path2D" parent="EnemyPaths" unique_id=1752817380]
-position = Vector2(6, 76.999985)
-scale = Vector2(0.9894629, 1.2247345)
+position = Vector2(6, 80.80224)
+scale = Vector2(0.9894629, 1.228926)
 curve = SubResource("Curve2D_hd237")
 
 [node name="FPVPath" type="Path2D" parent="EnemyPaths" unique_id=737667049]
@@ -57,3 +67,5 @@ script = ExtResource("6_lyu8i")
 [node name="HUD" parent="UI" unique_id=1870249777 instance=ExtResource("7_hud")]
 
 [node name="PauseMenu" parent="UI" unique_id=1536623147 instance=ExtResource("6_pause")]
+
+[node name="DefeatMenu" parent="UI" unique_id=2047928806 instance=ExtResource("7_xp86s")]

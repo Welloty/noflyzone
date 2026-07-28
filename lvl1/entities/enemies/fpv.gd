@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-@export var speed: float = 40
+@export var speed: float = 40.0
 @export var max_health: float = 25.0
+@export var damage_to_factory: int = 25
 @export var reward_money: int = 15
 @export var path_follower: PathFollow2D
-@export var propeller_speed: float = 1000.0 
+@export var propeller_speed: float = 1000.0
+
 @onready var propeller_lb: Sprite2D = $Propeller 
 @onready var propeller_rb: Sprite2D = $Propeller2 
 @onready var propeller_rf: Sprite2D = $Propeller3 
@@ -14,6 +16,8 @@ extends CharacterBody2D
 
 var health: float = 25.0
 var is_down: bool = false
+var die_velocity: Vector2 = Vector2.ZERO
+var die_rot_vel: float = 0.0
 
 func _ready() -> void:
 	add_to_group("drones")
@@ -30,9 +34,6 @@ func _process(_delta: float) -> void:
 	shadow_sprite.global_rotation = global_rotation + deg_to_rad(90)
 	shadow_sprite.global_position = global_position + sun_direction
 
-var die_velocity: Vector2 = Vector2.ZERO
-var die_rot_vel: float = 0.0
-
 func _physics_process(delta: float) -> void:
 	if is_down:
 		die_velocity = die_velocity * exp(-0.6 * delta)
@@ -43,25 +44,38 @@ func _physics_process(delta: float) -> void:
 
 	if not is_instance_valid(path_follower):
 		return
+		
 	path_follower.progress += speed * delta
+	
 	if path_follower.progress_ratio >= 0.99:
-		path_follower.progress_ratio = 0.0
-		global_position = path_follower.global_position
+		_explode_on_factory()
+		return	
 		
 	var target_position = path_follower.global_position
 	var direction = global_position.direction_to(target_position)
 	var distance = global_position.distance_to(target_position)
+	
 	if distance > 2.0:
 		velocity = direction * speed
 		look_at(target_position)
 	else:
 		velocity = Vector2.ZERO
+		
 	if propeller_rb and propeller_lb and propeller_lf and propeller_rf:
 		propeller_rb.rotation += propeller_speed * delta
 		propeller_lb.rotation += propeller_speed * delta
-		propeller_lf.rotation += propeller_speed * delta
 		propeller_rf.rotation += propeller_speed * delta
+		propeller_rf.rotation += propeller_speed * delta
+		
 	move_and_slide()
+
+func _explode_on_factory() -> void:
+	var factory = get_tree().get_first_node_in_group("factory")
+	if factory and factory.has_method("take_damage"):
+		factory.take_damage(damage_to_factory)
+	
+	remove_from_group("drones")
+	queue_free()
 
 func take_damage(amount: float) -> void:
 	if is_down:
