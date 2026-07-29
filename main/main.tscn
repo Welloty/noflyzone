@@ -511,7 +511,10 @@ offset_top = 300.0
 offset_right = 959.0
 offset_bottom = 322.0
 scale = Vector2(1.08, 1.08)
+<<<<<<< HEAD
 text = "karas– Senior designer & dev"
+=======
+>>>>>>> 0cc8e498a525275aaefa0c3827db6aa5505e7074
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
