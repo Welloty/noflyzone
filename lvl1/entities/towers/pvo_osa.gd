@@ -104,14 +104,25 @@ func set_ghost_valid(valid: bool) -> void:
 	queue_redraw()
 
 func _on_mouse_entered() -> void:
-	show_range = true
-	queue_redraw()
+	if not DisplayServer.is_touchscreen_available() and not OS.has_feature("mobile"):
+		show_range = true
+		queue_redraw()
 
 func _on_mouse_exited() -> void:
-	show_range = false
-	queue_redraw()
+	if not DisplayServer.is_touchscreen_available() and not OS.has_feature("mobile"):
+		show_range = false
+		queue_redraw()
 
 func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	var is_click = false
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		is_click = true
+	elif event is InputEventScreenTouch and event.pressed:
+		is_click = true
+
+	if is_click:
 		show_range = not show_range
+		if show_range and (DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")):
+			Input.vibrate_handheld(30)
 		queue_redraw()
+		get_viewport().set_input_as_handled()

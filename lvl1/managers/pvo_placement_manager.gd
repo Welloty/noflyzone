@@ -9,6 +9,7 @@ var ui_layer: CanvasLayer = null
 var confirm_btn: Button = null
 var cancel_btn: Button = null
 var is_touch_dragging: bool = false
+var touch_drag_index: int = -1
 
 func _ready() -> void:
 	add_to_group("placement_manager")
@@ -48,15 +49,20 @@ func start_placement(pvo_type: String, cost: int) -> void:
 
 	if _is_mobile_platform():
 		_create_placement_ui()
+		Input.vibrate_handheld(30)
 
 func _is_mobile_platform() -> bool:
 	return DisplayServer.is_touchscreen_available() or OS.has_feature("mobile") or OS.has_feature("android") or OS.has_feature("ios")
 
 func cancel_placement() -> void:
 	_destroy_placement_ui()
+	is_touch_dragging = false
+	touch_drag_index = -1
 	if is_instance_valid(ghost_instance):
 		ghost_instance.queue_free()
 		ghost_instance = null
+	if _is_mobile_platform():
+		Input.vibrate_handheld(20)
 
 func _get_hud() -> CanvasLayer:
 	return get_tree().get_first_node_in_group("hud") as CanvasLayer
@@ -65,7 +71,8 @@ func _process(_delta: float) -> void:
 	if not is_instance_valid(ghost_instance):
 		return
 		
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_touch_dragging:
+	# On desktop without touch, track mouse cursor smoothly
+	if not _is_mobile_platform() and not is_touch_dragging:
 		var mouse_pos = get_global_mouse_position()
 		if mouse_pos.distance_squared_to(ghost_instance.global_position) > 4.0:
 			ghost_instance.global_position = mouse_pos
@@ -90,14 +97,24 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if event is InputEventScreenTouch:
 		if event.pressed:
-			is_touch_dragging = true
-			ghost_instance.global_position = _screen_to_global(event.position)
+			# Check if user touched near ghost tower to drag it
+			var screen_ghost_pos = get_viewport().get_canvas_transform() * ghost_instance.global_position
+			if event.position.distance_to(screen_ghost_pos) <= 120.0:
+				is_touch_dragging = true
+				touch_drag_index = event.index
+				ghost_instance.global_position = _screen_to_global(event.position)
+				get_viewport().set_input_as_handled()
+			else:
+				is_touch_dragging = false
 		else:
-			is_touch_dragging = false
-			
+			if event.index == touch_drag_index:
+				is_touch_dragging = false
+				touch_drag_index = -1
+
 	elif event is InputEventScreenDrag:
-		if is_touch_dragging:
+		if is_touch_dragging and (touch_drag_index == -1 or event.index == touch_drag_index):
 			ghost_instance.global_position = _screen_to_global(event.position)
+			get_viewport().set_input_as_handled()
 
 	elif event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
@@ -111,7 +128,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			cancel_placement()
 			get_viewport().set_input_as_handled()
-		elif event.button_index == MOUSE_BUTTON_LEFT:
+		elif event.button_index == MOUSE_BUTTON_LEFT and not _is_mobile_platform():
 			_try_place_tower()
 			get_viewport().set_input_as_handled()
 
@@ -131,6 +148,8 @@ func _try_place_tower() -> void:
 	var is_collision_free = _is_position_valid(ghost_instance)
 	
 	if not can_afford or not is_collision_free:
+		if _is_mobile_platform():
+			Input.vibrate_handheld(80)
 		return
 		
 	if hud and hud.has_method("deduct_money"):
@@ -147,9 +166,14 @@ func _try_place_tower() -> void:
 	towers_container.add_child(new_tower)
 	new_tower.add_to_group("pvo_towers")
 	
+	if _is_mobile_platform():
+		Input.vibrate_handheld(50)
+
 	_destroy_placement_ui()
 	ghost_instance.queue_free()
 	ghost_instance = null
+	is_touch_dragging = false
+	touch_drag_index = -1
 
 func _create_placement_ui() -> void:
 	_destroy_placement_ui()
@@ -162,44 +186,44 @@ func _create_placement_ui() -> void:
 	panel.name = "PlacementPanel"
 	panel.anchor_left = 0.5
 	panel.anchor_right = 0.5
-	panel.anchor_top = 0.72
-	panel.anchor_bottom = 0.72
+	panel.anchor_top = 0.78
+	panel.anchor_bottom = 0.88
 	panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 
 	var panel_style = StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.07, 0.1, 0.14, 0.88)
+	panel_style.bg_color = Color(0.07, 0.1, 0.14, 0.92)
 	panel_style.corner_radius_top_left = 16
 	panel_style.corner_radius_top_right = 16
 	panel_style.corner_radius_bottom_left = 16
 	panel_style.corner_radius_bottom_right = 16
-	panel_style.border_width_left = 1
-	panel_style.border_width_top = 1
-	panel_style.border_width_right = 1
-	panel_style.border_width_bottom = 1
-	panel_style.border_color = Color(0.28, 0.45, 0.65, 0.5)
-	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.4)
-	panel_style.shadow_size = 12
+	panel_style.border_width_left = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = Color(0.28, 0.45, 0.65, 0.6)
+	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.5)
+	panel_style.shadow_size = 14
 	panel_style.shadow_offset = Vector2(0, 4)
 	panel.add_theme_stylebox_override("panel", panel_style)
 	ui_layer.add_child(panel)
 
 	var margin = MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 16)
+	margin.add_theme_constant_override("margin_left", 20)
 	margin.add_theme_constant_override("margin_top", 12)
-	margin.add_theme_constant_override("margin_right", 16)
+	margin.add_theme_constant_override("margin_right", 20)
 	margin.add_theme_constant_override("margin_bottom", 12)
 	panel.add_child(margin)
 
 	var hbox = HBoxContainer.new()
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	hbox.add_theme_constant_override("separation", 20)
+	hbox.add_theme_constant_override("separation", 24)
 	margin.add_child(hbox)
 
 	confirm_btn = Button.new()
 	confirm_btn.text = " ✓  ПОСТАВИТЬ "
-	confirm_btn.tooltip_text = "Подтвердить установку (Enter / Space / ЛКМ)"
-	confirm_btn.custom_minimum_size = Vector2(165, 54)
+	confirm_btn.tooltip_text = "Подтвердить установку"
+	confirm_btn.custom_minimum_size = Vector2(175, 60)
 	confirm_btn.focus_mode = Control.FOCUS_NONE
 	_style_button(confirm_btn, Color(0.16, 0.62, 0.3, 0.95), Color(0.2, 0.78, 0.38, 1.0), Color(0.12, 0.48, 0.22, 1.0))
 	confirm_btn.pressed.connect(_try_place_tower)
@@ -207,8 +231,8 @@ func _create_placement_ui() -> void:
 
 	cancel_btn = Button.new()
 	cancel_btn.text = " ✕  ОТМЕНА "
-	cancel_btn.tooltip_text = "Отменить установку (Esc / ПКМ)"
-	cancel_btn.custom_minimum_size = Vector2(145, 54)
+	cancel_btn.tooltip_text = "Отменить установку"
+	cancel_btn.custom_minimum_size = Vector2(155, 60)
 	cancel_btn.focus_mode = Control.FOCUS_NONE
 	_style_button(cancel_btn, Color(0.72, 0.22, 0.22, 0.95), Color(0.88, 0.28, 0.28, 1.0), Color(0.55, 0.16, 0.16, 1.0))
 	cancel_btn.pressed.connect(cancel_placement)
@@ -220,31 +244,31 @@ func _style_button(btn: Button, base_color: Color, hover_color: Color, pressed_c
 
 	var style_normal = StyleBoxFlat.new()
 	style_normal.bg_color = base_color
-	style_normal.corner_radius_top_left = 12
-	style_normal.corner_radius_top_right = 12
-	style_normal.corner_radius_bottom_left = 12
-	style_normal.corner_radius_bottom_right = 12
+	style_normal.corner_radius_top_left = 14
+	style_normal.corner_radius_top_right = 14
+	style_normal.corner_radius_bottom_left = 14
+	style_normal.corner_radius_bottom_right = 14
 
 	var style_hover = StyleBoxFlat.new()
 	style_hover.bg_color = hover_color
-	style_hover.corner_radius_top_left = 12
-	style_hover.corner_radius_top_right = 12
-	style_hover.corner_radius_bottom_left = 12
-	style_hover.corner_radius_bottom_right = 12
+	style_hover.corner_radius_top_left = 14
+	style_hover.corner_radius_top_right = 14
+	style_hover.corner_radius_bottom_left = 14
+	style_hover.corner_radius_bottom_right = 14
 
 	var style_pressed = StyleBoxFlat.new()
 	style_pressed.bg_color = pressed_color
-	style_pressed.corner_radius_top_left = 12
-	style_pressed.corner_radius_top_right = 12
-	style_pressed.corner_radius_bottom_left = 12
-	style_pressed.corner_radius_bottom_right = 12
+	style_pressed.corner_radius_top_left = 14
+	style_pressed.corner_radius_top_right = 14
+	style_pressed.corner_radius_bottom_left = 14
+	style_pressed.corner_radius_bottom_right = 14
 
 	var style_disabled = StyleBoxFlat.new()
 	style_disabled.bg_color = Color(0.2, 0.23, 0.26, 0.6)
-	style_disabled.corner_radius_top_left = 12
-	style_disabled.corner_radius_top_right = 12
-	style_disabled.corner_radius_bottom_left = 12
-	style_disabled.corner_radius_bottom_right = 12
+	style_disabled.corner_radius_top_left = 14
+	style_disabled.corner_radius_top_right = 14
+	style_disabled.corner_radius_bottom_left = 14
+	style_disabled.corner_radius_bottom_right = 14
 
 	btn.add_theme_stylebox_override("normal", style_normal)
 	btn.add_theme_stylebox_override("hover", style_hover)
@@ -254,7 +278,7 @@ func _style_button(btn: Button, base_color: Color, hover_color: Color, pressed_c
 	btn.add_theme_color_override("font_hover_color", Color.WHITE)
 	btn.add_theme_color_override("font_pressed_color", Color(0.9, 0.9, 0.9))
 	btn.add_theme_color_override("font_disabled_color", Color(0.6, 0.6, 0.6, 0.7))
-	btn.add_theme_font_size_override("font_size", 18)
+	btn.add_theme_font_size_override("font_size", 20)
 
 func _destroy_placement_ui() -> void:
 	if is_instance_valid(ui_layer):

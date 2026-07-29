@@ -6,15 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ddhqrl33tidcu" path="res://main/social/telegram.png" id="4_kfbq2"]
 
 [sub_resource type="LabelSettings" id="LS_title"]
-font_size = 108
+font_size = 90
 font_color = Color(0.29, 0.486, 0.145, 1)
-
-[sub_resource type="LabelSettings" id="LS_subtitle"]
-font_size = 34
-font_color = Color(0.741, 0.765, 0.78, 1)
-
-[sub_resource type="LabelSettings" id="LS_tagline"]
-font_color = Color(0.275, 0.435, 0.188, 1)
 
 [sub_resource type="StyleBoxFlat" id="SBF_btnGN"]
 content_margin_left = 20.0
@@ -114,10 +107,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="LabelSettings" id="LS_status"]
-font_size = 15
-font_color = Color(0.275, 0.435, 0.188, 0.7)
-
 [sub_resource type="LabelSettings" id="LS_version"]
 font_size = 13
 font_color = Color(0.275, 0.36, 0.247, 1)
@@ -141,6 +130,10 @@ font_color = Color(0.29, 0.486, 0.145, 1)
 [sub_resource type="LabelSettings" id="LS_overlayLabel"]
 font_size = 18
 font_color = Color(0.741, 0.765, 0.78, 1)
+
+[sub_resource type="LabelSettings" id="LS_status"]
+font_size = 15
+font_color = Color(0.275, 0.435, 0.188, 0.7)
 
 [node name="Control" type="Control" unique_id=2077169234]
 layout_mode = 3
@@ -187,30 +180,12 @@ color = Color(0.29, 0.486, 0.145, 0.2)
 
 [node name="Title" type="Label" parent="." unique_id=1604381719]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 55.0
-offset_right = 540.0
-offset_bottom = 180.0
-text = "SAAW"
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 534.0
+offset_bottom = 225.0
+text = "No fly zone"
 label_settings = SubResource("LS_title")
-
-[node name="Subtitle" type="Label" parent="." unique_id=1866810928]
-layout_mode = 0
-offset_left = 76.0
-offset_top = 178.0
-offset_right = 540.0
-offset_bottom = 220.0
-text = "TOWER DEFENCE"
-label_settings = SubResource("LS_subtitle")
-
-[node name="Tagline" type="Label" parent="." unique_id=538757694]
-layout_mode = 0
-offset_left = 78.0
-offset_top = 228.0
-offset_right = 540.0
-offset_bottom = 251.0
-text = "Anti Air defence"
-label_settings = SubResource("LS_tagline")
 
 [node name="Separator" type="ColorRect" parent="." unique_id=1123625411]
 layout_mode = 0
@@ -268,42 +243,13 @@ theme_override_styles/hover = SubResource("SBF_btnRH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Exit"
 
-[node name="Github" type="Label" parent="." unique_id=299251057]
-layout_mode = 0
-offset_left = 575.0
-offset_top = 55.0
-offset_right = 1080.0
-offset_bottom = 75.0
-text = "[   Github: https://github.com/Welloty/saawtd ]"
-label_settings = SubResource("LS_status")
-horizontal_alignment = 1
-
-[node name="GithubLink" type="LinkButton" parent="Github" unique_id=729937652]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.017
-offset_left = 87.0
-offset_top = 4.0
-offset_right = 397.41605
-offset_bottom = 23.0
-uri = "https://github.com/Welloty/saawtd"
-
-[node name="TextureRect" type="TextureRect" parent="Github" unique_id=2068850942]
-layout_mode = 0
-offset_left = 89.0
-offset_top = 7.000003
-offset_right = 369.0
-offset_bottom = 287.0
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("2_c651c")
-
 [node name="VersionLabel" type="Label" parent="." unique_id=2000052620]
 layout_mode = 0
 offset_left = 70.0
 offset_top = 612.0
 offset_right = 540.0
 offset_bottom = 632.0
-text = "SAAW TOWER DEFENCE  |  v0.1.4 DEV BUILD"
+text = "No fly zone  |  v0.1.5 Dev"
 label_settings = SubResource("LS_version")
 
 [node name="SettingsOverlay" type="ColorRect" parent="." unique_id=300000001]
@@ -417,13 +363,42 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="Github" type="Label" parent="." unique_id=299251057]
+layout_mode = 0
+offset_left = 575.0
+offset_top = 55.0
+offset_right = 1080.0
+offset_bottom = 77.0
+text = "[   github]"
+label_settings = SubResource("LS_status")
+horizontal_alignment = 1
+
+[node name="GithubLink" type="LinkButton" parent="Github" unique_id=729937652]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.017
+offset_left = 216.0
+offset_top = 4.0
+offset_right = 279.415
+offset_bottom = 23.0
+uri = "https://github.com/Welloty/noflyzone"
+
+[node name="TextureRect" type="TextureRect" parent="Github" unique_id=2068850942]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 7.0
+offset_right = 501.0
+offset_bottom = 287.0
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_c651c")
+
 [node name="Discord" type="Label" parent="." unique_id=63998221]
 layout_mode = 0
 offset_left = 575.0
 offset_top = 80.0
 offset_right = 1080.0
 offset_bottom = 102.0
-text = "[   Discord: https://discord.gg/bp9hN9rN4N ]"
+text = "[   Discord]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
@@ -431,17 +406,17 @@ horizontal_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.017
-offset_left = 87.0
+offset_left = 213.0
 offset_top = 3.0
-offset_right = 397.41605
+offset_right = 284.415
 offset_bottom = 22.0
 uri = "https://discord.gg/bp9hN9rN4N"
 
 [node name="TextureRect" type="TextureRect" parent="Discord" unique_id=2014223795]
 layout_mode = 0
-offset_left = 98.999985
-offset_top = 7.000004
-offset_right = 546.00006
+offset_left = 217.0
+offset_top = 7.0
+offset_right = 664.0002
 offset_bottom = 454.0
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_3wy1v")
@@ -452,7 +427,7 @@ offset_left = 575.0
 offset_top = 105.0
 offset_right = 1080.0
 offset_bottom = 127.0
-text = "[   Telegram: https://t.me/saawtd ]"
+text = "[   Telegram]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
@@ -460,20 +435,30 @@ horizontal_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.017
-offset_left = 87.0
+offset_left = 207.0
 offset_top = 3.0
-offset_right = 397.41605
+offset_right = 289.415
 offset_bottom = 22.0
-uri = "https://t.me/saawtd"
+uri = "https://t.me/https://t.me/noflydev"
 
 [node name="TextureRect" type="TextureRect" parent="Telegram" unique_id=1099002677]
 layout_mode = 0
-offset_left = 133.99997
-offset_top = 6.9999995
-offset_right = 581.00024
+offset_left = 210.0
+offset_top = 7.0
+offset_right = 657.00006
 offset_bottom = 454.0
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("4_kfbq2")
+
+[node name="links" type="Label" parent="." unique_id=549604796]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 30.0
+offset_right = 867.0
+offset_bottom = 52.0
+text = "Game links"
+label_settings = SubResource("LS_status")
+horizontal_alignment = 1
 
 [node name="devs" type="Label" parent="." unique_id=1838138771]
 layout_mode = 0
@@ -511,9 +496,9 @@ horizontal_alignment = 1
 [node name="artur" type="Label" parent="." unique_id=1669983088]
 layout_mode = 0
 offset_left = 750.0
-offset_top = 300.0
+offset_top = 275.0
 offset_right = 921.0
-offset_bottom = 322.0
+offset_bottom = 297.0
 scale = Vector2(1.08, 1.08)
 text = "Artur – Lead developer"
 label_settings = SubResource("LS_status")
@@ -522,11 +507,11 @@ horizontal_alignment = 1
 [node name="karas" type="Label" parent="." unique_id=408478099]
 layout_mode = 0
 offset_left = 750.0
-offset_top = 275.0
-offset_right = 921.0
-offset_bottom = 297.0
+offset_top = 300.0
+offset_right = 959.0
+offset_bottom = 322.0
 scale = Vector2(1.08, 1.08)
-text = "karas– Senior designer"
+text = "karas– Senior designer & dev"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 

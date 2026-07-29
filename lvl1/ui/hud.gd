@@ -15,10 +15,10 @@ signal pvo_selected(pvo_type: String, cost: int)
 func _ready() -> void:
 	add_to_group("hud")
 	if mog_button:
-		mog_button.custom_minimum_size = Vector2(130, 48)
+		mog_button.custom_minimum_size = Vector2(140, 52)
 		mog_button.pressed.connect(_on_mog_pressed)
 	if osa_button:
-		osa_button.custom_minimum_size = Vector2(130, 48)
+		osa_button.custom_minimum_size = Vector2(140, 52)
 		osa_button.pressed.connect(_on_osa_pressed)
 	_update_money_ui()
 
@@ -33,6 +33,8 @@ func _update_money_ui() -> void:
 
 func _on_osa_pressed() -> void:
 	get_viewport().set_input_as_handled()
+	if DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
+		Input.vibrate_handheld(25)
 	var osa_cost = 175
 	if money >= osa_cost:
 		pvo_selected.emit("Оса", osa_cost)
@@ -42,6 +44,8 @@ func _on_osa_pressed() -> void:
 
 func _on_mog_pressed() -> void:
 	get_viewport().set_input_as_handled()
+	if DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
+		Input.vibrate_handheld(25)
 	if money >= 75:
 		pvo_selected.emit("Стрела-10", 75)
 		var mgr = get_tree().get_first_node_in_group("placement_manager")

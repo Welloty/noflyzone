@@ -145,10 +145,10 @@ label_settings = SubResource("LS_pvo_badge")
 custom_minimum_size = Vector2(140, 32)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "МОГ (Мобильная Огневая Группа)
+tooltip_text = "Стрела-10
 Радиус: 180px
-Урон: 30
-Цена: 50 монет"
+Урон: 50
+Цена: 75$"
 text = "Strela-10 (75$)"
 
 [node name="OsaButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=406047732]

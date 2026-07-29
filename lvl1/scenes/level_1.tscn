@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgkw2aevbtbpu"]
 
 [ext_resource type="Texture2D" uid="uid://vvx5b1eo2olv" path="res://lvl1/textures/lvl1map.png" id="1_evo85"]
+[ext_resource type="Script" uid="uid://c808h2h17c8hb" path="res://lvl1/scripts/level_1.gd" id="1_lvl_script"]
 [ext_resource type="Script" uid="uid://6mn5xcik3wpx" path="res://lvl1/entities/factory/factory.gd" id="3_pv2c6"]
 [ext_resource type="Script" uid="uid://ce2l0oi4m1dcj" path="res://lvl1/scripts/camera_2d.gd" id="6_lyu8i"]
 [ext_resource type="PackedScene" uid="uid://bbsrj0i7up6bm" path="res://lvl1/ui/pause_menu.tscn" id="6_pause"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://wt60prnybw2q" path="res://lvl1/ui/defeat_menu.tscn" id="7_xp86s"]
 [ext_resource type="Script" uid="uid://csg58wixkkmk1" path="res://lvl1/managers/pvo_placement_manager.gd" id="8_placement"]
 [ext_resource type="Script" uid="uid://c4dle7r8ap8bk" path="res://lvl1/managers/wave_manager.gd" id="9_wave_mgr"]
+[ext_resource type="Script" uid="uid://g77koijmkd5h" path="res://lvl1/managers/mission_generator.gd" id="10_mission_gen"]
 
 [sub_resource type="Curve2D" id="Curve2D_hd237"]
 _data = {
@@ -23,6 +25,7 @@ _data = {
 point_count = 7
 
 [node name="level_1" type="Node2D" unique_id=365493064]
+script = ExtResource("1_lvl_script")
 
 [node name="Environment" type="Node2D" parent="." unique_id=723922786]
 
@@ -58,6 +61,9 @@ script = ExtResource("8_placement")
 
 [node name="WaveManager" type="Node2D" parent="Managers" unique_id=99001124]
 script = ExtResource("9_wave_mgr")
+
+[node name="MissionGenerator" type="Node2D" parent="Managers" unique_id=99001125]
+script = ExtResource("10_mission_gen")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1493913428]
 script = ExtResource("6_lyu8i")

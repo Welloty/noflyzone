@@ -26,7 +26,12 @@ Rpc="*uid://blcf7k44sfui0"
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
-window/stretch/aspect="ignore"
+window/stretch/aspect="expand"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=true
 
 [editor_plugins]
 

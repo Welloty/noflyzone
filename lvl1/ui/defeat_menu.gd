@@ -36,7 +36,7 @@ func _on_try_again_pressed() -> void:
 	tween.tween_property(fade_overlay, "modulate:a", 1.0, 0.3).set_ease(Tween.EASE_IN)
 	await tween.finished
 	
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://lvl1/scenes/mission_prep.tscn")
 
 
 func _on_menu_pressed() -> void:

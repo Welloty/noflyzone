@@ -3,7 +3,6 @@ extends Control
 @onready var fade_overlay: ColorRect = $FadeOverlay
 @onready var title_label: Label = $Title
 @onready var subtitle_label: Label = $Subtitle
-@onready var tagline_label: Label = $Tagline
 @onready var tip_label: Label = $TipLabel
 
 var tips: Array[String] = [
@@ -20,7 +19,6 @@ func _ready() -> void:
 	fade_overlay.modulate.a = 1.0
 	title_label.modulate.a = 0.0
 	subtitle_label.modulate.a = 0.0
-	tagline_label.modulate.a = 0.0
 	tip_label.modulate.a = 0.0
 	tip_label.text = tr("TIP_PREFIX") + tr(tips[randi() % tips.size()])
 
@@ -28,7 +26,6 @@ func _ready() -> void:
 	tween.tween_property(fade_overlay, "modulate:a", 0.0, 0.8).set_ease(Tween.EASE_OUT)
 	tween.tween_property(title_label, "modulate:a", 1.0, 1.0).set_delay(0.4)
 	tween.tween_property(subtitle_label, "modulate:a", 1.0, 1.0).set_delay(0.65)
-	tween.tween_property(tagline_label, "modulate:a", 1.0, 1.0).set_delay(0.85)
 	tween.tween_property(tip_label, "modulate:a", 1.0, 1.0).set_delay(1.1)
 
 	var timer := Timer.new()
