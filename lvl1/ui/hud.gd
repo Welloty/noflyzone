@@ -12,15 +12,50 @@ signal pvo_selected(pvo_type: String, cost: int)
 @onready var mog_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/MogButton
 @onready var osa_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/OsaButton
 
+var is_dragging: bool = false
+var current_pvo_type: String = ""
+var current_pvo_cost: int = 0
+
 func _ready() -> void:
 	add_to_group("hud")
 	if mog_button:
-		mog_button.custom_minimum_size = Vector2(140, 52)
-		mog_button.pressed.connect(_on_mog_pressed)
+		mog_button.custom_minimum_size = Vector2(130, 48)
+		mog_button.button_down.connect(_start_drag.bind("Стрела-10", 75))
+		mog_button.gui_input.connect(_on_button_gui_input)
 	if osa_button:
-		osa_button.custom_minimum_size = Vector2(140, 52)
-		osa_button.pressed.connect(_on_osa_pressed)
+		osa_button.custom_minimum_size = Vector2(130, 48)
+		osa_button.button_down.connect(_start_drag.bind("Оса", 175))
+		osa_button.gui_input.connect(_on_button_gui_input)
 	_update_money_ui()
+
+func _start_drag(pvo_type: String, cost: int) -> void:
+	if money >= cost:
+		is_dragging = true
+		current_pvo_type = pvo_type
+		current_pvo_cost = cost
+		
+		pvo_selected.emit(pvo_type, cost)
+		var mgr = get_tree().get_first_node_in_group("placement_manager")
+		if mgr and mgr.has_method("start_placement"):
+			mgr.start_placement(pvo_type, cost)
+
+func _on_button_gui_input(event: InputEvent) -> void:
+	if not is_dragging:
+		return
+		
+	var is_release = false
+	if event is InputEventScreenTouch and not event.pressed:
+		is_release = true
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		is_release = true
+		
+	if is_release:
+		is_dragging = false
+		var mgr = get_tree().get_first_node_in_group("placement_manager")
+		if mgr and mgr.has_method("confirm_placement"):
+			mgr.confirm_placement()
+		elif mgr and mgr.has_method("try_place"):
+			mgr.try_place()
 
 func _update_money_ui() -> void:
 	if money_value_label:
@@ -30,27 +65,6 @@ func _update_money_ui() -> void:
 		mog_button.text = "Strela-10 (75$)"
 	if osa_button:
 		osa_button.disabled = (money < 175)
-
-func _on_osa_pressed() -> void:
-	get_viewport().set_input_as_handled()
-	if DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
-		Input.vibrate_handheld(25)
-	var osa_cost = 175
-	if money >= osa_cost:
-		pvo_selected.emit("Оса", osa_cost)
-		var mgr = get_tree().get_first_node_in_group("placement_manager")
-		if mgr and mgr.has_method("start_placement"):
-			mgr.start_placement("Оса", osa_cost)
-
-func _on_mog_pressed() -> void:
-	get_viewport().set_input_as_handled()
-	if DisplayServer.is_touchscreen_available() or OS.has_feature("mobile"):
-		Input.vibrate_handheld(25)
-	if money >= 75:
-		pvo_selected.emit("Стрела-10", 75)
-		var mgr = get_tree().get_first_node_in_group("placement_manager")
-		if mgr and mgr.has_method("start_placement"):
-			mgr.start_placement("Стрела-10", 75)
 
 func update_wave(current: int, max_w: int) -> void:
 	if wave_value_label:

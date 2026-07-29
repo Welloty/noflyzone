@@ -22,20 +22,25 @@ Global="*uid://bvvb3ymjcjkru"
 DiscordRPCLoader="*uid://bl73nb1dnhy2b"
 Rpc="*uid://blcf7k44sfui0"
 
+[compression]
+
+formats/zstd/window_log_size=30
+
 [display]
 
+window/size/viewport_width=952
+window/size/viewport_height=548
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=true
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg")
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 

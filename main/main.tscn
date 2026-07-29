@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bl24tj8bl0sfh"]
 
 [ext_resource type="Script" uid="uid://c7dmrw1ahjn5y" path="res://main/main.gd" id="1_mgd"]
+[ext_resource type="FontFile" uid="uid://3pckuvsb6kf4" path="res://main/fonts/ColossusExpandedRUS.ttf" id="2_3wy1v"]
 [ext_resource type="Texture2D" uid="uid://bwokapolt2lcv" path="res://main/social/github.png" id="2_c651c"]
 [ext_resource type="Texture2D" uid="uid://17hw0w3rskly" path="res://main/social/discord.png" id="3_3wy1v"]
 [ext_resource type="Texture2D" uid="uid://ddhqrl33tidcu" path="res://main/social/telegram.png" id="4_kfbq2"]
@@ -135,6 +136,22 @@ font_color = Color(0.741, 0.765, 0.78, 1)
 font_size = 15
 font_color = Color(0.275, 0.435, 0.188, 0.7)
 
+[sub_resource type="FontFile" id="FontFile_h8yf2"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
 [node name="Control" type="Control" unique_id=2077169234]
 layout_mode = 3
 anchors_preset = 15
@@ -180,10 +197,13 @@ color = Color(0.29, 0.486, 0.145, 0.2)
 
 [node name="Title" type="Label" parent="." unique_id=1604381719]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 100.0
-offset_right = 534.0
-offset_bottom = 225.0
+offset_left = 28.0
+offset_top = 71.0
+offset_right = 593.0
+offset_bottom = 155.0
+scale = Vector2(0.9, 0.9)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 16
 text = "No fly zone"
 label_settings = SubResource("LS_title")
 
@@ -204,6 +224,7 @@ offset_bottom = 352.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("SBF_btnGN")
 theme_override_styles/pressed = SubResource("SBF_btnGP")
@@ -220,6 +241,7 @@ offset_bottom = 424.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("SBF_btnGN")
 theme_override_styles/pressed = SubResource("SBF_btnGP")
@@ -236,6 +258,7 @@ offset_bottom = 496.0
 theme_override_colors/font_color = Color(0.753, 0.224, 0.169, 1)
 theme_override_colors/font_pressed_color = Color(0.5, 0.15, 0.12, 1)
 theme_override_colors/font_hover_color = Color(0.88, 0.29, 0.22, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("SBF_btnRN")
 theme_override_styles/pressed = SubResource("SBF_btnRP")
@@ -365,10 +388,11 @@ color = Color(0, 0, 0, 1)
 
 [node name="Github" type="Label" parent="." unique_id=299251057]
 layout_mode = 0
-offset_left = 575.0
-offset_top = 55.0
-offset_right = 1080.0
-offset_bottom = 77.0
+offset_left = 538.0
+offset_top = 56.0
+offset_right = 1043.0
+offset_bottom = 78.0
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   github]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
@@ -381,23 +405,25 @@ offset_left = 216.0
 offset_top = 4.0
 offset_right = 279.415
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_3wy1v")
 uri = "https://github.com/Welloty/noflyzone"
 
 [node name="TextureRect" type="TextureRect" parent="Github" unique_id=2068850942]
 layout_mode = 0
-offset_left = 221.0
-offset_top = 7.0
-offset_right = 501.0
-offset_bottom = 287.0
+offset_left = 220.0
+offset_top = 2.0
+offset_right = 500.0
+offset_bottom = 282.0
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_c651c")
 
 [node name="Discord" type="Label" parent="." unique_id=63998221]
 layout_mode = 0
-offset_left = 575.0
-offset_top = 80.0
-offset_right = 1080.0
-offset_bottom = 102.0
+offset_left = 538.0
+offset_top = 81.0
+offset_right = 1043.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   Discord]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
@@ -410,23 +436,25 @@ offset_left = 213.0
 offset_top = 3.0
 offset_right = 284.415
 offset_bottom = 22.0
+theme_override_fonts/font = SubResource("FontFile_h8yf2")
 uri = "https://discord.gg/bp9hN9rN4N"
 
 [node name="TextureRect" type="TextureRect" parent="Discord" unique_id=2014223795]
 layout_mode = 0
-offset_left = 217.0
-offset_top = 7.0
-offset_right = 664.0002
-offset_bottom = 454.0
+offset_left = 215.0
+offset_top = 2.0000005
+offset_right = 662.0002
+offset_bottom = 449.0
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_3wy1v")
 
 [node name="Telegram" type="Label" parent="." unique_id=720527111]
 layout_mode = 0
-offset_left = 575.0
-offset_top = 105.0
-offset_right = 1080.0
-offset_bottom = 127.0
+offset_left = 538.0
+offset_top = 106.0
+offset_right = 1043.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   Telegram]"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
@@ -443,78 +471,81 @@ uri = "https://t.me/https://t.me/noflydev"
 
 [node name="TextureRect" type="TextureRect" parent="Telegram" unique_id=1099002677]
 layout_mode = 0
-offset_left = 210.0
-offset_top = 7.0
-offset_right = 657.00006
-offset_bottom = 454.0
+offset_left = 209.0
+offset_top = 2.0000005
+offset_right = 656.00006
+offset_bottom = 449.0
 scale = Vector2(0.025, 0.025)
 texture = ExtResource("4_kfbq2")
 
 [node name="links" type="Label" parent="." unique_id=549604796]
 layout_mode = 0
-offset_left = 780.0
-offset_top = 30.0
-offset_right = 867.0
-offset_bottom = 52.0
+offset_left = 743.0
+offset_top = 31.0
+offset_right = 832.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Game links"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
 [node name="devs" type="Label" parent="." unique_id=1838138771]
 layout_mode = 0
-offset_left = 750.0
-offset_top = 190.0
-offset_right = 874.00006
-offset_bottom = 212.0
+offset_left = 671.0
+offset_top = 196.0
+offset_right = 806.0
+offset_bottom = 218.0
 scale = Vector2(1.47, 1.47)
-text = "game developers"
+theme_override_fonts/font = ExtResource("2_3wy1v")
+text = "Game Developers"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
 [node name="welloty" type="Label" parent="." unique_id=930467072]
 layout_mode = 0
-offset_left = 750.0
-offset_top = 225.0
-offset_right = 921.0
-offset_bottom = 247.0
+offset_left = 671.0
+offset_top = 231.0
+offset_right = 878.0
+offset_bottom = 253.0
 scale = Vector2(1.08, 1.08)
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Welloty – Project owner"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
 [node name="warmt" type="Label" parent="." unique_id=2131642667]
 layout_mode = 0
-offset_left = 750.0
-offset_top = 250.0
-offset_right = 921.0
-offset_bottom = 272.0
+offset_left = 671.0
+offset_top = 256.0
+offset_right = 855.0
+offset_bottom = 278.0
 scale = Vector2(1.08, 1.08)
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Warmt – Lead designer"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
 [node name="artur" type="Label" parent="." unique_id=1669983088]
 layout_mode = 0
-offset_left = 750.0
-offset_top = 275.0
-offset_right = 921.0
-offset_bottom = 297.0
+offset_left = 671.0
+offset_top = 281.0
+offset_right = 859.0
+offset_bottom = 303.0
 scale = Vector2(1.08, 1.08)
+theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Artur – Lead developer"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
 [node name="karas" type="Label" parent="." unique_id=408478099]
 layout_mode = 0
-offset_left = 750.0
-offset_top = 300.0
-offset_right = 959.0
-offset_bottom = 322.0
+offset_left = 671.0
+offset_top = 306.0
+offset_right = 911.0
+offset_bottom = 328.0
 scale = Vector2(1.08, 1.08)
-<<<<<<< HEAD
-text = "karas– Senior designer & dev"
-=======
->>>>>>> 0cc8e498a525275aaefa0c3827db6aa5505e7074
+theme_override_fonts/font = ExtResource("2_3wy1v")
+text = "karas – Senior designer & dev"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
