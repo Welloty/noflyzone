@@ -23,6 +23,7 @@ var initial_touch_dist: float = 0.0
 var initial_zoom_val: float = 1.0
 
 func _ready() -> void:
+	add_to_group("camera")
 	target_zoom = zoom
 
 func _notification(what: int) -> void:
@@ -119,3 +120,12 @@ func _is_placing_pvo() -> bool:
 		if "is_dragging" in mgr and mgr.is_dragging:
 			return true
 	return false
+
+func shake(amount: float = 14.0, duration: float = 0.4) -> void:
+	var original_offset = offset
+	var tween = create_tween()
+	var steps = int(duration * 25.0)
+	for i in range(steps):
+		var random_offset = Vector2(randf_range(-amount, amount), randf_range(-amount, amount))
+		tween.tween_property(self, "offset", random_offset, duration / max(1, steps))
+	tween.tween_property(self, "offset", original_offset, 0.05)

@@ -119,7 +119,6 @@ func validate_path(curve: Curve2D, min_length: float, min_b: Vector2 = min_bound
 
 func generate_valid_path(spawn: Vector2, target: Vector2, waypoint_count: int, max_scatter: float, min_length: float, max_attempts: int = 50) -> Curve2D:
 	for attempt in range(max_attempts):
-		seed(randi())
 		var curve := generate_path(spawn, target, waypoint_count, max_scatter)
 		if validate_path(curve, min_length):
 			return curve

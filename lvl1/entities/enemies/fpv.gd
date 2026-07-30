@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var propeller_rf: Sprite2D = $Propeller3 
 @onready var propeller_lf: Sprite2D = $Propeller4 
 @export var sun_direction := Vector2(15, 20)
+@export var factory_explosion_scene: PackedScene = preload("res://lvl1/entities/enemies/factory_explosion.tscn")
 @onready var shadow_sprite: Sprite2D = $Shadow
 
 var health: float = 25.0
@@ -70,11 +71,26 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _explode_on_factory() -> void:
+	if is_down:
+		return
+	is_down = true
+
 	var factory = get_tree().get_first_node_in_group("factory")
 	if factory and factory.has_method("take_damage"):
 		factory.take_damage(damage_to_factory)
 	
 	remove_from_group("drones")
+
+	if factory_explosion_scene != null:
+		var explosion = factory_explosion_scene.instantiate()
+		explosion.global_position = global_position
+		explosion.rotation = global_rotation
+		explosion.scale = Vector2(0.85, 0.85)
+		if get_parent():
+			get_parent().add_child(explosion)
+		else:
+			get_tree().current_scene.add_child(explosion)
+
 	queue_free()
 
 func take_damage(amount: float) -> void:

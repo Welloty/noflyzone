@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var path_follower: PathFollow2D
 @export var sun_direction := Vector2(15, 20)
 @export var destruction_scene: PackedScene = preload("res://lvl1/entities/enemies/drone_destruction.tscn")
+@export var factory_explosion_scene: PackedScene = preload("res://lvl1/entities/enemies/factory_explosion.tscn")
 
 @onready var shadow_sprite: Sprite2D = $Shadow
 
@@ -58,6 +59,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _explode_on_factory() -> void:
+	if is_down:
+		return
+	is_down = true
+
 	var factory = get_tree().get_first_node_in_group("factory")
 	if not factory:
 		factory = get_tree().root.find_child("Factory", true, false)
@@ -66,6 +71,32 @@ func _explode_on_factory() -> void:
 		factory.take_damage(damage_to_factory)
 	
 	remove_from_group("drones")
+
+	if factory_explosion_scene != null:
+		var explosion = factory_explosion_scene.instantiate()
+		explosion.global_position = global_position
+		explosion.rotation = global_rotation
+		if get_parent():
+			get_parent().add_child(explosion)
+		else:
+			get_tree().current_scene.add_child(explosion)
+	elif destruction_scene != null:
+		var destruction = destruction_scene.instantiate()
+		destruction.global_position = global_position
+		destruction.rotation = global_rotation
+		
+		var move_vel = velocity
+		if move_vel.length() < 1.0:
+			move_vel = Vector2.RIGHT.rotated(global_rotation) * speed
+			
+		if destruction.has_method("setup"):
+			destruction.setup(move_vel)
+			
+		if get_parent():
+			get_parent().add_child(destruction)
+		else:
+			get_tree().current_scene.add_child(destruction)
+
 	queue_free()
 
 

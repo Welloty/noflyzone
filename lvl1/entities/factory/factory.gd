@@ -21,9 +21,5 @@ func take_damage(amount: float) -> void:
 		factory_destroyed.emit()
 
 		var defeat_menu = get_tree().get_first_node_in_group("defeat_menu")
-		
-		if not defeat_menu:
-			defeat_menu = get_tree().root.find_child("Defeatmenu", true, false)
-			
 		if defeat_menu and defeat_menu.has_method("open"):
 			defeat_menu.open()

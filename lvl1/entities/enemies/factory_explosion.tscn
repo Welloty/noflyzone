@@ -1,0 +1,63 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://lvl1/entities/enemies/factory_explosion.gd" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_burst"]
+offsets = PackedFloat32Array(0, 0.2, 0.6, 1)
+colors = PackedColorArray(1, 0.95, 0.5, 1, 1, 0.45, 0.1, 0.95, 0.35, 0.08, 0.03, 0.8, 0.1, 0.1, 0.1, 0)
+
+[sub_resource type="Gradient" id="Gradient_smoke"]
+offsets = PackedFloat32Array(0, 0.2, 0.65, 1)
+colors = PackedColorArray(0.35, 0.25, 0.15, 0.9, 0.2, 0.2, 0.2, 0.8, 0.12, 0.12, 0.12, 0.5, 0.05, 0.05, 0.05, 0)
+
+[sub_resource type="Gradient" id="Gradient_sparks"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(1, 1, 0.8, 1, 1, 0.55, 0.1, 0.9, 0.85, 0.25, 0.0, 0)
+
+[node name="FactoryExplosion" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="ExplosionBurst" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.65
+one_shot = true
+explosiveness = 0.95
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -20)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+scale_amount_min = 4.0
+scale_amount_max = 14.0
+color_ramp = SubResource("Gradient_burst")
+
+[node name="SmokePlume" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 35
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.85
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -60)
+initial_velocity_min = 40.0
+initial_velocity_max = 130.0
+scale_amount_min = 6.0
+scale_amount_max = 22.0
+color_ramp = SubResource("Gradient_smoke")
+
+[node name="Sparks" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.95
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 220)
+initial_velocity_min = 140.0
+initial_velocity_max = 380.0
+scale_amount_min = 1.5
+scale_amount_max = 4.5
+color_ramp = SubResource("Gradient_sparks")
