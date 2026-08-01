@@ -11,6 +11,12 @@ var cancel_btn: Button = null
 var is_touch_dragging: bool = false
 var touch_drag_index: int = -1
 
+# Tower Selection & Selling UI controls
+var selected_tower: Node2D = null
+var sell_ui_layer: CanvasLayer = null
+var sell_panel: PanelContainer = null
+var sell_btn: Button = null
+
 func _ready() -> void:
 	add_to_group("placement_manager")
 	z_index = 20
@@ -23,6 +29,7 @@ func _connect_hud() -> void:
 			hud_ref.pvo_selected.connect(_on_pvo_selected)
 
 func start_placement(pvo_type: String, cost: int) -> void:
+	deselect_tower()
 	if is_instance_valid(ghost_instance):
 		return
 	
@@ -68,6 +75,10 @@ func _get_hud() -> CanvasLayer:
 	return get_tree().get_first_node_in_group("hud") as CanvasLayer
 
 func _process(_delta: float) -> void:
+	if is_instance_valid(selected_tower) and is_instance_valid(sell_panel):
+		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
+		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
+
 	if not is_instance_valid(ghost_instance):
 		return
 		
@@ -93,6 +104,14 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_instance_valid(ghost_instance):
+		if is_instance_valid(selected_tower):
+			if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+				deselect_tower()
+				get_viewport().set_input_as_handled()
+			elif event is InputEventMouseButton and event.pressed:
+				deselect_tower()
+			elif event is InputEventScreenTouch and event.pressed:
+				deselect_tower()
 		return
 
 	if event is InputEventScreenTouch:
@@ -330,3 +349,155 @@ func _get_towers_container() -> Node2D:
 	if not container:
 		container = get_parent() as Node2D
 	return container
+
+func select_tower(tower: Node2D) -> void:
+	if is_instance_valid(ghost_instance):
+		return
+		
+	if is_instance_valid(selected_tower) and selected_tower != tower:
+		_set_tower_show_range(selected_tower, false)
+		
+	selected_tower = tower
+	if is_instance_valid(selected_tower):
+		_set_tower_show_range(selected_tower, true)
+		_create_sell_ui()
+		if _is_mobile_platform():
+			Input.vibrate_handheld(30)
+	else:
+		deselect_tower()
+
+func deselect_tower() -> void:
+	if is_instance_valid(selected_tower):
+		_set_tower_show_range(selected_tower, false)
+		selected_tower = null
+	_destroy_sell_ui()
+
+func toggle_tower_selection(tower: Node2D) -> void:
+	if selected_tower == tower:
+		deselect_tower()
+	else:
+		select_tower(tower)
+
+func _set_tower_show_range(tower: Node2D, show: bool) -> void:
+	if is_instance_valid(tower):
+		tower.show_range = show
+		tower.queue_redraw()
+
+func sell_selected_tower() -> void:
+	if not is_instance_valid(selected_tower):
+		_destroy_sell_ui()
+		return
+		
+	var tower_cost: int = 75
+	if "cost" in selected_tower:
+		tower_cost = selected_tower.cost
+	var refund: int = roundi(tower_cost * 0.9)
+	
+	var hud = _get_hud()
+	if hud and hud.has_method("add_money"):
+		hud.add_money(refund)
+		
+	var sold_tower = selected_tower
+	selected_tower = null
+	_destroy_sell_ui()
+	
+	if _is_mobile_platform():
+		Input.vibrate_handheld(40)
+		
+	if is_instance_valid(sold_tower):
+		sold_tower.queue_free()
+
+func _create_sell_ui() -> void:
+	_destroy_sell_ui()
+	if not is_instance_valid(selected_tower):
+		return
+
+	sell_ui_layer = CanvasLayer.new()
+	sell_ui_layer.layer = 98
+	add_child(sell_ui_layer)
+
+	sell_panel = PanelContainer.new()
+	sell_panel.name = "SellPanel"
+	
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.08, 0.11, 0.16, 0.94)
+	panel_style.corner_radius_top_left = 12
+	panel_style.corner_radius_top_right = 12
+	panel_style.corner_radius_bottom_left = 12
+	panel_style.corner_radius_bottom_right = 12
+	panel_style.border_width_left = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = Color(0.85, 0.35, 0.25, 0.8)
+	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.6)
+	panel_style.shadow_size = 10
+	panel_style.shadow_offset = Vector2(0, 3)
+	sell_panel.add_theme_stylebox_override("panel", panel_style)
+	sell_ui_layer.add_child(sell_panel)
+
+	var margin = MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 12)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_right", 12)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	sell_panel.add_child(margin)
+
+	var hbox = HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	hbox.add_theme_constant_override("separation", 12)
+	margin.add_child(hbox)
+
+	var tower_name: String = "ПВО"
+	if "pvo_name" in selected_tower:
+		tower_name = selected_tower.pvo_name
+	var tower_cost: int = 75
+	if "cost" in selected_tower:
+		tower_cost = selected_tower.cost
+	var refund: int = roundi(tower_cost * 0.9)
+
+	var info_vbox = VBoxContainer.new()
+	info_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	info_vbox.add_theme_constant_override("separation", 0)
+
+	var title_lbl = Label.new()
+	title_lbl.text = tower_name
+	title_lbl.add_theme_font_size_override("font_size", 14)
+	title_lbl.add_theme_color_override("font_color", Color(0.9, 0.95, 1.0))
+
+	var price_lbl = Label.new()
+	price_lbl.text = "+%d$" % refund
+	price_lbl.add_theme_font_size_override("font_size", 13)
+	price_lbl.add_theme_color_override("font_color", Color(0.4, 0.95, 0.45))
+
+	info_vbox.add_child(title_lbl)
+	info_vbox.add_child(price_lbl)
+	hbox.add_child(info_vbox)
+
+	sell_btn = Button.new()
+	sell_btn.text = " ПРОДАТЬ "
+	sell_btn.tooltip_text = "Продать ПВО за %d$" % refund
+	sell_btn.custom_minimum_size = Vector2(100, 36)
+	sell_btn.focus_mode = Control.FOCUS_NONE
+	_style_button(sell_btn, Color(0.78, 0.25, 0.2, 0.95), Color(0.92, 0.32, 0.25, 1.0), Color(0.55, 0.18, 0.15, 1.0))
+	sell_btn.pressed.connect(sell_selected_tower)
+	hbox.add_child(sell_btn)
+
+	var close_btn = Button.new()
+	close_btn.text = " ✕ "
+	close_btn.custom_minimum_size = Vector2(36, 36)
+	close_btn.focus_mode = Control.FOCUS_NONE
+	_style_button(close_btn, Color(0.25, 0.28, 0.32, 0.8), Color(0.35, 0.4, 0.45, 1.0), Color(0.18, 0.2, 0.24, 1.0))
+	close_btn.pressed.connect(deselect_tower)
+	hbox.add_child(close_btn)
+
+	if is_instance_valid(selected_tower):
+		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
+		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
+
+func _destroy_sell_ui() -> void:
+	if is_instance_valid(sell_ui_layer):
+		sell_ui_layer.queue_free()
+		sell_ui_layer = null
+		sell_panel = null
+		sell_btn = null

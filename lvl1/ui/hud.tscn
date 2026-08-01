@@ -155,10 +155,10 @@ text = "Strela-10 (75$)"
 custom_minimum_size = Vector2(140, 32)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "МОГ (Мобильная Огневая Группа)
-Радиус: 180px
-Урон: 30
-Цена: 50 монет"
+tooltip_text = "Оса СА-8
+Радиус: 360px
+Урон: 100
+Цена: 175 монет"
 text = "OSA SA-8 (175$)"
 
 [node name="WaveTablet" type="Control" parent="Control" unique_id=2000000001]

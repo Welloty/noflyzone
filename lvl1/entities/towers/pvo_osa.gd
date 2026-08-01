@@ -121,8 +121,12 @@ func _on_click_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: 
 		is_click = true
 
 	if is_click:
-		show_range = not show_range
-		if show_range and (DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")):
-			Input.vibrate_handheld(30)
-		queue_redraw()
+		var mgr = get_tree().get_first_node_in_group("placement_manager")
+		if mgr and mgr.has_method("toggle_tower_selection"):
+			mgr.toggle_tower_selection(self)
+		else:
+			show_range = not show_range
+			if show_range and (DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")):
+				Input.vibrate_handheld(30)
+			queue_redraw()
 		get_viewport().set_input_as_handled()

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b53olvyjto88b"]
+
+[ext_resource type="Script" uid="uid://cjo46u5yuwc0v" path="res://lvl1/entities/enemies/fp-1.gd" id="1_48hx4"]
+[ext_resource type="Texture2D" uid="uid://j6fm56cfav4k" path="res://lvl1/textures/fp-1.png" id="2_48hx4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifeun"]
+radius = 114.0
+height = 270.0
+
+[node name="Drone" type="CharacterBody2D" unique_id=1354707800]
+script = ExtResource("1_48hx4")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1227777398]
+modulate = Color(0, 0, 0, 0.50980395)
+position = Vector2(-22, 23)
+rotation = 1.5707964
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("2_48hx4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096788497]
+rotation = 1.5707964
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("2_48hx4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=996383420]
+visible = false
+rotation = 1.5707964
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CapsuleShape2D_ifeun")

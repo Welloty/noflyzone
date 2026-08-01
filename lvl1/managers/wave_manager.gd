@@ -18,9 +18,11 @@ var break_timer: float = 2.0
 
 var drone_scene: PackedScene = preload("res://lvl1/entities/enemies/drone.tscn")
 var fpv_scene: PackedScene = preload("res://lvl1/entities/enemies/fpv.tscn")
+var fp1_scene: PackedScene = preload("res://lvl1/entities/enemies/fp-1.tscn")
 
 @onready var main_path: Path2D = get_node_or_null("../../EnemyPaths/MainPath") if get_node_or_null("../../EnemyPaths/MainPath") else get_node_or_null("../Path2D")
 @onready var fpv_path: Path2D = get_node_or_null("../../EnemyPaths/FPVPath") if get_node_or_null("../../EnemyPaths/FPVPath") else get_node_or_null("../fpvdrun")
+@onready var fp1_path: Path2D = get_node_or_null("../../EnemyPaths/FP1Path") if get_node_or_null("../../EnemyPaths/FP1Path") else get_node_or_null("../FP1Path")
 
 func _ready() -> void:
 	add_to_group("wave_manager")
@@ -71,9 +73,17 @@ func _spawn_single_drone() -> void:
 	drones_spawned += 1
 	
 	# выбор типа дрона
-	var spawn_fpv = (randf() > 0.5 and current_wave >= 2)
-	var path_node = fpv_path if spawn_fpv else main_path
-	var scene = fpv_scene if spawn_fpv else drone_scene
+	var scene: PackedScene = drone_scene
+	var path_node: Path2D = main_path
+	
+	if current_wave >= 2:
+		var roll := randf()
+		if roll < 0.35:
+			scene = fpv_scene
+			path_node = fpv_path
+		elif roll < 0.70:
+			scene = fp1_scene
+			path_node = fp1_path
 	
 	if not is_instance_valid(path_node):
 		path_node = main_path
@@ -92,7 +102,7 @@ func _spawn_single_drone() -> void:
 	new_drone.max_health = new_drone.max_health * (1.0 + (current_wave * 0.08))
 	new_drone.health = new_drone.max_health
 	
-	if not spawn_fpv:
+	if scene == drone_scene:
 		new_drone.scale = Vector2(0.4, 0.4)
 		
 	get_parent().add_child(new_drone)

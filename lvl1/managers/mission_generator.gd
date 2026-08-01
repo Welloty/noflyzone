@@ -13,17 +13,23 @@ extends Node2D
 @export var fpv_max_scatter: float = 100.0
 @export var fpv_min_length: float = 800.0
 
+@export_group("FP1 Path Configuration")
+@export var fp1_waypoint_count: int = 2
+@export var fp1_max_scatter: float = 150.0
+@export var fp1_min_length: float = 1000.0
+
 @export_group("Path Smoothing")
 @export var enable_smoothing: bool = true
 @export var curve_smoothness: float = 0.25
 
 @onready var main_path_node: Path2D = get_node_or_null("../../EnemyPaths/MainPath") if get_node_or_null("../../EnemyPaths/MainPath") else get_node_or_null("../MainPath")
 @onready var fpv_path_node: Path2D = get_node_or_null("../../EnemyPaths/FPVPath") if get_node_or_null("../../EnemyPaths/FPVPath") else get_node_or_null("../FPVPath")
+@onready var fp1_path_node: Path2D = get_node_or_null("../../EnemyPaths/FP1Path") if get_node_or_null("../../EnemyPaths/FP1Path") else get_node_or_null("../FP1Path")
 
 func _ready() -> void:
 	add_to_group("mission_generator")
 	_update_bounds_from_camera()
-	generate_mission_paths()
+
 
 func _update_bounds_from_camera() -> void:
 	var camera = get_tree().get_first_node_in_group("camera")
@@ -140,6 +146,10 @@ func generate_mission_paths() -> void:
 	var fpv_spawn := select_spawn_point()
 	var fpv_curve := generate_valid_path(fpv_spawn, target, fpv_waypoint_count, fpv_max_scatter, fpv_min_length)
 	
+	# Generate FP-1 Drone Path
+	var fp1_spawn := select_spawn_point()
+	var fp1_curve := generate_valid_path(fp1_spawn, target, fp1_waypoint_count, fp1_max_scatter, fp1_min_length)
+	
 	if is_instance_valid(main_path_node):
 		main_path_node.position = Vector2.ZERO
 		main_path_node.scale = Vector2.ONE
@@ -151,3 +161,9 @@ func generate_mission_paths() -> void:
 		fpv_path_node.scale = Vector2.ONE
 		fpv_path_node.curve = fpv_curve
 		print("Generated FPVPath: length=", fpv_curve.get_baked_length(), ", points=", fpv_curve.point_count)
+
+	if is_instance_valid(fp1_path_node):
+		fp1_path_node.position = Vector2.ZERO
+		fp1_path_node.scale = Vector2.ONE
+		fp1_path_node.curve = fp1_curve
+		print("Generated FP1Path: length=", fp1_curve.get_baked_length(), ", points=", fp1_curve.point_count)
