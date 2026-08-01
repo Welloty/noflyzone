@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://frd6rww3ybjx" path="res://lvl1/textures/factory.png" id="2_va5di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ps0q5"]
+size = Vector2(987, 1096)
 
 [node name="Factory" type="StaticBody2D" unique_id=2012694825]
 script = ExtResource("1_hru48")
@@ -12,4 +13,5 @@ script = ExtResource("1_hru48")
 texture = ExtResource("2_va5di")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=546575004]
+position = Vector2(3.5, -12)
 shape = SubResource("RectangleShape2D_ps0q5")
