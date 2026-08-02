@@ -8,6 +8,7 @@
 size = Vector2(53, 40)
 
 [node name="Fpv" type="CharacterBody2D" unique_id=2064926873]
+z_index = 10
 scale = Vector2(0.525, 0.525)
 script = ExtResource("1_168kf")
 
@@ -19,6 +20,7 @@ scale = Vector2(0.525, 0.525)
 texture = ExtResource("1_f25y8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1590518566]
+z_index = 10
 rotation = -1.5707964
 scale = Vector2(0.525, 0.525)
 texture = ExtResource("1_f25y8")

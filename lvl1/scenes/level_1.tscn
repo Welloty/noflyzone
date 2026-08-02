@@ -21122,6 +21122,7 @@ texture_region_size = Vector2i(738, 899)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ps0q5"]
+tile_size = Vector2i(738, 899)
 sources/1 = SubResource("TileSetAtlasSource_1ipph")
 
 [sub_resource type="Curve2D" id="Curve2D_hd237"]

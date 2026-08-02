@@ -8,6 +8,7 @@ radius = 114.0
 height = 270.0
 
 [node name="Drone" type="CharacterBody2D" unique_id=1354707800]
+z_index = 10
 script = ExtResource("1_d5du7")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1227777398]
@@ -18,6 +19,8 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_g5748")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096788497]
+z_index = 10
+position = Vector2(0.99999994, 1.9999999)
 rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_g5748")
