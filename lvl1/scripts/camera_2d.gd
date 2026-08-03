@@ -117,7 +117,11 @@ func _is_placing_pvo() -> bool:
 	if mgr:
 		if "ghost_instance" in mgr and is_instance_valid(mgr.ghost_instance):
 			return true
+		if "is_touch_dragging" in mgr and mgr.is_touch_dragging:
+			return true
 		if "is_dragging" in mgr and mgr.is_dragging:
+			return true
+		if "is_drawing_patrol" in mgr and mgr.is_drawing_patrol:
 			return true
 	return false
 

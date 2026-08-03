@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://j6fm56cfav4k" path="res://lvl1/textures/fp-1.png" id="2_48hx4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifeun"]
-radius = 114.0
-height = 270.0
+radius = 324.99997
+height = 664.99994
 
 [node name="Drone" type="CharacterBody2D" unique_id=1354707800]
 z_index = 10
@@ -25,7 +25,6 @@ scale = Vector2(0.28, 0.28)
 texture = ExtResource("2_48hx4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=996383420]
-visible = false
 rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_ifeun")

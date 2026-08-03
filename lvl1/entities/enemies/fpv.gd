@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		propeller_rb.rotation += propeller_speed * delta
 		propeller_lb.rotation += propeller_speed * delta
 		propeller_rf.rotation += propeller_speed * delta
-		propeller_rf.rotation += propeller_speed * delta
+		propeller_lf.rotation += propeller_speed * delta
 		
 	move_and_slide()
 

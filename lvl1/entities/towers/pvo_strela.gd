@@ -7,7 +7,7 @@ extends Node2D
 @export var fire_rate: float = 1.0
 @export var missile_scene: PackedScene = preload("res://lvl1/entities/projectiles/missile.tscn")
 @export var missile_speed: float = 400.0
-@export var missile_turn_speed: float = 2.4
+@export var missile_turn_speed: float = 3.0
 @export var missile_max_g: float = 7.0
 @export var missile_lifetime: float = 3.5
 

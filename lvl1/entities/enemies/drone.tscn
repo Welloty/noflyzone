@@ -26,7 +26,6 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_g5748")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=996383420]
-visible = false
 rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_ifeun")

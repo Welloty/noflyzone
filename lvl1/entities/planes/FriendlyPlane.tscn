@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cs70aq0pwrps3"]
+
+[ext_resource type="Script" uid="uid://csbfxb3blhn8" path="res://lvl1/entities/planes/friendly_plane.gd" id="1_friendly_plane"]
+[ext_resource type="Texture2D" uid="uid://ojd7lk8nwgyx" path="res://lvl1/textures/f-16.png" id="2_mf867"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 35.510563
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
+radius = 492.7961
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_click"]
+radius = 230.10649
+
+[node name="FriendlyPlane" type="CharacterBody2D" unique_id=125044412]
+z_index = 10
+script = ExtResource("1_friendly_plane")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1933748152]
+modulate = Color(0, 0, 0, 0.4)
+position = Vector2(-62.305, -16.26)
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_mf867")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=811124891]
+modulate = Color(0.8497684, 0.8339317, 0.81570166, 1)
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_mf867")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1574779097]
+shape = SubResource("CircleShape2D_body")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=2029971933]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1624062127]
+shape = SubResource("CircleShape2D_detection")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=731075022]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1141551604]
+shape = SubResource("CircleShape2D_click")

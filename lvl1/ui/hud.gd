@@ -11,6 +11,7 @@ signal pvo_selected(pvo_type: String, cost: int)
 @onready var wave_value_label: Label = %WaveValueLabel
 @onready var mog_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/MogButton
 @onready var osa_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/OsaButton
+var plane_button: Button = null
 
 var is_dragging: bool = false
 var current_pvo_type: String = ""
@@ -18,6 +19,16 @@ var current_pvo_cost: int = 0
 
 func _ready() -> void:
 	add_to_group("hud")
+	var hbox = $Control/TopPvoBar/PanelContainer/HBoxContainer
+	if hbox:
+		plane_button = hbox.get_node_or_null("PlaneButton")
+		if not plane_button:
+			plane_button = Button.new()
+			plane_button.name = "PlaneButton"
+			plane_button.text = "Plane (150$)"
+			plane_button.tooltip_text = "Самолет-перехватчик\nРадиус LOITER: 150px\nЦена: 150$"
+			hbox.add_child(plane_button)
+
 	if mog_button:
 		mog_button.custom_minimum_size = Vector2(130, 48)
 		mog_button.button_down.connect(_start_drag.bind("Стрела-10", 75))
@@ -26,6 +37,11 @@ func _ready() -> void:
 		osa_button.custom_minimum_size = Vector2(130, 48)
 		osa_button.button_down.connect(_start_drag.bind("Оса", 175))
 		osa_button.gui_input.connect(_on_button_gui_input)
+	if plane_button:
+		plane_button.custom_minimum_size = Vector2(130, 48)
+		plane_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		plane_button.button_down.connect(_start_drag.bind("Самолет", 150))
+		plane_button.gui_input.connect(_on_button_gui_input)
 	_update_money_ui()
 
 func _start_drag(pvo_type: String, cost: int) -> void:
@@ -65,6 +81,9 @@ func _update_money_ui() -> void:
 		mog_button.text = "Strela-10 (75$)"
 	if osa_button:
 		osa_button.disabled = (money < 175)
+	if plane_button:
+		plane_button.disabled = (money < 150)
+		plane_button.text = "Plane (150$)"
 
 func update_wave(current: int, max_w: int) -> void:
 	if wave_value_label:

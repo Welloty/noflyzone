@@ -53,8 +53,8 @@ func generate_large_map() -> void:
 	var tiles_x: int = int(ceil(target_map_size_px.x / float(tile_size)))
 	var tiles_y: int = int(ceil(target_map_size_px.y / float(tile_size)))
 	
-	var half_x: int = tiles_x / 2
-	var half_y: int = tiles_y / 2
+	var half_x: int = floori(tiles_x / 2.0)
+	var half_y: int = floori(tiles_y / 2.0)
 	
 	var start_x = -half_x
 	var end_x = half_x + (tiles_x % 2)
@@ -119,11 +119,12 @@ func update_camera_bounds() -> void:
 
 	if is_instance_valid(target_cam) and is_instance_valid(ground_tile_map):
 		var used_rect = ground_tile_map.get_used_rect()
+		var map_scale = ground_tile_map.scale
 		var map_rect = Rect2(
-			used_rect.position.x * tile_size,
-			used_rect.position.y * tile_size,
-			used_rect.size.x * tile_size,
-			used_rect.size.y * tile_size
+			used_rect.position.x * tile_size * map_scale.x,
+			used_rect.position.y * tile_size * map_scale.y,
+			used_rect.size.x * tile_size * map_scale.x,
+			used_rect.size.y * tile_size * map_scale.y
 		)
 		
 		if target_cam.has_method("set_map_bounds_in_pixels"):

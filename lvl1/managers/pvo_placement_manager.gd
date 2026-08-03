@@ -13,9 +13,19 @@ var touch_drag_index: int = -1
 
 # Tower Selection & Selling UI controls
 var selected_tower: Node2D = null
+var selected_plane: Node2D = null
 var sell_ui_layer: CanvasLayer = null
 var sell_panel: PanelContainer = null
 var sell_btn: Button = null
+var patrol_btn: Button = null
+
+# Patrol Drawing controls
+var is_drawing_patrol: bool = false
+var temp_patrol_points: Array[Vector2] = []
+var patrol_ui_layer: CanvasLayer = null
+var patrol_confirm_btn: Button = null
+var patrol_cancel_btn: Button = null
+var patrol_info_label: Label = null
 
 func _ready() -> void:
 	add_to_group("placement_manager")
@@ -40,6 +50,8 @@ func start_placement(pvo_type: String, cost: int) -> void:
 	current_cost = cost
 	if pvo_type == "Оса" or pvo_type == "Osa":
 		active_pvo_scene = preload("res://lvl1/entities/towers/pvo_osa.tscn")
+	elif pvo_type == "Самолет" or pvo_type == "Plane" or pvo_type == "FriendlyPlane":
+		active_pvo_scene = preload("res://lvl1/entities/planes/FriendlyPlane.tscn")
 	else:
 		active_pvo_scene = preload("res://lvl1/entities/towers/pvo_strela.tscn")
 
@@ -75,6 +87,9 @@ func _get_hud() -> CanvasLayer:
 	return get_tree().get_first_node_in_group("hud") as CanvasLayer
 
 func _process(_delta: float) -> void:
+	if selected_tower != null and not is_instance_valid(selected_tower):
+		deselect_tower()
+
 	if is_instance_valid(selected_tower) and is_instance_valid(sell_panel):
 		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
 		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
@@ -103,15 +118,40 @@ func _process(_delta: float) -> void:
 		confirm_btn.disabled = not is_valid
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_drawing_patrol:
+		if event is InputEventKey and event.pressed:
+			if event.keycode == KEY_ESCAPE:
+				cancel_patrol_drawing()
+				get_viewport().set_input_as_handled()
+			elif event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER or event.keycode == KEY_SPACE:
+				confirm_patrol_drawing()
+				get_viewport().set_input_as_handled()
+		elif event is InputEventMouseButton and event.pressed:
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				cancel_patrol_drawing()
+				get_viewport().set_input_as_handled()
+			elif event.button_index == MOUSE_BUTTON_LEFT:
+				var click_pos = get_global_mouse_position()
+				_add_patrol_point(click_pos)
+				get_viewport().set_input_as_handled()
+		elif event is InputEventScreenTouch and event.pressed:
+			var touch_pos = _screen_to_global(event.position)
+			_add_patrol_point(touch_pos)
+			get_viewport().set_input_as_handled()
+		return
+
 	if not is_instance_valid(ghost_instance):
 		if is_instance_valid(selected_tower):
 			if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 				deselect_tower()
 				get_viewport().set_input_as_handled()
-			elif event is InputEventMouseButton and event.pressed:
-				deselect_tower()
+			elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				if not _is_click_on_interactive_object(get_global_mouse_position()):
+					deselect_tower()
 			elif event is InputEventScreenTouch and event.pressed:
-				deselect_tower()
+				var touch_global = _screen_to_global(event.position)
+				if not _is_click_on_interactive_object(touch_global):
+					deselect_tower()
 		return
 
 	if event is InputEventScreenTouch:
@@ -154,6 +194,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _screen_to_global(screen_pos: Vector2) -> Vector2:
 	var canvas_xform = get_canvas_transform()
 	return canvas_xform.affine_inverse() * screen_pos
+
+func _is_click_on_interactive_object(global_click_pos: Vector2) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	if not space_state:
+		return false
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = global_click_pos
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	var results = space_state.intersect_point(query)
+	return not results.is_empty()
 
 func _try_place_tower() -> void:
 	if not is_instance_valid(ghost_instance):
@@ -359,6 +410,10 @@ func select_tower(tower: Node2D) -> void:
 		
 	selected_tower = tower
 	if is_instance_valid(selected_tower):
+		if selected_tower.is_in_group("friendly_units") or "state" in selected_tower:
+			selected_plane = selected_tower
+		else:
+			selected_plane = null
 		_set_tower_show_range(selected_tower, true)
 		_create_sell_ui()
 		if _is_mobile_platform():
@@ -370,6 +425,7 @@ func deselect_tower() -> void:
 	if is_instance_valid(selected_tower):
 		_set_tower_show_range(selected_tower, false)
 		selected_tower = null
+	selected_plane = null
 	_destroy_sell_ui()
 
 func toggle_tower_selection(tower: Node2D) -> void:
@@ -378,9 +434,9 @@ func toggle_tower_selection(tower: Node2D) -> void:
 	else:
 		select_tower(tower)
 
-func _set_tower_show_range(tower: Node2D, show: bool) -> void:
+func _set_tower_show_range(tower: Node2D, should_show: bool) -> void:
 	if is_instance_valid(tower):
-		tower.show_range = show
+		tower.show_range = should_show
 		tower.queue_redraw()
 
 func sell_selected_tower() -> void:
@@ -474,9 +530,22 @@ func _create_sell_ui() -> void:
 	info_vbox.add_child(price_lbl)
 	hbox.add_child(info_vbox)
 
+	if is_instance_valid(selected_plane) or (is_instance_valid(selected_tower) and selected_tower.is_in_group("friendly_units")):
+		var plane_ref = selected_plane if is_instance_valid(selected_plane) else selected_tower
+		var has_route = ("patrol_points" in plane_ref and not plane_ref.patrol_points.is_empty())
+		var btn_label = " ✈  Изменить патруль " if has_route else " ✈  Задать патруль "
+		patrol_btn = Button.new()
+		patrol_btn.text = btn_label
+		patrol_btn.tooltip_text = "Нарисовать новый маршрут патрулирования"
+		patrol_btn.custom_minimum_size = Vector2(150, 36)
+		patrol_btn.focus_mode = Control.FOCUS_NONE
+		_style_button(patrol_btn, Color(0.2, 0.55, 0.85, 0.95), Color(0.25, 0.68, 0.98, 1.0), Color(0.15, 0.4, 0.65, 1.0))
+		patrol_btn.pressed.connect(_on_patrol_button_pressed)
+		hbox.add_child(patrol_btn)
+
 	sell_btn = Button.new()
 	sell_btn.text = " ПРОДАТЬ "
-	sell_btn.tooltip_text = "Продать ПВО за %d$" % refund
+	sell_btn.tooltip_text = "Продать за %d$" % refund
 	sell_btn.custom_minimum_size = Vector2(100, 36)
 	sell_btn.focus_mode = Control.FOCUS_NONE
 	_style_button(sell_btn, Color(0.78, 0.25, 0.2, 0.95), Color(0.92, 0.32, 0.25, 1.0), Color(0.55, 0.18, 0.15, 1.0))
@@ -495,9 +564,138 @@ func _create_sell_ui() -> void:
 		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
 		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
 
+func _on_patrol_button_pressed() -> void:
+	start_patrol_drawing()
+
 func _destroy_sell_ui() -> void:
 	if is_instance_valid(sell_ui_layer):
 		sell_ui_layer.queue_free()
 		sell_ui_layer = null
 		sell_panel = null
 		sell_btn = null
+		patrol_btn = null
+
+func _draw() -> void:
+	if is_drawing_patrol and not temp_patrol_points.is_empty():
+		for i in range(temp_patrol_points.size()):
+			var local_pt = to_local(temp_patrol_points[i])
+			draw_circle(local_pt, 7.0, Color(0.2, 0.8, 1.0, 0.95))
+			draw_arc(local_pt, 7.0, 0, TAU, 32, Color.WHITE, 2.0)
+			
+			if i > 0:
+				var prev_pt = to_local(temp_patrol_points[i - 1])
+				draw_line(prev_pt, local_pt, Color(0.25, 0.75, 1.0, 0.95), 3.5)
+
+		if temp_patrol_points.size() > 2:
+			var first_pt = to_local(temp_patrol_points[0])
+			var last_pt = to_local(temp_patrol_points[temp_patrol_points.size() - 1])
+			draw_line(last_pt, first_pt, Color(0.25, 0.75, 1.0, 0.45), 2.0)
+
+func start_patrol_drawing() -> void:
+	if not is_instance_valid(selected_plane):
+		return
+	_destroy_sell_ui()
+	is_drawing_patrol = true
+	temp_patrol_points.clear()
+	_create_patrol_ui()
+	queue_redraw()
+
+func _add_patrol_point(pos: Vector2) -> void:
+	temp_patrol_points.append(pos)
+	if _is_mobile_platform():
+		Input.vibrate_handheld(25)
+	_update_patrol_ui()
+	queue_redraw()
+
+func _create_patrol_ui() -> void:
+	_destroy_patrol_ui()
+
+	patrol_ui_layer = CanvasLayer.new()
+	patrol_ui_layer.layer = 99
+	add_child(patrol_ui_layer)
+
+	var panel = PanelContainer.new()
+	panel.name = "PatrolPanel"
+	panel.anchor_left = 0.5
+	panel.anchor_right = 0.5
+	panel.anchor_top = 0.78
+	panel.anchor_bottom = 0.88
+	panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	panel.grow_vertical = Control.GROW_DIRECTION_BOTH
+
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.06, 0.12, 0.18, 0.94)
+	panel_style.corner_radius_top_left = 16
+	panel_style.corner_radius_top_right = 16
+	panel_style.corner_radius_bottom_left = 16
+	panel_style.corner_radius_bottom_right = 16
+	panel_style.border_width_left = 2
+	panel_style.border_width_top = 2
+	panel_style.border_width_right = 2
+	panel_style.border_width_bottom = 2
+	panel_style.border_color = Color(0.25, 0.65, 0.9, 0.7)
+	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.5)
+	panel_style.shadow_size = 14
+	panel.add_theme_stylebox_override("panel", panel_style)
+	patrol_ui_layer.add_child(panel)
+
+	var margin = MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 20)
+	margin.add_theme_constant_override("margin_top", 12)
+	margin.add_theme_constant_override("margin_right", 20)
+	margin.add_theme_constant_override("margin_bottom", 12)
+	panel.add_child(margin)
+
+	var hbox = HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	hbox.add_theme_constant_override("separation", 20)
+	margin.add_child(hbox)
+
+	patrol_info_label = Label.new()
+	patrol_info_label.text = "Кликайте по карте (Точек: 0)"
+	patrol_info_label.add_theme_font_size_override("font_size", 16)
+	patrol_info_label.add_theme_color_override("font_color", Color(0.85, 0.95, 1.0))
+	hbox.add_child(patrol_info_label)
+
+	patrol_confirm_btn = Button.new()
+	patrol_confirm_btn.text = " ✓  ПОДТВЕРДИТЬ "
+	patrol_confirm_btn.disabled = true
+	patrol_confirm_btn.custom_minimum_size = Vector2(160, 50)
+	patrol_confirm_btn.focus_mode = Control.FOCUS_NONE
+	_style_button(patrol_confirm_btn, Color(0.16, 0.62, 0.3, 0.95), Color(0.2, 0.78, 0.38, 1.0), Color(0.12, 0.48, 0.22, 1.0))
+	patrol_confirm_btn.pressed.connect(confirm_patrol_drawing)
+	hbox.add_child(patrol_confirm_btn)
+
+	patrol_cancel_btn = Button.new()
+	patrol_cancel_btn.text = " ✕  ОТМЕНА "
+	patrol_cancel_btn.custom_minimum_size = Vector2(140, 50)
+	patrol_cancel_btn.focus_mode = Control.FOCUS_NONE
+	_style_button(patrol_cancel_btn, Color(0.72, 0.22, 0.22, 0.95), Color(0.88, 0.28, 0.28, 1.0), Color(0.55, 0.16, 0.16, 1.0))
+	patrol_cancel_btn.pressed.connect(cancel_patrol_drawing)
+	hbox.add_child(patrol_cancel_btn)
+
+func _update_patrol_ui() -> void:
+	if is_instance_valid(patrol_info_label):
+		patrol_info_label.text = "Кликайте по карте (Точек: %d)" % temp_patrol_points.size()
+	if is_instance_valid(patrol_confirm_btn):
+		patrol_confirm_btn.disabled = temp_patrol_points.is_empty()
+
+func confirm_patrol_drawing() -> void:
+	if is_instance_valid(selected_plane) and not temp_patrol_points.is_empty():
+		if selected_plane.has_method("set_patrol"):
+			selected_plane.set_patrol(temp_patrol_points.duplicate())
+	cancel_patrol_drawing()
+
+func cancel_patrol_drawing() -> void:
+	is_drawing_patrol = false
+	temp_patrol_points.clear()
+	_destroy_patrol_ui()
+	queue_redraw()
+
+func _destroy_patrol_ui() -> void:
+	if is_instance_valid(patrol_ui_layer):
+		patrol_ui_layer.queue_free()
+		patrol_ui_layer = null
+		patrol_confirm_btn = null
+		patrol_cancel_btn = null
+		patrol_info_label = null
