@@ -2,7 +2,7 @@ extends Node2D
 
 @export var pvo_name: String = "Оса"
 @export var cost: int = 175
-@export var range_radius: float = 360.0
+@export var range_radius: float = 1000.0
 @export var damage: float = 100.0
 @export var fire_rate: float = 1.75
 @export var missile_scene: PackedScene = preload("res://lvl1/entities/projectiles/missile.tscn")
@@ -26,6 +26,7 @@ var fire_timer: float = 0.0
 var use_left_barrel: bool = true
 
 func _ready() -> void:
+	add_to_group("zrk")
 	if not is_ghost:
 		add_to_group("pvo_towers")
 		if click_area:

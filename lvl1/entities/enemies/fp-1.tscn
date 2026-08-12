@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://j6fm56cfav4k" path="res://lvl1/textures/fp-1.png" id="2_48hx4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ifeun"]
-radius = 324.99997
-height = 664.99994
+radius = 99.99999
+height = 204.99998
 
 [node name="Drone" type="CharacterBody2D" unique_id=1354707800]
 z_index = 10
@@ -13,18 +13,19 @@ script = ExtResource("1_48hx4")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1227777398]
 modulate = Color(0, 0, 0, 0.50980395)
-position = Vector2(-22, 23)
+position = Vector2(-20.135, 16.77)
 rotation = 1.5707964
-scale = Vector2(0.28, 0.28)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_48hx4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096788497]
 z_index = 10
 rotation = 1.5707964
-scale = Vector2(0.28, 0.28)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_48hx4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=996383420]
+position = Vector2(-3.9999998, 0.99999994)
 rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_ifeun")

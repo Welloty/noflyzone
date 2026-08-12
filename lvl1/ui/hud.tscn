@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c15ihusqcgh2i" path="res://lvl1/ui/hud.gd" id="1_hud"]
 [ext_resource type="Script" uid="uid://c1b4jmk6orlr1" path="res://lvl1/ui/tablet_panel.gd" id="2_tablet"]
+[ext_resource type="Script" uid="uid://deesjcwtbnlp" path="res://lvl1/ui/radar.gd" id="3_x1k73"]
+[ext_resource type="Texture2D" uid="uid://c1r6ssxlehx7g" path="res://lvl1/textures/radar.png" id="4_0gim1"]
+[ext_resource type="Texture2D" uid="uid://d2tu3ab1dj7q3" path="res://lvl1/textures/target.png" id="5_da8o2"]
+[ext_resource type="Texture2D" uid="uid://c1lgvl1gq1o4h" path="res://lvl1/textures/pvo.png" id="6_if3iv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 14.0
@@ -192,6 +196,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 26.0
+offset_bottom = -264.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tablet")
@@ -297,3 +302,66 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
+
+[node name="Radar" type="Control" parent="." unique_id=366577308]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_x1k73")
+
+[node name="ToggleButton" type="Button" parent="Radar" unique_id=593720450]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 821.0
+offset_top = 311.0
+offset_right = 901.0
+offset_bottom = 335.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "▶ Скрыть"
+
+[node name="Strela" type="Button" parent="Radar" unique_id=947237867]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 612.0
+offset_top = 403.0
+offset_right = 692.0
+offset_bottom = 427.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "Стрела-10
+"
+
+[node name="Osa" type="Button" parent="Radar" unique_id=1926467799]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 612.0
+offset_top = 440.045
+offset_right = 692.0
+offset_bottom = 464.045
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "ОСА СА-8"
+
+[node name="Background" type="Sprite2D" parent="Radar" unique_id=1286857360]
+position = Vector2(833.36945, 432.36942)
+scale = Vector2(0.050961647, 0.050961655)
+texture = ExtResource("4_0gim1")
+
+[node name="Target" type="Sprite2D" parent="Radar" unique_id=843437166]
+position = Vector2(807.705, 400)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("5_da8o2")
+
+[node name="Pvo" type="Sprite2D" parent="Radar" unique_id=1849294948]
+z_index = 5
+position = Vector2(833.43, 432.58)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("6_if3iv")

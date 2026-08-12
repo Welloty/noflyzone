@@ -99,9 +99,9 @@ color = Color(0.29, 0.486, 0.145, 0.3)
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1137495542]
 layout_mode = 0
-offset_left = 70.0
+offset_left = 34.0
 offset_top = 408.0
-offset_right = 1082.0
+offset_right = 934.0
 offset_bottom = 442.0
 theme_override_styles/background = SubResource("SBF_pbBg")
 theme_override_styles/fill = SubResource("SBF_pbFill")
@@ -110,9 +110,9 @@ script = ExtResource("2_pbgd")
 
 [node name="TipLabel" type="Label" parent="." unique_id=1438268710]
 layout_mode = 0
-offset_left = 70.0
+offset_left = 34.0
 offset_top = 458.0
-offset_right = 1082.0
+offset_right = 1046.0
 offset_bottom = 482.0
 text = "Tip: ..."
 label_settings = SubResource("LabelSettings_vjmxb")

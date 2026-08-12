@@ -126,20 +126,21 @@ color = Color(0.29, 0.486, 0.145, 0.3)
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1406829910]
 layout_mode = 0
-offset_left = 70.0
+offset_left = 39.0
 offset_top = 408.0
-offset_right = 1082.0
+offset_right = 990.4285
 offset_bottom = 442.0
+scale = Vector2(0.93333334, 1)
 theme_override_styles/background = SubResource("SBF_pbBg")
 theme_override_styles/fill = SubResource("SBF_pbFill")
 show_percentage = false
 
 [node name="TipLabel" type="Label" parent="." unique_id=762264278]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 458.0
-offset_right = 1082.0
-offset_bottom = 482.0
+offset_left = 39.0
+offset_top = 456.0
+offset_right = 1051.0
+offset_bottom = 480.0
 text = "Tip: ..."
 label_settings = SubResource("LS_tip")
 

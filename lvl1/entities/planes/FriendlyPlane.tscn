@@ -7,10 +7,10 @@
 radius = 35.510563
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
-radius = 492.7961
+radius = 132.09845
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_click"]
-radius = 230.10649
+radius = 61.008198
 
 [node name="FriendlyPlane" type="CharacterBody2D" unique_id=125044412]
 z_index = 10
@@ -18,15 +18,15 @@ script = ExtResource("1_friendly_plane")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1933748152]
 modulate = Color(0, 0, 0, 0.4)
-position = Vector2(-62.305, -16.26)
+position = Vector2(-32.445, -7.575)
 rotation = 1.5707964
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.07, 0.07)
 texture = ExtResource("2_mf867")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=811124891]
 modulate = Color(0.8497684, 0.8339317, 0.81570166, 1)
 rotation = 1.5707964
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.07, 0.07)
 texture = ExtResource("2_mf867")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1574779097]
