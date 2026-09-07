@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cknjoske2u1lb"]
+
+[ext_resource type="Script" uid="uid://c45f0t8x4kld0" path="res://lvl1/entities/enemies/roctetks.gd" id="1_6cg2q"]
+[ext_resource type="Texture2D" uid="uid://ctiuwogkdjmm8" path="res://lvl1/textures/Kalibr.png" id="2_6cg2q"]
+[ext_resource type="AudioStream" uid="uid://bw3xvu2ywhta1" path="res://sounds/627118__newlocknew__aerorckt_rocket-roar-2steadycrackle_em_7lrs.wav" id="3_k50cq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xnyk"]
+size = Vector2(1229.9999, 89.99999)
+
+[node name="Roctetks" type="CharacterBody2D" unique_id=2077631192]
+script = ExtResource("1_6cg2q")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=832578510]
+modulate = Color(0, 0, 0, 0.50980395)
+position = Vector2(-4.9999995, 6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_6cg2q")
+
+[node name="Kalibr" type="Sprite2D" parent="." unique_id=176994879]
+scale = Vector2(0.1, 0.076)
+texture = ExtResource("2_6cg2q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=964443889]
+position = Vector2(-0.5, 3)
+scale = Vector2(0.1, 0.1)
+shape = SubResource("RectangleShape2D_5xnyk")
+
+[node name="627118NewlocknewAerorcktRocketRoar2SteadycrackleEm7Lrs" type="AudioStreamPlayer2D" parent="." unique_id=1815734490]
+position = Vector2(-194, 12)
+stream = ExtResource("3_k50cq")

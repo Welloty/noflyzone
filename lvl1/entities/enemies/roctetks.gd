@@ -1,42 +1,38 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
-@export var max_health: float = 80.0
-@export var damage_to_factory: float = 25.0
-@export var reward_money: int = 20
+@export var speed: float = 150.0
+@export var max_health: float = 80
+@export var damage_to_factory: float = 50.0
+@export var reward_money: int = 75
 @export var path_follower: PathFollow2D
-@export var sun_direction := Vector2(15, 20)
+@export var sun_direction := Vector2(20, 25)
 @export var destruction_scene: PackedScene = preload("res://lvl1/entities/enemies/drone_destruction.tscn")
 @export var factory_explosion_scene: PackedScene = preload("res://lvl1/entities/enemies/factory_explosion.tscn")
+@onready var sounds_effect: AudioStreamPlayer2D = $"627118NewlocknewAerorcktRocketRoar2SteadycrackleEm7Lrs"
 
 @onready var shadow_sprite: Sprite2D = $Shadow
-@onready var shahed_sound: AudioStreamPlayer2D = $Shahedsound
-
 
 var health: float = 80.0
 var is_down: bool = false
 
-
 func _ready() -> void:
 	add_to_group("drones")
 	health = max_health
-	#if not shahed_sound.playing:
-		#shahed_sound.play()
-
+	#sounds_effect.play()
+	
 func _exit_tree() -> void:
 	_cleanup_path_follower()
-
 
 func _cleanup_path_follower() -> void:
 	if is_instance_valid(path_follower):
 		path_follower.queue_free()
 
-
 func _process(_delta: float) -> void:
-	
 	if is_instance_valid(shadow_sprite):
-		shadow_sprite.global_rotation = global_rotation + deg_to_rad(90)
+		shadow_sprite.global_rotation = global_rotation + deg_to_rad(0)
 		shadow_sprite.global_position = global_position + sun_direction
+
+
 
 
 func _physics_process(delta: float) -> void:
@@ -60,8 +56,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		
 	move_and_slide()
-
-
+	
 func _explode_on_factory() -> void:
 	if is_down:
 		return

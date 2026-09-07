@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://cg14gahay7orx"]
+
+[ext_resource type="FontFile" uid="uid://3pckuvsb6kf4" path="res://main/fonts/ColossusExpandedRUS.ttf" id="1_bpa3b"]
+[ext_resource type="Script" uid="uid://6ml181wywsxd" path="res://helps/strela_10_info.gd" id="1_ogi81"]
+[ext_resource type="Script" uid="uid://d3te88s8fqf5g" path="res://helps/label.gd" id="2_pnuex"]
+[ext_resource type="Script" uid="uid://beyw3skprunrn" path="res://helps/title.gd" id="2_v0tbb"]
+[ext_resource type="AudioStream" uid="uid://b6dw2bqbis882" path="res://sounds/546167__grcekh__keyboard-typing-10-whitefox-mechanical.mp3" id="4_v0tbb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnuex"]
+font_size = 72
+font_color = Color(0.29, 0.486, 0.145, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0tbb"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.082, 0.168, 0.051, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.65)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogi81"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.047, 0.098, 0.027, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.45)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvpn2"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.122, 0.247, 0.075, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uf266"]
+
+[node name="Strela-10 info" type="Control" unique_id=1912276032]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ogi81")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1162754968]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.051, 0.122, 0.059, 1)
+
+[node name="Title" type="Label" parent="." unique_id=92065803]
+layout_mode = 0
+offset_left = 55.99999
+offset_top = 55.999996
+offset_right = 1002.0
+offset_bottom = 123.0
+scale = Vector2(0.905, 0.905)
+theme_override_fonts/font = ExtResource("1_bpa3b")
+text = "STRELA-10:"
+label_settings = SubResource("LabelSettings_pnuex")
+script = ExtResource("2_v0tbb")
+
+[node name="Label" type="Label" parent="." unique_id=1862148294]
+layout_mode = 0
+offset_left = 48.000008
+offset_top = 112.0
+offset_right = 787.0
+offset_bottom = 192.0
+scale = Vector2(1.13, 1.13)
+theme_override_fonts/font = ExtResource("1_bpa3b")
+text = "Зенитно-ракетный комплекс 9К35 «Стрела-10» 
+— это советский боевой комплекс ближнего действия, 
+созданный для защиты сухопутных войск на поле боя
+. По классификации НАТО он известен как SA-13 Gopher («Суслик»)"
+script = ExtResource("2_pnuex")
+
+[node name="KeyboardSounds" type="AudioStreamPlayer2D" parent="." unique_id=607569658]
+position = Vector2(-184, 200)
+stream = ExtResource("4_v0tbb")
+
+[node name="Timer" type="Timer" parent="." unique_id=2033508295]
+
+[node name="BACK" type="Button" parent="." unique_id=1881304595]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 456.0
+offset_right = 504.0
+offset_bottom = 512.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("1_bpa3b")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_v0tbb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ogi81")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bvpn2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uf266")
+text = "Назад"
+
+[connection signal="timeout" from="Timer" to="Label" method="_on_timer_timeout"]
+[connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]

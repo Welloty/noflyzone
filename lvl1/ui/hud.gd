@@ -31,7 +31,7 @@ func _ready() -> void:
 
 	if mog_button:
 		mog_button.custom_minimum_size = Vector2(130, 48)
-		mog_button.button_down.connect(_start_drag.bind("Стрела-10", 75))
+		mog_button.button_down.connect(_start_drag.bind("Стрела-1", 75))
 		mog_button.gui_input.connect(_on_button_gui_input)
 	if osa_button:
 		osa_button.custom_minimum_size = Vector2(130, 48)

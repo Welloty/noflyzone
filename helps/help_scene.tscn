@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://corbl56ry01b4"]
+
+[ext_resource type="Script" uid="uid://c554ncfo5n14s" path="res://helps/help_scene.gd" id="1_666i6"]
+[ext_resource type="FontFile" uid="uid://3pckuvsb6kf4" path="res://main/fonts/ColossusExpandedRUS.ttf" id="1_h6pr4"]
+[ext_resource type="AudioStream" uid="uid://bk0xsgh5lsv6p" path="res://sounds/623175__aphom000__button-click-selection.wav" id="3_hy5t4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mh1yi"]
+font_size = 72
+font_color = Color(0.29, 0.486, 0.145, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6pr4"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.082, 0.168, 0.051, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.65)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwew2"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.047, 0.098, 0.027, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.45)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dhtx"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.122, 0.247, 0.075, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvvg7"]
+
+[node name="HelpScene" type="Control" unique_id=721735942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_666i6")
+
+[node name="BG" type="ColorRect" parent="." unique_id=888653878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.051, 0.122, 0.059, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1441883294]
+layout_mode = 0
+offset_left = 55.99999
+offset_top = 55.999996
+offset_right = 1002.0
+offset_bottom = 123.0
+scale = Vector2(0.905, 0.905)
+theme_override_fonts/font = ExtResource("1_h6pr4")
+text = "This_is_a_game_tutorial"
+label_settings = SubResource("LabelSettings_mh1yi")
+
+[node name="Label" type="Label" parent="." unique_id=778454778]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 272.0
+offset_bottom = 160.0
+scale = Vector2(1.835, 1.835)
+theme_override_fonts/font = ExtResource("1_h6pr4")
+text = "Opportunities"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HELP1" type="Button" parent="." unique_id=1183010674]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 184.0
+offset_right = 512.0
+offset_bottom = 240.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("1_h6pr4")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6pr4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fwew2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5dhtx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xvvg7")
+text = "Help1"
+
+[node name="HELP2" type="Button" parent="." unique_id=450829554]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 264.0
+offset_right = 512.0
+offset_bottom = 320.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("1_h6pr4")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6pr4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fwew2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5dhtx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xvvg7")
+text = "Help2"
+
+[node name="HELP3" type="Button" parent="." unique_id=1275196335]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 344.0
+offset_right = 512.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("1_h6pr4")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6pr4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fwew2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5dhtx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xvvg7")
+text = "Help3"
+
+[node name="ClicksSound" type="AudioStreamPlayer2D" parent="." unique_id=1689263040]
+position = Vector2(-64, 280)
+stream = ExtResource("3_hy5t4")
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=522407165]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="HELP1" to="." method="_on_help_1_pressed"]

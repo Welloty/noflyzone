@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bwokapolt2lcv" path="res://main/social/github.png" id="2_c651c"]
 [ext_resource type="Texture2D" uid="uid://17hw0w3rskly" path="res://main/social/discord.png" id="3_3wy1v"]
 [ext_resource type="Texture2D" uid="uid://ddhqrl33tidcu" path="res://main/social/telegram.png" id="4_kfbq2"]
+[ext_resource type="AudioStream" uid="uid://bk0xsgh5lsv6p" path="res://sounds/623175__aphom000__button-click-selection.wav" id="6_kfbq2"]
 
 [sub_resource type="LabelSettings" id="LS_title"]
 font_size = 90
@@ -112,26 +113,6 @@ corner_radius_bottom_left = 2
 font_size = 13
 font_color = Color(0.275, 0.36, 0.247, 1)
 
-[sub_resource type="StyleBoxFlat" id="SBF_overlayPanel"]
-bg_color = Color(0.063, 0.133, 0.071, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.29, 0.486, 0.145, 0.8)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="LabelSettings" id="LS_overlayTitle"]
-font_size = 28
-font_color = Color(0.29, 0.486, 0.145, 1)
-
-[sub_resource type="LabelSettings" id="LS_overlayLabel"]
-font_size = 18
-font_color = Color(0.741, 0.765, 0.78, 1)
-
 [sub_resource type="LabelSettings" id="LS_status"]
 font_size = 15
 font_color = Color(0.275, 0.435, 0.188, 0.7)
@@ -151,6 +132,26 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+
+[sub_resource type="StyleBoxFlat" id="SBF_overlayPanel"]
+bg_color = Color(0.063, 0.133, 0.071, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.29, 0.486, 0.145, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="LabelSettings" id="LS_overlayTitle"]
+font_size = 28
+font_color = Color(0.29, 0.486, 0.145, 1)
+
+[sub_resource type="LabelSettings" id="LS_overlayLabel"]
+font_size = 18
+font_color = Color(0.741, 0.765, 0.78, 1)
 
 [node name="Control" type="Control" unique_id=2077169234]
 layout_mode = 3
@@ -209,18 +210,18 @@ label_settings = SubResource("LS_title")
 
 [node name="Separator" type="ColorRect" parent="." unique_id=1123625411]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 278.0
-offset_right = 540.0
-offset_bottom = 280.0
+offset_left = 70.72
+offset_top = 200.0
+offset_right = 540.7196
+offset_bottom = 202.0
 color = Color(0.29, 0.486, 0.145, 0.35)
 
 [node name="DeployButton" type="Button" parent="." unique_id=1943171896]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 296.0
-offset_right = 510.0
-offset_bottom = 352.0
+offset_left = 72.0
+offset_top = 216.0
+offset_right = 512.0
+offset_bottom = 272.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
@@ -234,10 +235,10 @@ text = "Start"
 
 [node name="SettingsButton" type="Button" parent="." unique_id=447485150]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 368.0
-offset_right = 510.0
-offset_bottom = 424.0
+offset_left = 72.0
+offset_top = 288.0
+offset_right = 512.0
+offset_bottom = 344.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
@@ -249,12 +250,29 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Settings"
 
+[node name="HelpButton" type="Button" parent="." unique_id=281811274]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 360.0
+offset_right = 512.0
+offset_bottom = 416.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Help (в разработке)"
+
 [node name="AbortButton" type="Button" parent="." unique_id=282283821]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 440.0
-offset_right = 510.0
-offset_bottom = 496.0
+offset_left = 72.0
+offset_top = 432.0
+offset_right = 512.0
+offset_bottom = 488.0
 theme_override_colors/font_color = Color(0.753, 0.224, 0.169, 1)
 theme_override_colors/font_pressed_color = Color(0.5, 0.15, 0.12, 1)
 theme_override_colors/font_hover_color = Color(0.88, 0.29, 0.22, 1)
@@ -274,106 +292,6 @@ offset_right = 540.0
 offset_bottom = 632.0
 text = "No fly zone  |  v0.1.5 Dev"
 label_settings = SubResource("LS_version")
-
-[node name="SettingsOverlay" type="ColorRect" parent="." unique_id=300000001]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.6)
-
-[node name="Panel" type="Panel" parent="SettingsOverlay" unique_id=300000002]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -200.0
-offset_right = 250.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("SBF_overlayPanel")
-
-[node name="Title" type="Label" parent="SettingsOverlay/Panel" unique_id=300000003]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -150.0
-offset_top = 25.0
-offset_right = 150.0
-offset_bottom = 65.0
-grow_horizontal = 2
-text = "Settings"
-label_settings = SubResource("LS_overlayTitle")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Separator" type="ColorRect" parent="SettingsOverlay/Panel" unique_id=300000004]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 80.0
-offset_right = 200.0
-offset_bottom = 82.0
-grow_horizontal = 2
-color = Color(0.29, 0.486, 0.145, 0.35)
-
-[node name="LanguageLabel" type="Label" parent="SettingsOverlay/Panel" unique_id=300000005]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 135.0
-offset_right = 200.0
-offset_bottom = 175.0
-text = "Language"
-label_settings = SubResource("LS_overlayLabel")
-vertical_alignment = 1
-
-[node name="LanguageOptions" type="OptionButton" parent="SettingsOverlay/Panel" unique_id=300000006]
-layout_mode = 0
-offset_left = 220.0
-offset_top = 135.0
-offset_right = 450.0
-offset_bottom = 175.0
-theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
-theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
-theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("SBF_btnGN")
-theme_override_styles/pressed = SubResource("SBF_btnGP")
-theme_override_styles/hover = SubResource("SBF_btnGH")
-theme_override_styles/focus = SubResource("SBF_focus")
-
-[node name="CloseButton" type="Button" parent="SettingsOverlay/Panel" unique_id=300000007]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -80.0
-offset_right = 100.0
-offset_bottom = -30.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
-theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
-theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("SBF_btnGN")
-theme_override_styles/pressed = SubResource("SBF_btnGP")
-theme_override_styles/hover = SubResource("SBF_btnGH")
-theme_override_styles/focus = SubResource("SBF_focus")
-text = "Close"
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1237362566]
 visible = false
@@ -549,6 +467,125 @@ text = "karas – Senior designer & dev"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
+[node name="karas2" type="Label" parent="." unique_id=574137173]
+layout_mode = 0
+offset_left = 648.0
+offset_top = 336.00003
+offset_right = 888.0
+offset_bottom = 358.00003
+scale = Vector2(1.08, 1.08)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+text = "dmitjjtpc - developer"
+label_settings = SubResource("LS_status")
+horizontal_alignment = 1
+
+[node name="SettingsOverlay" type="ColorRect" parent="." unique_id=300000001]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel" type="Panel" parent="SettingsOverlay" unique_id=300000002]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SBF_overlayPanel")
+
+[node name="Title" type="Label" parent="SettingsOverlay/Panel" unique_id=300000003]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 25.0
+offset_right = 150.0
+offset_bottom = 65.0
+grow_horizontal = 2
+text = "Settings"
+label_settings = SubResource("LS_overlayTitle")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="ColorRect" parent="SettingsOverlay/Panel" unique_id=300000004]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 82.0
+grow_horizontal = 2
+color = Color(0.29, 0.486, 0.145, 0.35)
+
+[node name="LanguageLabel" type="Label" parent="SettingsOverlay/Panel" unique_id=300000005]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 135.0
+offset_right = 200.0
+offset_bottom = 175.0
+text = "Language"
+label_settings = SubResource("LS_overlayLabel")
+vertical_alignment = 1
+
+[node name="LanguageOptions" type="OptionButton" parent="SettingsOverlay/Panel" unique_id=300000006]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 135.0
+offset_right = 450.0
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+
+[node name="CloseButton" type="Button" parent="SettingsOverlay/Panel" unique_id=300000007]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -80.0
+offset_right = 100.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Close"
+
+[node name="SoundsMouse" type="AudioStreamPlayer2D" parent="." unique_id=332691226]
+position = Vector2(-154, 281)
+stream = ExtResource("6_kfbq2")
+volume_db = 5.0
+
 [connection signal="pressed" from="DeployButton" to="." method="_on_deploy_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="AbortButton" to="." method="_on_abort_pressed"]
+[connection signal="pressed" from="SettingsOverlay/Panel/LanguageOptions" to="." method="_on_language_options_pressed"]

@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://fagheigpbwb1"]
+
+[ext_resource type="FontFile" uid="uid://3pckuvsb6kf4" path="res://main/fonts/ColossusExpandedRUS.ttf" id="1_3tixn"]
+[ext_resource type="Script" uid="uid://4c04bok1568e" path="res://helps/briefly.gd" id="1_fnptg"]
+[ext_resource type="Script" uid="uid://dpbpgre14741x" path="res://helps/game_info.gd" id="3_twd85"]
+[ext_resource type="AudioStream" uid="uid://b6dw2bqbis882" path="res://sounds/546167__grcekh__keyboard-typing-10-whitefox-mechanical.mp3" id="4_cx0is"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fnptg"]
+font_size = 72
+font_color = Color(0.29, 0.486, 0.145, 1)
+
+[node name="Briefly" type="Control" unique_id=1886536135]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fnptg")
+
+[node name="BG" type="ColorRect" parent="." unique_id=790585711]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.051, 0.122, 0.059, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1156591663]
+layout_mode = 0
+offset_left = 55.99999
+offset_top = 55.999996
+offset_right = 1002.0
+offset_bottom = 123.0
+scale = Vector2(0.905, 0.905)
+theme_override_fonts/font = ExtResource("1_3tixn")
+text = "NO FLY ZONE:"
+label_settings = SubResource("LabelSettings_fnptg")
+
+[node name="GameInfo" type="Label" parent="." unique_id=1959242165]
+layout_mode = 0
+offset_left = 48.000008
+offset_top = 112.0
+offset_right = 787.0
+offset_bottom = 192.0
+scale = Vector2(1.13, 1.13)
+theme_override_fonts/font = ExtResource("1_3tixn")
+text = "No fly zone - это одиночная инди игра,
+ которая позволяет нам уничтожать дроны, fpv-камикадзе и ракеты.
+Главная задача в игре - уничтожить все цели, и не дать врагу уничтожить завод."
+script = ExtResource("3_twd85")
+
+[node name="Strela-10 info" type="LinkButton" parent="." unique_id=1204827118]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 176.0
+offset_right = 120.072075
+offset_bottom = 200.0
+scale = Vector2(1.955, 1.955)
+theme_override_fonts/font = ExtResource("1_3tixn")
+text = "Strela-10"
+
+[node name="OSA-SA8 info" type="LinkButton" parent="." unique_id=978107962]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 224.0
+offset_right = 120.072075
+offset_bottom = 248.0
+scale = Vector2(1.955, 1.955)
+theme_override_fonts/font = ExtResource("1_3tixn")
+text = "OSA-SA8"
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=1138159672]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="KeyboardSounds" type="AudioStreamPlayer2D" parent="." unique_id=1169493297]
+position = Vector2(-184, 192)
+stream = ExtResource("4_cx0is")
+
+[connection signal="pressed" from="Strela-10 info" to="." method="_on_strela_10_info_pressed"]
+[connection signal="pressed" from="OSA-SA8 info" to="." method="_on_osasa_8_info_pressed"]

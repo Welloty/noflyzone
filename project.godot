@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="saawtd"
+config/name="Noflyzone Main"
 run/main_scene="res://loading/control.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://ci4vl08fuctkj"
@@ -44,7 +44,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://locale/translations.en.translation", "res://locale/translations.ru.translation")
+locale/translations=PackedStringArray("res://locale/translations.en.translation", "res://locale/translations.ru.translation", "res://locale/translations.uk.translation")
 
 [physics]
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://4y75ovufogdq"]
 
 [ext_resource type="Script" uid="uid://b4kfpqt2xmv3l" path="res://loading/loading.gd" id="1_ldgd"]
+[ext_resource type="FontFile" uid="uid://3pckuvsb6kf4" path="res://main/fonts/ColossusExpandedRUS.ttf" id="2_je35a"]
 [ext_resource type="Script" uid="uid://ckb35w4u5kyeh" path="res://loading/progress_bar/progress_bar.gd" id="2_pbgd"]
 
 [sub_resource type="LabelSettings" id="LS_title"]
@@ -77,6 +78,7 @@ offset_left = 70.0
 offset_top = 90.0
 offset_right = 700.0
 offset_bottom = 215.0
+theme_override_fonts/font = ExtResource("2_je35a")
 text = "No fly"
 label_settings = SubResource("LS_title")
 
@@ -86,6 +88,7 @@ offset_left = 76.0
 offset_top = 213.0
 offset_right = 570.0
 offset_bottom = 255.0
+theme_override_fonts/font = ExtResource("2_je35a")
 text = "Zone"
 label_settings = SubResource("LS_subtitle")
 
@@ -114,6 +117,7 @@ offset_left = 34.0
 offset_top = 458.0
 offset_right = 1046.0
 offset_bottom = 482.0
+theme_override_fonts/font = ExtResource("2_je35a")
 text = "Tip: ..."
 label_settings = SubResource("LabelSettings_vjmxb")
 

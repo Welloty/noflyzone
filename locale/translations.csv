@@ -1,36 +1,41 @@
-keys,en,ru
-Start,Start,Старт
-Settings,Settings,Настройки
-Exit,Exit,Выход
-Language,Language,Язык
-Close,Close,Закрыть
-Back,Back,Назад
-"Anti Air defence","Anti-Air Defense","Противовоздушная оборона"
-TIP_PREFIX,"Tip:  ","Совет:  "
-"Join our Discord.","Join our Discord.","Присоединяйтесь к нашему Discord."
-"You can modify the game using the code on GitHub.","You can modify the game using the code on GitHub.","Вы можете изменить игру, используя исходный код на GitHub."
-"We have our own Telegram channel.","We have our own Telegram channel.","У нас есть собственный Telegram-канал."
-"Enjoy the game!","Enjoy the game!","Приятной игры!"
-"Please write reviews for the game; it helps us.","Please write reviews for the game; it helps us.","Пожалуйста, пишите отзывы об игре; это очень помогает нам."
-"Improve your air defense.","Improve your air defense.","Улучшайте свою противовоздушную оборону."
-MONEY,Money,Деньги
-WAVE,Wave,Волна
-TABLET_HEADER,Command,Коммандование
-TABLET_CHANNEL,Radio,Рация
-TABLET_STATUS_TITLE,"Status:","Статус:"
-TABLET_TARGETS_TITLE,"Targets:","Целей:"
-TABLET_TIMER_TITLE,"Next attack:","След. атака:"
-TABLET_STATUS_ACTIVE,Hostile Raid,Воздушная атака
-TABLET_STATUS_BREAK,Intermission,Перерыв
-TABLET_STATUS_CLEARED,UAVs shot down,БПЛА сбиты
-TABLET_TARGETS,Active Targets,Активные цели
-TABLET_NEXT_WAVE,Next wave in,Следующая волна через
-TABLET_GENSTAFF,GenStaff,ГенШтаб
-TABLET_SYSTEM,System,Система
-"TABLET_DISPATCH_1","Shahed-136 UAV group detected heading towards our air space. Deploy air defense units.","Обнаружена группа БПЛА шахед-136, движущаяся в наше воздушное пространство. Разверните средства ПВО."
-"TABLET_DISPATCH_2","Warning! FPV strike drones joined the enemy attack formation.","Внимание! К атаке противника присоединились ударные FPV дроны."
-"TABLET_DISPATCH_3","Enemy raid intensity is increasing. Keep your air defense ready.","Интенсивность налета противника увеличивается. Держите средства ПВО в готовности."
-"TABLET_DISPATCH_GENERIC","Command: Enemy UAV raid detected. Protect the air space.","Штаб: Зафиксирован налет БПЛА противника. Защищайте воздушное пространство."
-"TABLET_WAVE_CLEARED_MSG","Wave %d successfully repelled. Reward: +$%d","Волна %d успешно отбита. Награда: +%d$"
-TABLET_TOGGLE_OPEN,Tablet,Планшет
-TABLET_TOGGLE_CLOSE,Hide,Скрыть
+keys,en,ru,uk
+Start,Start,Старт,Старт
+Settings,Settings,Настройки,Налаштування
+Exit,Exit,Выход,Вихід
+Help (в разработке),Help (In development),Помощь (в разработке),Допомога (в розробці)
+Language,Language,Язык,Мова
+Close,Close,Закрыть,Закрити
+Back,Back,Назад,Назад
+"Anti Air defence","Anti-Air Defense","Противовоздушная оборона","Протиповітряна оборона"
+TIP_PREFIX,"Tip:  ","Совет:  ","Порада:  "
+"Join our Discord.","Join our Discord.","Присоединяйтесь к нашему Discord.","Приєднуйтесь до нашого Discord."
+"You can modify the game using the code on GitHub.","You can modify the game using the code on GitHub.","Вы можете изменить игру, используя исходный код на GitHub.","Ви можете змінити гру, використовуючи початковий код на GitHub."
+"We have our own Telegram channel.","We have our own Telegram channel.","У нас есть собственный Telegram-канал.","У нас є власний Telegram-канал."
+"Enjoy the game!","Enjoy the game!","Приятной игры!","Приємної гри!"
+"Please write reviews for the game; it helps us.","Please write reviews for the game; it helps us.","Пожалуйста, пишите отзывы об игре; это очень помогает нам.","Будь ласка, пишіть відгуки про гру; це дуже допомагає нам."
+"Improve your air defense.","Improve your air defense.","Улучшайте свою противовоздушную оборону.","Вдосконалюйте свою протиповітряну оборону."
+MONEY,Money,Деньги,Гроші
+WAVE,Wave,Волна,Хвиля
+TABLET_HEADER,Command,Коммандование,Командування
+TABLET_CHANNEL,Radio,Рация,Рація
+TABLET_STATUS_TITLE,"Status:","Статус:","Статус:"
+TABLET_TARGETS_TITLE,"Targets:","Целей:","Цілей:"
+TABLET_TIMER_TITLE,"Next attack:","След. атака:","Наст. атака:"
+TABLET_STATUS_ACTIVE,Hostile Raid,Воздушная атака,Повітряна атака
+TABLET_STATUS_BREAK,Intermission,Перерыв,Перерва
+TABLET_STATUS_CLEARED,UAVs shot down,БПЛА сбиты,БПЛА збито
+TABLET_TARGETS,Active Targets,Активные цели,Активні цілі
+TABLET_NEXT_WAVE,Next wave in,Следующая волна через,Наступна хвиля через
+TABLET_GENSTAFF,GenStaff,ГенШтаб,ГенШтаб
+TABLET_SYSTEM,System,Система,Система
+"TABLET_DISPATCH_1","Shahed-136 UAV group detected heading towards our air space. Deploy air defense units.","Обнаружена группа БПЛА шахед-136, движущаяся в наше воздушное пространство. Разверните средства ПВО.","Виявлено групу БПЛА Шахед-136, що рухається в наш повітряний простір. Розгорніть засоби ППО."
+"TABLET_DISPATCH_2","Warning! FPV strike drones joined the enemy attack formation.","Внимание! К атаке противника присоединились ударные FPV дроны.","Увага! До атаки противника приєдналися ударні FPV дрони."
+"TABLET_DISPATCH_3","Enemy raid intensity is increasing. Keep your air defense ready.","Интенсивность налета противника увеличивается. Держите средства ПВО в готовности.","Інтенсивність нальоту противника збільшується. Тримайте засоби ППО в готовності."
+"TABLET_DISPATCH_4","Attention! The enemy has launched missiles!","Внимание! Противник запустил ракеты!","Увага! Противник запустив ракети!"
+"TABLET_DISPATCH_GENERIC","Command: Enemy UAV raid detected. Protect the air space.","Штаб: Зафиксирован налет БПЛА противника. Защищайте воздушное пространство.","Штаб: Зафіксовано наліт БПЛА противника. Захищайте повітряний простір."
+"TABLET_WAVE_CLEARED_MSG","Wave %d successfully repelled. Reward: +$%d","Волна %d успешно отбита. Награда: +%d$","Хвиля %d успішно відбита. Нагорода: +%d$"
+TABLET_TOGGLE_OPEN,Tablet,Планшет,Планшет
+TABLET_TOGGLE_CLOSE,Hide,Скрыть,Сховати
+This_is_a_game_tutorial,This is a game tutorial,Это туториал к игре.,Це посібник із гри.
+Opportunities,Here you can find out:,Вы тут сможете узнать:
+Help1,Briefly to game,Кратко про игру

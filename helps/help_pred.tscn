@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://dlepqt7poo4jg"]
+
+[ext_resource type="Script" uid="uid://dk5c5oc43jhml" path="res://helps/help_pred.gd" id="1_rxtgl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8f0g0"]
+font_size = 72
+font_color = Color(0.29, 0.486, 0.145, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rtvb4"]
+font_size = 28
+font_color = Color(0.741, 0.765, 0.78, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5v7he"]
+font_size = 17
+font_color = Color(0.275, 0.435, 0.188, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s4h03"]
+font_size = 18
+font_color = Color(0.45, 0.75, 0.3, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aq2pu"]
+bg_color = Color(0.086, 0.153, 0.051, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.7)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e44k5"]
+bg_color = Color(0.29, 0.486, 0.145, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_vkjcv"]
+font_size = 15
+font_color = Color(0.7, 0.7, 0.7, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_piqdy"]
+font_size = 13
+font_color = Color(0.275, 0.36, 0.247, 1)
+
+[node name="HelpPred" type="Control" unique_id=12614393]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rxtgl")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1240623790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.051, 0.122, 0.059, 1)
+
+[node name="AccentTop" type="ColorRect" parent="." unique_id=1302512666]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 2.0
+color = Color(0.29, 0.486, 0.145, 0.55)
+
+[node name="AccentBottom" type="ColorRect" parent="." unique_id=931665472]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.29, 0.486, 0.145, 0.55)
+
+[node name="Title" type="Label" parent="." unique_id=1415352443]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 90.0
+offset_right = 799.0
+offset_bottom = 189.0
+text = "Preparing for studies"
+label_settings = SubResource("LabelSettings_8f0g0")
+
+[node name="Subtitle" type="Label" parent="." unique_id=1206045191]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 185.0
+offset_right = 600.0
+offset_bottom = 225.0
+text = "Studies 1"
+label_settings = SubResource("LabelSettings_rtvb4")
+
+[node name="Tagline" type="Label" parent="." unique_id=493643036]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 230.0
+offset_right = 570.0
+offset_bottom = 255.0
+text = "No fly zone"
+label_settings = SubResource("LabelSettings_5v7he")
+
+[node name="StatusLabel" type="Label" parent="." unique_id=68025190]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 350.0
+offset_right = 1082.0
+offset_bottom = 380.0
+text = "Initializing sector data..."
+label_settings = SubResource("LabelSettings_s4h03")
+
+[node name="Separator" type="ColorRect" parent="." unique_id=79680020]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 388.0
+offset_right = 1082.0
+offset_bottom = 390.0
+color = Color(0.29, 0.486, 0.145, 0.3)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1681180181]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 408.0
+offset_right = 990.4285
+offset_bottom = 442.0
+scale = Vector2(0.93333334, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_aq2pu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e44k5")
+show_percentage = false
+
+[node name="TipLabel" type="Label" parent="." unique_id=1886034439]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 456.0
+offset_right = 1051.0
+offset_bottom = 480.0
+text = "Tip: ..."
+label_settings = SubResource("LabelSettings_vkjcv")
+
+[node name="VersionLabel" type="Label" parent="." unique_id=1756364391]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 612.0
+offset_right = 450.0
+offset_bottom = 632.0
+text = "No fly zone |  v0.1.5 dev"
+label_settings = SubResource("LabelSettings_piqdy")
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=2040588282]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

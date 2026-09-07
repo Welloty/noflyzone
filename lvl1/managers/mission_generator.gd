@@ -18,6 +18,11 @@ extends Node2D
 @export var fp1_max_scatter: float = 150.0
 @export var fp1_min_length: float = 1000.0
 
+@export_group("Kalibr Path Configuration")
+@export var kalibr_waypoint_count: int = 2
+@export var kalibr_max_scatter: float = 150.0
+@export var kalibr_min_length: float = 1000.0
+
 @export_group("Path Smoothing")
 @export var enable_smoothing: bool = true
 @export var curve_smoothness: float = 0.25
@@ -25,11 +30,12 @@ extends Node2D
 @onready var main_path_node: Path2D = get_node_or_null("../../EnemyPaths/MainPath") if get_node_or_null("../../EnemyPaths/MainPath") else get_node_or_null("../MainPath")
 @onready var fpv_path_node: Path2D = get_node_or_null("../../EnemyPaths/FPVPath") if get_node_or_null("../../EnemyPaths/FPVPath") else get_node_or_null("../FPVPath")
 @onready var fp1_path_node: Path2D = get_node_or_null("../../EnemyPaths/FP1Path") if get_node_or_null("../../EnemyPaths/FP1Path") else get_node_or_null("../FP1Path")
+# ИСПРАВЛЕНО: убран символ '$' из строки get_node_or_null
+@onready var kalibr_path_node: Path2D = get_node_or_null("../../EnemyPaths/KalibrPath") if get_node_or_null("../../EnemyPaths/KalibrPath") else get_node_or_null("../KalibrPath")
 
 func _ready() -> void:
 	add_to_group("mission_generator")
 	_update_bounds_from_camera()
-
 
 func _update_bounds_from_camera() -> void:
 	var camera = get_tree().get_first_node_in_group("camera")
@@ -149,6 +155,18 @@ func generate_mission_paths() -> void:
 	# Generate FP-1 Drone Path
 	var fp1_spawn := select_spawn_point()
 	var fp1_curve := generate_valid_path(fp1_spawn, target, fp1_waypoint_count, fp1_max_scatter, fp1_min_length)
+	
+	# Generate Kalibr Drone path
+	var kalibr_spawn := select_spawn_point()
+	var kalibr_curve := generate_valid_path(kalibr_spawn, target, kalibr_waypoint_count, kalibr_max_scatter, kalibr_min_length)
+	
+	if is_instance_valid(kalibr_path_node):
+		kalibr_path_node.position = Vector2.ZERO
+		kalibr_path_node.scale = Vector2.ONE
+		kalibr_path_node.curve = kalibr_curve
+		print("Generated KalibrPath: length=", kalibr_curve.get_baked_length(), ", points=", kalibr_curve.point_count)
+	else:
+		print("ERROR: kalibr_path_node is NOT valid!")
 	
 	if is_instance_valid(main_path_node):
 		main_path_node.position = Vector2.ZERO

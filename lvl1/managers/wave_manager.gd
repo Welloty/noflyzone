@@ -19,10 +19,12 @@ var break_timer: float = 2.0
 var drone_scene: PackedScene = preload("res://lvl1/entities/enemies/drone.tscn")
 var fpv_scene: PackedScene = preload("res://lvl1/entities/enemies/fpv.tscn")
 var fp1_scene: PackedScene = preload("res://lvl1/entities/enemies/fp-1.tscn")
+var Kalibr_scene: PackedScene = preload("res://lvl1/entities/enemies/Roctetks.tscn")
 
 @onready var main_path: Path2D = get_node_or_null("../../EnemyPaths/MainPath") if get_node_or_null("../../EnemyPaths/MainPath") else get_node_or_null("../Path2D")
 @onready var fpv_path: Path2D = get_node_or_null("../../EnemyPaths/FPVPath") if get_node_or_null("../../EnemyPaths/FPVPath") else get_node_or_null("../fpvdrun")
 @onready var fp1_path: Path2D = get_node_or_null("../../EnemyPaths/FP1Path") if get_node_or_null("../../EnemyPaths/FP1Path") else get_node_or_null("../FP1Path")
+@onready var Kalibr_path: Path2D = get_node_or_null("../../EnemyPaths/KalibrPath") if get_node_or_null("../../EnemyPaths/KalibrPath") else get_node_or_null("../Path2D")
 
 func _ready() -> void:
 	add_to_group("wave_manager")
@@ -84,7 +86,11 @@ func _spawn_single_drone() -> void:
 		elif roll < 0.70:
 			scene = fp1_scene
 			path_node = fp1_path
-	
+	if current_wave >= 4:
+		var roll := randf()
+		if roll < 0.25:
+			scene = Kalibr_scene
+			path_node = Kalibr_path
 	if not is_instance_valid(path_node):
 		path_node = main_path
 		
