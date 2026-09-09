@@ -78,31 +78,19 @@ func _spawn_single_drone() -> void:
 	var scene: PackedScene = drone_scene
 	var path_node: Path2D = main_path
 	
-	var roll := randf()
+	if current_wave >= 2:
+		var roll := randf()
+		if roll < 0.35:
+			scene = fpv_scene
+			path_node = fpv_path
+		elif roll < 0.70:
+			scene = fp1_scene
+			path_node = fp1_path
 	if current_wave >= 4:
-		if roll < 0.20:
+		var roll := randf()
+		if roll < 0.25:
 			scene = Kalibr_scene
 			path_node = Kalibr_path
-		elif roll < 0.50:
-			scene = fpv_scene
-			path_node = fpv_path
-		elif roll < 0.80:
-			scene = fp1_scene
-			path_node = fp1_path
-		else:
-			scene = drone_scene
-			path_node = main_path
-	elif current_wave >= 2:
-		if roll < 0.40:
-			scene = fpv_scene
-			path_node = fpv_path
-		elif roll < 0.75:
-			scene = fp1_scene
-			path_node = fp1_path
-		else:
-			scene = drone_scene
-			path_node = main_path
-
 	if not is_instance_valid(path_node):
 		path_node = main_path
 		
@@ -119,12 +107,16 @@ func _spawn_single_drone() -> void:
 	new_drone.speed = new_drone.speed * (1.0 + (current_wave * 0.05))
 	new_drone.max_health = new_drone.max_health * (1.0 + (current_wave * 0.08))
 	new_drone.health = new_drone.max_health
+	
+	if scene == drone_scene:
+		new_drone.scale = Vector2(0.4, 0.4)
 		
 	get_parent().add_child(new_drone)
 	new_drone.global_position = path_follower.global_position
 
 func _on_wave_completed() -> void:
 	is_wave_active = false
+	break_timer = break_duration
 	
 	# награда за завершение волны
 	var reward = 40 + (current_wave * 10)
@@ -133,18 +125,7 @@ func _on_wave_completed() -> void:
 		hud.add_money(reward)
 		
 	wave_completed.emit(current_wave, reward)
-	print("Wave ", current_wave, " completed.")
-
-	if current_wave >= max_waves:
-		_on_mission_victory()
-	else:
-		break_timer = break_duration
-		print("Next wave in ", break_duration, " seconds.")
-
-func _on_mission_victory() -> void:
-	var defeat_menu = get_tree().get_first_node_in_group("defeat_menu")
-	if defeat_menu and defeat_menu.has_method("open"):
-		defeat_menu.open(true)
+	print("Wave ", current_wave, " completed. Next wave in ", break_duration, " seconds.")
 
 func _update_hud() -> void:
 	var hud = get_tree().get_first_node_in_group("hud")

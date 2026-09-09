@@ -150,7 +150,7 @@ custom_minimum_size = Vector2(140, 32)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Стрела-10
-Радиус: 460px
+Радиус: 180px
 Урон: 50
 Цена: 75$"
 text = "Strela-10 (75$)"
@@ -160,9 +160,9 @@ custom_minimum_size = Vector2(140, 32)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Оса СА-8
-Радиус: 1000px
+Радиус: 360px
 Урон: 100
-Цена: 175$"
+Цена: 175 монет"
 text = "OSA SA-8 (175$)"
 
 [node name="WaveTablet" type="Control" parent="Control" unique_id=2000000001]
@@ -303,77 +303,65 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 
-[node name="Radar" type="Control" parent="Control" unique_id=366577308]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Radar" type="Control" parent="." unique_id=366577308]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("3_x1k73")
 
-[node name="ToggleButton" type="Button" parent="Control/Radar" unique_id=593720450]
+[node name="ToggleButton" type="Button" parent="Radar" unique_id=593720450]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -131.0
-offset_top = -237.0
-offset_right = -51.0
-offset_bottom = -213.0
+offset_left = 821.0
+offset_top = 311.0
+offset_right = 901.0
+offset_bottom = 335.0
 grow_horizontal = 0
-grow_vertical = 0
 theme_override_font_sizes/font_size = 11
 text = "▶ Скрыть"
 
-[node name="Strela" type="Button" parent="Control/Radar" unique_id=947237867]
+[node name="Strela" type="Button" parent="Radar" unique_id=947237867]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -340.0
-offset_top = -145.0
-offset_right = -260.0
-offset_bottom = -121.0
+offset_left = 612.0
+offset_top = 403.0
+offset_right = 692.0
+offset_bottom = 427.0
 grow_horizontal = 0
-grow_vertical = 0
 theme_override_font_sizes/font_size = 11
-text = "Стрела-10"
+text = "Стрела-10
+"
 
-[node name="Osa" type="Button" parent="Control/Radar" unique_id=1926467799]
+[node name="Osa" type="Button" parent="Radar" unique_id=1926467799]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -340.0
-offset_top = -108.0
-offset_right = -260.0
-offset_bottom = -84.0
+offset_left = 612.0
+offset_top = 440.045
+offset_right = 692.0
+offset_bottom = 464.045
 grow_horizontal = 0
-grow_vertical = 0
 theme_override_font_sizes/font_size = 11
 text = "ОСА СА-8"
 
-[node name="Background" type="Sprite2D" parent="Control/Radar" unique_id=1286857360]
-position = Vector2(-119, -116)
+[node name="Background" type="Sprite2D" parent="Radar" unique_id=1286857360]
+position = Vector2(833.36945, 432.36942)
 scale = Vector2(0.050961647, 0.050961655)
 texture = ExtResource("4_0gim1")
 
-[node name="Target" type="Sprite2D" parent="Control/Radar" unique_id=843437166]
-position = Vector2(-145, -148)
+[node name="Target" type="Sprite2D" parent="Radar" unique_id=843437166]
+position = Vector2(807.705, 400)
 scale = Vector2(0.27, 0.27)
 texture = ExtResource("5_da8o2")
 
-[node name="Pvo" type="Sprite2D" parent="Control/Radar" unique_id=1849294948]
+[node name="Pvo" type="Sprite2D" parent="Radar" unique_id=1849294948]
 z_index = 5
-position = Vector2(-119, -116)
+position = Vector2(833.43, 432.58)
 scale = Vector2(0.13, 0.13)
 texture = ExtResource("6_if3iv")

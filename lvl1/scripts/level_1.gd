@@ -1,9 +1,9 @@
 extends Node2D
 
 @export var ground_sources: Array[int] = [0, 1, 3]
-@export var target_map_size_px: Vector2 = Vector2(30000, 30000)
+@export var target_map_size_px: Vector2 = Vector2(50000, 50000)
 @export var tile_size: int = 1280
-@export var total_trees_count: int = 600
+@export var total_trees_count: int = 2000
 
 const GROUND_LAYER = 0
 const OBJECTS_LAYER = 1

@@ -30,12 +30,12 @@ func open() -> void:
 	visible = true
 	overlay.modulate.a = 0.0
 	
-	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	var tween := create_tween()
 	tween.tween_property(overlay, "modulate:a", 1.0, 0.2).set_ease(Tween.EASE_OUT)
 
 
 func _on_resume_pressed() -> void:
-	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	var tween := create_tween()
 	tween.tween_property(overlay, "modulate:a", 0.0, 0.15).set_ease(Tween.EASE_IN)
 	await tween.finished
 	

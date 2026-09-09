@@ -13,9 +13,7 @@ config_version=5
 config/name="Noflyzone Main"
 run/main_scene="res://loading/control.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-boot_splash/image="uid://dmgbf87x2upl1"
 config/icon="uid://ci4vl08fuctkj"
-boot_splash/minimum_display_time=10000
 
 [autoload]
 
