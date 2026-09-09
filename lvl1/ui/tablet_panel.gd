@@ -47,9 +47,10 @@ func _connect_wave_manager() -> void:
 func _process(_delta: float) -> void:
 	if is_instance_valid(wave_manager) and wave_manager.is_wave_active:
 		var active_count = wave_manager.get_active_drones_count()
-		var total_count = wave_manager.drones_to_spawn_this_wave
+		var unspawned = max(0, wave_manager.drones_to_spawn_this_wave - wave_manager.drones_spawned)
+		var remaining = unspawned + active_count
 		if targets_value_label:
-			targets_value_label.text = "%d / %d" % [active_count, total_count]
+			targets_value_label.text = "%d" % remaining
 
 func _update_static_texts() -> void:
 	if header_title:

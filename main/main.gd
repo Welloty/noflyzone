@@ -85,12 +85,12 @@ func _on_language_selected(index: int) -> void:
 	SettingsManager.save_settings()
 
 func _on_abort_pressed() -> void:
+	sound_mouse.play()
 	fade_overlay.modulate.a = 0.0
 	var tween := create_tween()
 	tween.tween_property(fade_overlay, "modulate:a", 1.0, 0.45).set_ease(Tween.EASE_IN)
 	await tween.finished
 	get_tree().quit()
-	sound_mouse.play()
 
 func _fade_and_go(scene_path: String) -> void:
 	var tween := create_tween()
@@ -104,5 +104,5 @@ func _on_language_options_pressed() -> void:
 
 
 func _on_help_button_pressed() -> void:
-	#_fade_and_go("res://main/help_pred.tscn")
-	pass
+	sound_mouse.play()
+	_fade_and_go("res://helps/help_pred.tscn")

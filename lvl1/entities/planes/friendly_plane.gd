@@ -54,6 +54,10 @@ func _ready() -> void:
 		state = State.LOITER
 		if detection_zone:
 			detection_zone.input_pickable = false
+			var cs = detection_zone.get_node_or_null("CollisionShape2D") as CollisionShape2D
+			if cs and cs.shape is CircleShape2D:
+				cs.shape = cs.shape.duplicate()
+				(cs.shape as CircleShape2D).radius = detection_radius
 			detection_zone.body_entered.connect(_on_detection_zone_body_entered)
 			detection_zone.body_exited.connect(_on_detection_zone_body_exited)
 			detection_zone.area_entered.connect(_on_detection_zone_area_entered)
@@ -62,9 +66,6 @@ func _ready() -> void:
 			click_area.mouse_entered.connect(_on_mouse_entered)
 			click_area.mouse_exited.connect(_on_mouse_exited)
 			click_area.input_event.connect(_on_click_area_input_event)
-		input_event.connect(_on_click_area_input_event)
-		mouse_entered.connect(_on_mouse_entered)
-		mouse_exited.connect(_on_mouse_exited)
 
 var prev_rotation: float = 0.0
 

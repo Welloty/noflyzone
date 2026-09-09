@@ -31,7 +31,7 @@ func _ready() -> void:
 
 	if mog_button:
 		mog_button.custom_minimum_size = Vector2(130, 48)
-		mog_button.button_down.connect(_start_drag.bind("Стрела-1", 75))
+		mog_button.button_down.connect(_start_drag.bind("Стрела-10", 75))
 		mog_button.gui_input.connect(_on_button_gui_input)
 	if osa_button:
 		osa_button.custom_minimum_size = Vector2(130, 48)
@@ -51,9 +51,6 @@ func _start_drag(pvo_type: String, cost: int) -> void:
 		current_pvo_cost = cost
 		
 		pvo_selected.emit(pvo_type, cost)
-		var mgr = get_tree().get_first_node_in_group("placement_manager")
-		if mgr and mgr.has_method("start_placement"):
-			mgr.start_placement(pvo_type, cost)
 
 func _on_button_gui_input(event: InputEvent) -> void:
 	if not is_dragging:
@@ -68,10 +65,10 @@ func _on_button_gui_input(event: InputEvent) -> void:
 	if is_release:
 		is_dragging = false
 		var mgr = get_tree().get_first_node_in_group("placement_manager")
-		if mgr and mgr.has_method("confirm_placement"):
-			mgr.confirm_placement()
-		elif mgr and mgr.has_method("try_place"):
+		if mgr and mgr.has_method("try_place"):
 			mgr.try_place()
+		elif mgr and mgr.has_method("confirm_placement"):
+			mgr.confirm_placement()
 
 func _update_money_ui() -> void:
 	if money_value_label:
@@ -81,6 +78,7 @@ func _update_money_ui() -> void:
 		mog_button.text = "Strela-10 (75$)"
 	if osa_button:
 		osa_button.disabled = (money < 175)
+		osa_button.text = "OSA SA-8 (175$)"
 	if plane_button:
 		plane_button.disabled = (money < 150)
 		plane_button.text = "Plane (150$)"

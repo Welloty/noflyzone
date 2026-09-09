@@ -47,14 +47,15 @@ func _process(delta: float) -> void:
 	progress_bar.value = min(prep_progress, 100.0)
 	
 	var is_ru := SettingsManager.current_language == "ru"
+	var is_uk := SettingsManager.current_language == "uk"
 	if prep_progress < 35.0:
-		status_label.text = "Сканирование местности сектора..." if is_ru else "Scanning sector terrain..."
+		status_label.text = "Сканирование местности сектора..." if is_ru else ("Сканування місцевості сектора..." if is_uk else "Scanning sector terrain...")
 	elif prep_progress < 70.0:
-		status_label.text = "Расчёт тактических маршрутов..." if is_ru else "Plotting tactical flight paths..."
+		status_label.text = "Расчёт тактических маршрутов..." if is_ru else ("Розрахунок тактичних маршрутів..." if is_uk else "Plotting tactical flight paths...")
 	elif prep_progress < 100.0:
-		status_label.text = "Развёртывание сил ПВО..." if is_ru else "Deploying air defense forces..."
+		status_label.text = "Развёртывание сил ПВО..." if is_ru else ("Розгортання сил ППО..." if is_uk else "Deploying air defense forces...")
 	else:
-		status_label.text = "Миссия готова!" if is_ru else "Mission ready!"
+		status_label.text = "Миссия готова!" if is_ru else ("Місія готова!" if is_uk else "Mission ready!")
 
 	if prep_progress >= 100.0:
 		done = true

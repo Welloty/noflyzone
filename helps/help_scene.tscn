@@ -150,6 +150,23 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_5dhtx")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xvvg7")
 text = "Help3"
 
+[node name="BACK" type="Button" parent="." unique_id=987654321]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 424.0
+offset_right = 512.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("1_h6pr4")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6pr4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fwew2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5dhtx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xvvg7")
+text = "Back"
+
 [node name="ClicksSound" type="AudioStreamPlayer2D" parent="." unique_id=1689263040]
 position = Vector2(-64, 280)
 stream = ExtResource("3_hy5t4")
@@ -166,3 +183,4 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="HELP1" to="." method="_on_help_1_pressed"]
+[connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]

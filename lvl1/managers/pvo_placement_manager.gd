@@ -91,7 +91,10 @@ func _process(_delta: float) -> void:
 		deselect_tower()
 
 	if is_instance_valid(selected_tower) and is_instance_valid(sell_panel):
-		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
+		var target_world_pos = selected_tower.global_position
+		if is_instance_valid(selected_plane) and "loiter_center" in selected_plane and selected_plane.loiter_center != Vector2.ZERO:
+			target_world_pos = selected_plane.loiter_center
+		var screen_pos = get_viewport().get_canvas_transform() * target_world_pos
 		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
 
 	if not is_instance_valid(ghost_instance):
@@ -205,6 +208,12 @@ func _is_click_on_interactive_object(global_click_pos: Vector2) -> bool:
 	query.collide_with_bodies = true
 	var results = space_state.intersect_point(query)
 	return not results.is_empty()
+
+func try_place() -> void:
+	_try_place_tower()
+
+func confirm_placement() -> void:
+	_try_place_tower()
 
 func _try_place_tower() -> void:
 	if not is_instance_valid(ghost_instance):
@@ -455,6 +464,7 @@ func sell_selected_tower() -> void:
 		
 	var sold_tower = selected_tower
 	selected_tower = null
+	selected_plane = null
 	_destroy_sell_ui()
 	
 	if _is_mobile_platform():

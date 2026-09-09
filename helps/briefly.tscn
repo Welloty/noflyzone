@@ -71,6 +71,16 @@ scale = Vector2(1.955, 1.955)
 theme_override_fonts/font = ExtResource("1_3tixn")
 text = "OSA-SA8"
 
+[node name="BACK" type="LinkButton" parent="." unique_id=987111222]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 272.0
+offset_right = 120.072075
+offset_bottom = 296.0
+scale = Vector2(1.955, 1.955)
+theme_override_fonts/font = ExtResource("1_3tixn")
+text = "Back"
+
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1138159672]
 visible = false
 layout_mode = 1
@@ -88,3 +98,4 @@ stream = ExtResource("4_cx0is")
 
 [connection signal="pressed" from="Strela-10 info" to="." method="_on_strela_10_info_pressed"]
 [connection signal="pressed" from="OSA-SA8 info" to="." method="_on_osasa_8_info_pressed"]
+[connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]

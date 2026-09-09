@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 40.0
+@export var speed: float = 130.0
 @export var max_health: float = 25.0
 @export var damage_to_factory: int = 25
 @export var reward_money: int = 15
@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var sun_direction := Vector2(15, 20)
 @export var factory_explosion_scene: PackedScene = preload("res://lvl1/entities/enemies/factory_explosion.tscn")
 @onready var shadow_sprite: Sprite2D = $Shadow
+@onready var main_sprite: Sprite2D = $Sprite2D
 
 var health: float = 25.0
 var is_down: bool = false
@@ -32,8 +33,12 @@ func _cleanup_path_follower() -> void:
 		path_follower.queue_free()
 
 func _process(_delta: float) -> void:
-	shadow_sprite.global_rotation = global_rotation + deg_to_rad(90)
-	shadow_sprite.global_position = global_position + sun_direction
+	if is_instance_valid(shadow_sprite):
+		if is_instance_valid(main_sprite):
+			shadow_sprite.global_rotation = main_sprite.global_rotation
+		else:
+			shadow_sprite.global_rotation = global_rotation - deg_to_rad(90)
+		shadow_sprite.global_position = global_position + sun_direction
 
 func _physics_process(delta: float) -> void:
 	if is_down:

@@ -43,7 +43,7 @@ func _on_toggle_button_pressed() -> void:
 		osa_button.visible = is_radar_visible
 		
 	if is_instance_valid(toggle_button):
-		toggle_button.text = "► Скрыть" if is_radar_visible else "► Показать"
+		toggle_button.text = "► " + tr("TABLET_TOGGLE_CLOSE") if is_radar_visible else "► " + tr("TABLET_TOGGLE_OPEN")
 func _process(_delta: float) -> void:
 	if not is_instance_valid(background) or not is_radar_visible:
 		if is_instance_valid(pvo_icon): pvo_icon.visible = false

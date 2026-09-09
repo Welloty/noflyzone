@@ -28,7 +28,6 @@ func apply_settings() -> void:
 
 func _get_default_locale() -> String:
 	var sys_lang := OS.get_locale_language()
-	if sys_lang == "ru":
-		return "uk"
-		return "ru"
+	if sys_lang == "ru" or sys_lang == "uk":
+		return sys_lang
 	return "en"

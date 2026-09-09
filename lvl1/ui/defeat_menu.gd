@@ -18,12 +18,22 @@ func _ready() -> void:
 	try_again_btn.pressed.connect(_on_try_again_pressed)
 	menu_btn.pressed.connect(_on_menu_pressed)
 
-func open() -> void:
+@onready var title_label: Label = $Overlay/Panel/Title
+
+func open(is_victory: bool = false) -> void:
 	get_tree().paused = true
 	visible = true
 	overlay.modulate.a = 0.0
 	
-	var tween := create_tween()
+	if is_instance_valid(title_label):
+		if is_victory:
+			title_label.text = tr("VICTORY") if tr("VICTORY") != "VICTORY" else "ПОБЕДА"
+			title_label.modulate = Color(0.4, 0.95, 0.35, 1.0)
+		else:
+			title_label.text = tr("DEFEAT") if tr("DEFEAT") != "DEFEAT" else "ПОРАЖЕНИЕ"
+			title_label.modulate = Color(1.0, 0.35, 0.35, 1.0)
+			
+	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(overlay, "modulate:a", 1.0, 0.2).set_ease(Tween.EASE_OUT)
 
 
