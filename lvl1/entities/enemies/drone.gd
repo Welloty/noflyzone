@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 @export var max_health: float = 80.0
-@export var damage_to_factory: float = 25.0
+@export var damage_to_factory: float = 156.0
 @export var reward_money: int = 20
 @export var path_follower: PathFollow2D
 @export var sun_direction := Vector2(15, 20)

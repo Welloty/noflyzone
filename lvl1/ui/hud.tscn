@@ -63,6 +63,10 @@ corner_radius_bottom_left = 6
 font_size = 14
 font_color = Color(0.9, 0.95, 0.9, 1)
 
+[sub_resource type="LabelSettings" id="LS_header"]
+font_size = 11
+font_color = Color(0.741, 0.765, 0.78, 0.75)
+
 [sub_resource type="LabelSettings" id="LS_tablet_channel"]
 font_size = 10
 font_color = Color(0.35, 0.85, 0.3, 1)
@@ -82,10 +86,6 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="LabelSettings" id="LS_header"]
-font_size = 11
-font_color = Color(0.741, 0.765, 0.78, 0.75)
 
 [sub_resource type="LabelSettings" id="LS_tablet_val"]
 font_size = 12
@@ -196,7 +196,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 26.0
-offset_bottom = -264.0
+offset_bottom = -260.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tablet")
@@ -214,6 +214,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Командование"
 label_settings = SubResource("LS_tablet_title")
+
+[node name="TargetsTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/HeaderBox" unique_id=2000000012]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Целей:"
+label_settings = SubResource("LS_header")
 
 [node name="ChannelLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000007]
 unique_name_in_owner = true
@@ -266,12 +272,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Перерыв"
 label_settings = SubResource("LS_tablet_val")
-
-[node name="TargetsTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000012]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Целей:"
-label_settings = SubResource("LS_header")
 
 [node name="TargetsValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000013]
 unique_name_in_owner = true

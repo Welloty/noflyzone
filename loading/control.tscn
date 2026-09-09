@@ -123,10 +123,10 @@ label_settings = SubResource("LabelSettings_vjmxb")
 
 [node name="VersionLabel" type="Label" parent="." unique_id=298532837]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 612.0
-offset_right = 450.0
-offset_bottom = 632.0
+offset_left = 21.0
+offset_top = 521.0
+offset_right = 401.0
+offset_bottom = 541.0
 text = "No fly zone  |  v0.1.5 dev"
 label_settings = SubResource("LS_version")
 

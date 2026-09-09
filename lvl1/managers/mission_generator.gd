@@ -23,6 +23,11 @@ extends Node2D
 @export var kalibr_max_scatter: float = 150.0
 @export var kalibr_min_length: float = 1000.0
 
+@export_group("Shahed238 Path Configuration")
+@export var shahed238_waypoint_count: int = 2
+@export var shahed238_max_scatter: float = 150.0
+@export var shahed238_min_length: float = 1000.0
+
 @export_group("Path Smoothing")
 @export var enable_smoothing: bool = true
 @export var curve_smoothness: float = 0.25
@@ -30,8 +35,8 @@ extends Node2D
 @onready var main_path_node: Path2D = get_node_or_null("../../EnemyPaths/MainPath") if get_node_or_null("../../EnemyPaths/MainPath") else get_node_or_null("../MainPath")
 @onready var fpv_path_node: Path2D = get_node_or_null("../../EnemyPaths/FPVPath") if get_node_or_null("../../EnemyPaths/FPVPath") else get_node_or_null("../FPVPath")
 @onready var fp1_path_node: Path2D = get_node_or_null("../../EnemyPaths/FP1Path") if get_node_or_null("../../EnemyPaths/FP1Path") else get_node_or_null("../FP1Path")
-# ИСПРАВЛЕНО: убран символ '$' из строки get_node_or_null
 @onready var kalibr_path_node: Path2D = get_node_or_null("../../EnemyPaths/KalibrPath") if get_node_or_null("../../EnemyPaths/KalibrPath") else get_node_or_null("../KalibrPath")
+@onready var shahed238_path_node: Path2D = get_node_or_null("../../EnemyPaths/Shahed238Path") if get_node_or_null("../../EnemyPaths/Shahed238Path") else get_node_or_null("../Shahed238Path")
 
 func _ready() -> void:
 	add_to_group("mission_generator")
@@ -160,6 +165,9 @@ func generate_mission_paths() -> void:
 	var kalibr_spawn := select_spawn_point()
 	var kalibr_curve := generate_valid_path(kalibr_spawn, target, kalibr_waypoint_count, kalibr_max_scatter, kalibr_min_length)
 	
+	var shahed238_spawn := select_spawn_point()
+	var shahed238_curve := generate_valid_path(shahed238_spawn, target, shahed238_waypoint_count, shahed238_max_scatter, shahed238_min_length)
+	
 	if is_instance_valid(kalibr_path_node):
 		kalibr_path_node.position = Vector2.ZERO
 		kalibr_path_node.scale = Vector2.ONE
@@ -185,3 +193,9 @@ func generate_mission_paths() -> void:
 		fp1_path_node.scale = Vector2.ONE
 		fp1_path_node.curve = fp1_curve
 		print("Generated FP1Path: length=", fp1_curve.get_baked_length(), ", points=", fp1_curve.point_count)
+	
+	if is_instance_valid(fp1_path_node):
+		shahed238_path_node.position = Vector2.ZERO
+		shahed238_path_node.scale = Vector2.ONE
+		shahed238_path_node.curve = shahed238_curve
+		print("Generated Shahed238Path: length=", shahed238_curve.get_baked_length(), ", points=", shahed238_curve.point_count)

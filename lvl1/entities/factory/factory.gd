@@ -2,7 +2,7 @@ extends Sprite2D
 
 signal factory_destroyed
 
-@export var max_health: float = 100
+@export var max_health: float = 1000
 @onready var current_health: float = max_health
 
 

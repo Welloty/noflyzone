@@ -70,6 +70,12 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="Curve2D" id="Curve2D_lcyvg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 163, -991, 0, 0, 0, 0, 375, -760, 0, 0, 0, 0, 394, -325, 0, 0, 0, 0, 192, -70, 0, 0, 0, 0, 256, 401)
+}
+point_count = 5
+
 [node name="level_1" type="Node2D" unique_id=365493064]
 script = ExtResource("1_lvl_script")
 
@@ -120,6 +126,9 @@ curve = SubResource("Curve2D_fp1path")
 [node name="KalibrPath" type="Path2D" parent="EnemyPaths" unique_id=615277902]
 z_index = 10
 curve = SubResource("Curve2D_no3qr")
+
+[node name="Shahed238Path" type="Path2D" parent="EnemyPaths" unique_id=955722109]
+curve = SubResource("Curve2D_lcyvg")
 
 [node name="Containers" type="Node2D" parent="." unique_id=1071642140]
 

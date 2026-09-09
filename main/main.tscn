@@ -286,10 +286,10 @@ text = "Exit"
 
 [node name="VersionLabel" type="Label" parent="." unique_id=2000052620]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 612.0
-offset_right = 540.0
-offset_bottom = 632.0
+offset_left = 8.0
+offset_top = 528.0
+offset_right = 478.0
+offset_bottom = 548.0
 text = "No fly zone  |  v0.1.5 Dev"
 label_settings = SubResource("LS_version")
 

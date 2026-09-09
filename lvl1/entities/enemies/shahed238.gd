@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@export var speed: float = 100.0
+@export var speed: float = 200.0
 @export var max_health: float = 80.0
-@export var damage_to_factory: float = 130.0
-@export var reward_money: int = 30
+@export var damage_to_factory: float = 150.0
+@export var reward_money: int = 50
 @export var path_follower: PathFollow2D
 @export var sun_direction := Vector2(15, 20)
 @export var destruction_scene: PackedScene = preload("res://lvl1/entities/enemies/drone_destruction.tscn")
@@ -31,7 +31,7 @@ func _cleanup_path_follower() -> void:
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(shadow_sprite):
-		shadow_sprite.global_rotation = global_rotation + deg_to_rad(90)
+		shadow_sprite.global_rotation = global_rotation + deg_to_rad(180)
 		shadow_sprite.global_position = global_position + sun_direction
 
 

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bravfdc0dsuqk"]
+
+[ext_resource type="Script" uid="uid://2rlv47mh3hnu" path="res://lvl1/entities/enemies/shahed238.gd" id="1_ka7em"]
+[ext_resource type="Texture2D" uid="uid://ckkotvm08856w" path="res://lvl1/textures/Shahed238.png" id="2_8jtsf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mx1ku"]
+radius = 99.99999
+height = 204.99998
+
+[node name="Shahed238" type="CharacterBody2D" unique_id=869318561]
+script = ExtResource("1_ka7em")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=262771064]
+modulate = Color(0, 0, 0, 0.50980395)
+position = Vector2(-20.135, 16.77)
+rotation = 1.5707964
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_8jtsf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=293852094]
+z_index = 10
+rotation = 3.1398165
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_8jtsf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=60182412]
+position = Vector2(-3.9999998, 0.99999994)
+rotation = 1.5707964
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CapsuleShape2D_mx1ku")
