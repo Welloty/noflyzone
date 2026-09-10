@@ -11,6 +11,7 @@ signal pvo_selected(pvo_type: String, cost: int)
 @onready var wave_value_label: Label = %WaveValueLabel
 @onready var mog_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/MogButton
 @onready var osa_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/OsaButton
+@onready var pause_button: Button = $Control/PauseButton
 var strela_button: Button = null
 var plane_button: Button = null
 
@@ -66,7 +67,21 @@ func _ready() -> void:
 		plane_button.button_down.connect(_start_drag.bind("Самолет", 150))
 		plane_button.gui_input.connect(_on_button_gui_input)
 
+	if pause_button:
+		pause_button.pressed.connect(_on_pause_pressed)
+
 	_update_money_ui()
+
+func _on_pause_pressed() -> void:
+	if get_tree().paused:
+		return
+	var pause_menu = get_tree().get_first_node_in_group("pause_menu")
+	if not pause_menu:
+		var parent_ui = get_parent()
+		if parent_ui:
+			pause_menu = parent_ui.get_node_or_null("PauseMenu")
+	if pause_menu and pause_menu.has_method("open"):
+		pause_menu.open()
 
 func _start_drag(pvo_type: String, cost: int) -> void:
 	if money >= cost:

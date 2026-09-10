@@ -118,6 +118,7 @@ corner_radius_bottom_left = 2
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=2047928806]
 process_mode = 3
+layer = 10
 script = ExtResource("1_pm")
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=896561137]

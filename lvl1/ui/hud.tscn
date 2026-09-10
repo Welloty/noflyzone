@@ -95,6 +95,44 @@ font_color = Color(0.85, 0.9, 0.87, 1)
 font_size = 12
 font_color = Color(0.44, 0.85, 0.25, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn"]
+bg_color = Color(0.063, 0.133, 0.071, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_hover"]
+bg_color = Color(0.12, 0.24, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.44, 0.71, 0.23, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_pressed"]
+bg_color = Color(0.047, 0.098, 0.027, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.31, 0.09, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pause_btn"]
+
 [node name="HUD" type="CanvasLayer" unique_id=1855121295]
 script = ExtResource("1_hud")
 
@@ -193,9 +231,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -80.0
+offset_left = -126.0
 offset_top = -2.0
-offset_bottom = 22.0
+offset_right = -46.0
+offset_bottom = 32.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 11
 text = "▶ Скрыть"
@@ -205,8 +244,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 26.0
-offset_bottom = -260.0
+offset_top = 38.0
+offset_bottom = -250.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tablet")
@@ -312,6 +351,52 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
+
+[node name="PauseButton" type="Button" parent="Control" unique_id=2000000022]
+custom_minimum_size = Vector2(40, 34)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 44.0
+grow_horizontal = 0
+focus_mode = 0
+tooltip_text = "Пауза (Esc)"
+theme_override_styles/normal = SubResource("StyleBoxFlat_pause_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pause_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pause_btn_pressed")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pause_btn")
+
+[node name="HBox" type="HBoxContainer" parent="Control/PauseButton" unique_id=2000000023]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Bar1" type="ColorRect" parent="Control/PauseButton/HBox" unique_id=2000000024]
+custom_minimum_size = Vector2(4, 16)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.95, 0.35, 1)
+
+[node name="Bar2" type="ColorRect" parent="Control/PauseButton/HBox" unique_id=2000000025]
+custom_minimum_size = Vector2(4, 16)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.95, 0.35, 1)
 
 [node name="Radar" type="Control" parent="." unique_id=366577308]
 layout_mode = 3
