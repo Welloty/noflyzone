@@ -1,6 +1,16 @@
-# No Fly Zone
-No Fly Zone — free, open source.
+# No fly zone
 
-discord - https://discord.gg/bp9hN9rN4N
+No Fly Zone is an open-source project.
 
-telegram - https://t.me/saawtd
+The source code is distributed under the MIT License. See LICENSE.
+Links
+
+    Official Telegram: https://t.me/NoFlyZoneofficial
+    Studio Telegram: https://t.me/hearthsidedev
+    Original Discord: https://discord.gg/tUDJJU9Az
+
+Platforms
+
+    Linux
+    Windows
+    Android

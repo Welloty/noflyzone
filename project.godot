@@ -13,7 +13,7 @@ config_version=5
 config/name="Noflyzone Main"
 run/main_scene="res://loading/control.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="uid://ci4vl08fuctkj"
+config/icon="uid://b7uea7j2vek1t"
 
 [autoload]
 
@@ -21,6 +21,7 @@ SettingsManager="*res://settings_manager.gd"
 Global="*uid://bvvb3ymjcjkru"
 DiscordRPCLoader="*uid://bl73nb1dnhy2b"
 Rpc="*uid://blcf7k44sfui0"
+H="*uid://bxfwp2hbbgute"
 
 [compression]
 

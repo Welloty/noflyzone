@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bew65sjuq68u2"]
+
+[ext_resource type="Script" uid="uid://dvjpnj8f7c36h" path="res://lvl1/entities/towers/pvo_mog.gd" id="1_mog"]
+[ext_resource type="Texture2D" uid="uid://b23dp8g17uvyh" path="res://lvl1/textures/pvo_mog_base.png" id="2_base_tex"]
+[ext_resource type="Texture2D" uid="uid://b7gqdg8hw8yty" path="res://lvl1/textures/pvo_mog_head.png" id="3_head_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_click"]
+radius = 26.0
+
+[node name="PvoMog" type="Node2D" unique_id=1410508932]
+script = ExtResource("1_mog")
+
+[node name="Base" type="Node2D" parent="." unique_id=1666980408]
+
+[node name="BaseSprite" type="Sprite2D" parent="Base" unique_id=538803336]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_base_tex")
+
+[node name="TurretHead" type="Node2D" parent="." unique_id=1839863026]
+position = Vector2(-16.5, 0)
+
+[node name="HeadSprite" type="Sprite2D" parent="TurretHead" unique_id=1726493737]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("3_head_tex")
+
+[node name="BarrelLeft" type="Node2D" parent="TurretHead" unique_id=785717888]
+position = Vector2(11.5, -1.3)
+
+[node name="BarrelRight" type="Node2D" parent="TurretHead" unique_id=1912061960]
+position = Vector2(11.5, 1.2)
+
+[node name="MuzzleFlash" type="Polygon2D" parent="TurretHead" unique_id=549710041]
+visible = false
+position = Vector2(12, 0)
+color = Color(1, 0.9, 0.3, 0.9)
+polygon = PackedVector2Array(0, -2, 7, 0, 0, 2, -1, 0)
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1351580348]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1044042459]
+shape = SubResource("CircleShape2D_click")

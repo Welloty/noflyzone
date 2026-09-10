@@ -11,6 +11,7 @@ signal pvo_selected(pvo_type: String, cost: int)
 @onready var wave_value_label: Label = %WaveValueLabel
 @onready var mog_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/MogButton
 @onready var osa_button: Button = $Control/TopPvoBar/PanelContainer/HBoxContainer/OsaButton
+var strela_button: Button = null
 var plane_button: Button = null
 
 var is_dragging: bool = false
@@ -21,6 +22,19 @@ func _ready() -> void:
 	add_to_group("hud")
 	var hbox = $Control/TopPvoBar/PanelContainer/HBoxContainer
 	if hbox:
+		strela_button = hbox.get_node_or_null("StrelaButton")
+		if not strela_button:
+			strela_button = Button.new()
+			strela_button.name = "StrelaButton"
+			strela_button.text = "Strela-10 (75$)"
+			strela_button.tooltip_text = "Стрела-10\nРадиус: 460px\nУрон: 50\nЦена: 75$"
+			if mog_button:
+				var idx = mog_button.get_index()
+				hbox.add_child(strela_button)
+				hbox.move_child(strela_button, idx + 1)
+			else:
+				hbox.add_child(strela_button)
+
 		plane_button = hbox.get_node_or_null("PlaneButton")
 		if not plane_button:
 			plane_button = Button.new()
@@ -30,18 +44,28 @@ func _ready() -> void:
 			hbox.add_child(plane_button)
 
 	if mog_button:
-		mog_button.custom_minimum_size = Vector2(130, 48)
-		mog_button.button_down.connect(_start_drag.bind("Стрела-1", 75))
+		mog_button.custom_minimum_size = Vector2(98, 34)
+		mog_button.text = "МОГ (50$)"
+		mog_button.tooltip_text = "МОГ (Мобильная огневая группа)\nРадиус: 340px\nУрон: пулеметная очередь\nЦена: 50$"
+		mog_button.button_down.connect(_start_drag.bind("МОГ", 50))
 		mog_button.gui_input.connect(_on_button_gui_input)
+
+	if strela_button:
+		strela_button.custom_minimum_size = Vector2(98, 34)
+		strela_button.button_down.connect(_start_drag.bind("Стрела-10", 75))
+		strela_button.gui_input.connect(_on_button_gui_input)
+
 	if osa_button:
-		osa_button.custom_minimum_size = Vector2(130, 48)
+		osa_button.custom_minimum_size = Vector2(98, 34)
 		osa_button.button_down.connect(_start_drag.bind("Оса", 175))
 		osa_button.gui_input.connect(_on_button_gui_input)
+
 	if plane_button:
-		plane_button.custom_minimum_size = Vector2(130, 48)
+		plane_button.custom_minimum_size = Vector2(98, 34)
 		plane_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		plane_button.button_down.connect(_start_drag.bind("Самолет", 150))
 		plane_button.gui_input.connect(_on_button_gui_input)
+
 	_update_money_ui()
 
 func _start_drag(pvo_type: String, cost: int) -> void:
@@ -77,8 +101,11 @@ func _update_money_ui() -> void:
 	if money_value_label:
 		money_value_label.text = str(money) + "$"
 	if mog_button:
-		mog_button.disabled = (money < 75)
-		mog_button.text = "Strela-10 (75$)"
+		mog_button.disabled = (money < 50)
+		mog_button.text = "МОГ (50$)"
+	if strela_button:
+		strela_button.disabled = (money < 75)
+		strela_button.text = "Strela-10 (75$)"
 	if osa_button:
 		osa_button.disabled = (money < 175)
 	if plane_button:

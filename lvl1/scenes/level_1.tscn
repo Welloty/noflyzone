@@ -94,6 +94,10 @@ scale = Vector2(0.18359375, 0.18359375)
 texture = ExtResource("7_rl3t3")
 script = ExtResource("3_pv2c6")
 
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Environment/Factory" unique_id=837118274]
+position = Vector2(-637.0247, -641.74884)
+texture_normal = ExtResource("7_rl3t3")
+
 [node name="Ground" type="TileMapLayer" parent="Environment" unique_id=1417737838]
 z_index = -10
 use_parent_material = true
@@ -155,3 +159,5 @@ script = ExtResource("6_lyu8i")
 [node name="PauseMenu" parent="UI" unique_id=1536623147 instance=ExtResource("6_pause")]
 
 [node name="DefeatMenu" parent="UI" unique_id=2047928806 instance=ExtResource("7_xp86s")]
+
+[connection signal="pressed" from="Environment/Factory/TouchScreenButton" to="Environment/Factory" method="_on_touch_screen_button_pressed"]

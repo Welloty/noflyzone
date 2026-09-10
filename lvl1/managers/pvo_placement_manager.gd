@@ -40,6 +40,9 @@ func _connect_hud() -> void:
 
 func start_placement(pvo_type: String, cost: int) -> void:
 	deselect_tower()
+	var factory = get_tree().get_first_node_in_group("factory")
+	if factory and factory.has_method("close_upgrade_ui"):
+		factory.close_upgrade_ui()
 	if is_instance_valid(ghost_instance):
 		return
 	
@@ -52,6 +55,8 @@ func start_placement(pvo_type: String, cost: int) -> void:
 		active_pvo_scene = preload("res://lvl1/entities/towers/pvo_osa.tscn")
 	elif pvo_type == "Самолет" or pvo_type == "Plane" or pvo_type == "FriendlyPlane":
 		active_pvo_scene = preload("res://lvl1/entities/planes/FriendlyPlane.tscn")
+	elif pvo_type == "МОГ" or pvo_type == "Mog" or pvo_type == "MOG":
+		active_pvo_scene = preload("res://lvl1/entities/towers/pvo_mog.tscn")
 	else:
 		active_pvo_scene = preload("res://lvl1/entities/towers/pvo_strela.tscn")
 
@@ -404,6 +409,10 @@ func _get_towers_container() -> Node2D:
 func select_tower(tower: Node2D) -> void:
 	if is_instance_valid(ghost_instance):
 		return
+		
+	var factory = get_tree().get_first_node_in_group("factory")
+	if factory and factory.has_method("close_upgrade_ui"):
+		factory.close_upgrade_ui()
 		
 	if is_instance_valid(selected_tower) and selected_tower != tower:
 		_set_tower_show_range(selected_tower, false)

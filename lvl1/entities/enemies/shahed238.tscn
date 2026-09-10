@@ -10,16 +10,16 @@ height = 204.99998
 [node name="Shahed238" type="CharacterBody2D" unique_id=869318561]
 script = ExtResource("1_ka7em")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=293852094]
+z_index = 10
+rotation = 3.1398165
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_8jtsf")
+
 [node name="Shadow" type="Sprite2D" parent="." unique_id=262771064]
 modulate = Color(0, 0, 0, 0.50980395)
 position = Vector2(-20.135, 16.77)
 rotation = 1.5707964
-scale = Vector2(0.07, 0.07)
-texture = ExtResource("2_8jtsf")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=293852094]
-z_index = 10
-rotation = 3.1398165
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("2_8jtsf")
 

@@ -8,11 +8,11 @@ func _ready() -> void:
 	# На ПК безпечно встановлюємо всі значення
 	DiscordRPC.set("app_id", 1530222816421609472)
 	DiscordRPC.set("details", "air!")
-	DiscordRPC.set("state", "https://welloty.github.io/saaw/")
-	DiscordRPC.set("large_image", "saawtd_logo")
-	DiscordRPC.set("large_image_text", "saaw tower defense")
-	DiscordRPC.set("small_image", "osa")
-	DiscordRPC.set("small_image_text", "AA")
+	DiscordRPC.set("state", "https://github.com/Welloty/noflyzone")
+	DiscordRPC.set("large_image", "ico")
+	DiscordRPC.set("large_image_text", "game")
+	DiscordRPC.set("small_image", "")
+	DiscordRPC.set("small_image_text", "")
 	DiscordRPC.set("start_timestamp", int(Time.get_unix_time_from_system()))
 
 	DiscordRPC.call("refresh")
