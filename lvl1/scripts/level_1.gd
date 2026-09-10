@@ -4,6 +4,8 @@ extends Node2D
 @export var target_map_size_px: Vector2 = Vector2(50000, 50000)
 @export var tile_size: int = 1280
 @export var total_trees_count: int = 2000
+# Константа масштаба: 1 px = 1.18 см
+const CM_PER_PIXEL: float = 1.18
 
 const GROUND_LAYER = 0
 const OBJECTS_LAYER = 1
@@ -25,12 +27,28 @@ const OBJECTS_LAYER = 1
 @export var tree_source_id: int = 1
 @export var tree_atlas_coords: Vector2i = Vector2i(0, 0)
 
+
+func calculate_distance(pixels: float) -> Dictionary:
+	var cm = pixels * CM_PER_PIXEL
+	var meters = cm / 100.0
+	var km = cm / 100000.0
+	
+	return {
+		"pixels": pixels,
+		"cm": cm,
+		"meters": meters,
+		"km": km
+	}
+
 func _ready() -> void:
 	add_to_group("level")
 	if is_instance_valid(ground_tile_map):
 		generate_large_map()
 		spawn_trees_randomly()
 		update_camera_bounds()
+	var distance_px = 500.0 # Например, длина отрезка в пикселях
+	var result = calculate_distance(distance_px)
+	
 	
 	var factory = get_tree().get_first_node_in_group("factory")
 	if not factory:

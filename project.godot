@@ -21,6 +21,7 @@ SettingsManager="*res://settings_manager.gd"
 Global="*uid://bvvb3ymjcjkru"
 DiscordRPCLoader="*uid://bl73nb1dnhy2b"
 Rpc="*uid://blcf7k44sfui0"
+H="*uid://bxfwp2hbbgute"
 
 [compression]
 

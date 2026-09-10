@@ -49,20 +49,57 @@ func _process(delta: float) -> void:
 			_fire()
 			fire_timer = fire_rate
 
+
+
+
+
+# Вспомогательный метод для безопасного получения высоты конкретного дрона
+func _get_target_height(drone_node: Node2D) -> float:
+	if not is_instance_valid(drone_node):
+		return 9999.0
+		
+	# 1. Проверяем переменные на самом объекте дрона
+	if "heightMain" in drone_node:
+		return float(drone_node.heightMain)
+	elif "HeightMain" in drone_node:
+		return float(drone_node.HeightMain)
+	# 2. Проверяем дочерний узел или глобальный скрипт H на дроне
+	elif "H" in drone_node and "heightMain" in drone_node.H:
+		return float(drone_node.H.heightMain)
+	# 3. Если ничего не найдено, берем глобальный H (если есть)
+	elif typeof(H) != TYPE_NIL and "heightMain" in H:
+		return float(H.heightMain)
+		
+	return 0.0
+
 func _update_target() -> void:
-	if not is_instance_valid(current_target) or not current_target.is_inside_tree() or global_position.distance_to(current_target.global_position) > range_radius or not current_target.is_in_group("drones"):
+	# 1. Сбрасываем цель, если она уничтожена, улетела из радиуса ИЛИ поднялась выше 500 м
+	if not is_instance_valid(current_target) \
+	or not current_target.is_inside_tree() \
+	or global_position.distance_to(current_target.global_position) > range_radius \
+	or not current_target.is_in_group("drones") \
+	or _get_target_height(current_target) >= 500.0:
 		current_target = null
+
 	if current_target != null:
 		return
+
+	# 2. Ищем новую ближайшую цель ТОЛЬКО среди дронов, которые ниже 500 м
 	var drones = get_tree().get_nodes_in_group("drones")
 	var closest_dist: float = range_radius + 1.0
 	var best_drone: Node2D = null
+
 	for drone in drones:
 		if is_instance_valid(drone) and drone.is_inside_tree():
+			# Игнорируем дроны, которые летят слишком высоко
+			if _get_target_height(drone) >= 500.0:
+				continue
+				
 			var dist = global_position.distance_to(drone.global_position)
 			if dist <= range_radius and dist < closest_dist:
 				closest_dist = dist
 				best_drone = drone
+
 	current_target = best_drone
 
 func _fire() -> void:

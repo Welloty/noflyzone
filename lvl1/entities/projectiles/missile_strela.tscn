@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ds80b2qhc107u"]
+
+[ext_resource type="Script" uid="uid://dl36a7yplpxla" path="res://missile_strela.gd" id="1_0cfp5"]
+[ext_resource type="Texture2D" uid="uid://bdbbrll7jbabr" path="res://lvl1/textures/raketa.png" id="2_llwlu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8336"]
+size = Vector2(52, 6)
+
+[node name="MissileStrela" type="Area2D" unique_id=2054946760]
+script = ExtResource("1_0cfp5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=832478106]
+rotation = -1.5707964
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("2_llwlu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=662960591]
+scale = Vector2(0.465, 0.465)
+shape = SubResource("RectangleShape2D_p8336")

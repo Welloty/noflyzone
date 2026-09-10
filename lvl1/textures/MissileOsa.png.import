@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmgbf87x2upl1"
-path="res://.godot/imported/Знімок екрана 2026-09-09 192448.png-c49b832a00dca30ad09aef4fa13168a1.ctex"
+uid="uid://dkr0jkjhkj28j"
+path="res://.godot/imported/MissileOsa.png-3953f3b426dd98f231c6809b2d7339aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lvl1/textures/Знімок екрана 2026-09-09 192448.png"
-dest_files=["res://.godot/imported/Знімок екрана 2026-09-09 192448.png-c49b832a00dca30ad09aef4fa13168a1.ctex"]
+source_file="res://lvl1/textures/MissileOsa.png"
+dest_files=["res://.godot/imported/MissileOsa.png-3953f3b426dd98f231c6809b2d7339aa.ctex"]
 
 [params]
 
