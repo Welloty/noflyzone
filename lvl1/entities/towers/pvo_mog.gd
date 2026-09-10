@@ -2,6 +2,7 @@ extends Node2D
 
 # ==============================================================================
 # НАСТРОЙКИ БАЛАНСА МОБИЛЬНОЙ ОГНЕВОЙ ГРУППЫ (МОГ)
+# Здесь вы можете быстро подкорректировать урон, дальность и скорострельность
 # ==============================================================================
 @export_group("Параметры башни (Tower Stats)")
 @export var pvo_name: String = "МОГ"
@@ -11,7 +12,6 @@ extends Node2D
 @export var fire_rate: float = 0.08        # Время между выстрелами внутри очереди (сек)
 @export var burst_count: int = 5           # Количество выстрелов в одной очереди
 @export var burst_pause: float = 0.45      # Пауза между очередями (сек)
-@export var max_target_height: float = 500.0 # МАКСИМАЛЬНАЯ ВЫСОТА ЦЕЛИ
 
 @export_group("Параметры стрельбы (Ballistics)")
 @export var bullet_scene: PackedScene = preload("res://lvl1/entities/projectiles/mog_bullet.tscn")
@@ -60,12 +60,6 @@ func _process(delta: float) -> void:
 	_update_target()
 
 	if is_instance_valid(current_target):
-		# ДОПОЛНИТЕЛЬНАЯ ПРОВЕРКА: Если цель поднялась выше нормы — моментально прекращаем огонь
-		if _get_target_height(current_target) >= max_target_height:
-			current_target = null
-			shots_in_current_burst = 0
-			return
-
 		var target_angle = (current_target.global_position - turret_head.global_position).angle()
 		turret_head.rotation = lerp_angle(turret_head.rotation, target_angle, delta * turret_turn_speed)
 
@@ -84,30 +78,8 @@ func _process(delta: float) -> void:
 	else:
 		shots_in_current_burst = 0
 
-# Вспомогательный метод для безопасного получения высоты дрона
-func _get_target_height(target: Node2D) -> float:
-	if not is_instance_valid(target):
-		return 9999.0
-		
-	# Проверяем, есть ли переменная HeightMain на самом дроне
-	if "HeightMain" in target:
-		return float(target.HeightMain)
-	# Проверяем, есть ли HeightMain с маленькой буквы
-	elif "heightMain" in target:
-		return float(target.heightMain)
-	# Проверяем глобальную переменную H (если она используется)
-	elif typeof(H) != TYPE_NIL and "heightMain" in H:
-		return float(H.heightMain)
-		
-	return 0.0
-
 func _update_target() -> void:
-	# Проверка валидности текущей цели + проверка по высоте
-	if not is_instance_valid(current_target) \
-	or not current_target.is_inside_tree() \
-	or global_position.distance_to(current_target.global_position) > range_radius \
-	or not current_target.is_in_group("drones") \
-	or _get_target_height(current_target) >= max_target_height:
+	if not is_instance_valid(current_target) or not current_target.is_inside_tree() or global_position.distance_to(current_target.global_position) > range_radius or not current_target.is_in_group("drones"):
 		current_target = null
 
 	if current_target != null:
@@ -119,10 +91,6 @@ func _update_target() -> void:
 
 	for drone in drones:
 		if is_instance_valid(drone) and drone.is_inside_tree():
-			# Игнорируем дроны с высотой >= 500
-			if _get_target_height(drone) >= max_target_height:
-				continue
-				
 			var dist = global_position.distance_to(drone.global_position)
 			if dist <= range_radius and dist < closest_dist:
 				closest_dist = dist
@@ -138,6 +106,7 @@ func _fire_shot() -> void:
 	var barrel_node = barrel_left if use_left_barrel else barrel_right
 	use_left_barrel = not use_left_barrel
 
+	# Легкий случайный разброс для реалистичной пулеметной очереди
 	var spread_rad = deg_to_rad(randf_range(-bullet_spread_deg, bullet_spread_deg))
 	var shot_rotation = turret_head.rotation + spread_rad
 
@@ -150,6 +119,7 @@ func _fire_shot() -> void:
 
 	get_tree().current_scene.add_child(bullet)
 
+	# Вспышка выстрела
 	if is_instance_valid(muzzle_flash):
 		muzzle_flash.position = barrel_node.position + Vector2(2, 0)
 		muzzle_flash.visible = true

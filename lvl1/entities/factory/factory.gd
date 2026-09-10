@@ -684,7 +684,3 @@ func _destroy_upgrade_ui() -> void:
 		net_btn = null
 		repair_btn = null
 		armor_btn = null
-
-
-func _on_touch_screen_button_pressed() -> void:
-	open_upgrade_ui()
