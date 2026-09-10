@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://frd6rww3ybjx" path="res://lvl1/textures/factory.png" id="2_va5di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ps0q5"]
-size = Vector2(987, 1096)
+size = Vector2(1150, 1150)
 
-[node name="Factory" type="StaticBody2D" unique_id=2012694825]
+[node name="Factory" type="Sprite2D" unique_id=2012694825]
+texture = ExtResource("2_va5di")
 script = ExtResource("1_hru48")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=63580718]
-texture = ExtResource("2_va5di")
+[node name="ClickArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=546575004]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
 shape = SubResource("RectangleShape2D_ps0q5")

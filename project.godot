@@ -13,7 +13,7 @@ config_version=5
 config/name="Noflyzone Main"
 run/main_scene="res://loading/control.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="uid://ci4vl08fuctkj"
+config/icon="uid://b7uea7j2vek1t"
 
 [autoload]
 

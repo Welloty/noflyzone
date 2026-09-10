@@ -290,7 +290,7 @@ offset_left = 8.0
 offset_top = 528.0
 offset_right = 478.0
 offset_bottom = 548.0
-text = "No fly zone  |  v0.1.5 Dev"
+text = "No fly zone  |  v0.1.6 beta"
 label_settings = SubResource("LS_version")
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1237362566]
@@ -355,7 +355,7 @@ offset_top = 3.0
 offset_right = 284.415
 offset_bottom = 22.0
 theme_override_fonts/font = SubResource("FontFile_h8yf2")
-uri = "https://discord.gg/bp9hN9rN4N"
+uri = "https://discord.gg/tUDJJU9AzA"
 
 [node name="TextureRect" type="TextureRect" parent="Discord" unique_id=2014223795]
 layout_mode = 0
@@ -385,7 +385,7 @@ offset_left = 207.0
 offset_top = 3.0
 offset_right = 289.415
 offset_bottom = 22.0
-uri = "https://t.me/https://t.me/noflydev"
+uri = "https://t.me/NoFlyZoneofficial"
 
 [node name="TextureRect" type="TextureRect" parent="Telegram" unique_id=1099002677]
 layout_mode = 0
@@ -451,7 +451,7 @@ offset_right = 859.0
 offset_bottom = 303.0
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
-text = "Artur – Lead developer"
+text = "dmitjjtpc – Lead developer"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
@@ -464,18 +464,6 @@ offset_bottom = 328.0
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "karas – Senior designer & dev"
-label_settings = SubResource("LS_status")
-horizontal_alignment = 1
-
-[node name="karas2" type="Label" parent="." unique_id=574137173]
-layout_mode = 0
-offset_left = 648.0
-offset_top = 336.00003
-offset_right = 888.0
-offset_bottom = 358.00003
-scale = Vector2(1.08, 1.08)
-theme_override_fonts/font = ExtResource("2_3wy1v")
-text = "dmitjjtpc - developer"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 

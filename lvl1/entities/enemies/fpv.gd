@@ -22,6 +22,7 @@ var die_rot_vel: float = 0.0
 
 func _ready() -> void:
 	add_to_group("drones")
+	add_to_group("fpv_drones")
 	health = max_health
 
 func _exit_tree() -> void:
@@ -76,8 +77,10 @@ func _explode_on_factory() -> void:
 	is_down = true
 
 	var factory = get_tree().get_first_node_in_group("factory")
+	if not factory:
+		factory = get_tree().root.find_child("Factory", true, false)
 	if factory and factory.has_method("take_damage"):
-		factory.take_damage(damage_to_factory)
+		factory.take_damage(damage_to_factory, "fpv")
 	
 	remove_from_group("drones")
 

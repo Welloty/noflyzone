@@ -121,10 +121,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -175.0
+offset_left = -295.0
 offset_top = 12.0
-offset_right = 174.99976
-offset_bottom = 60.0
+offset_right = 175.0
+offset_bottom = 58.0
 grow_horizontal = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control/TopPvoBar" unique_id=1342108310]
@@ -133,7 +133,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/TopPvoBar/PanelContainer" unique_id=619433852]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="PvoBadge" type="PanelContainer" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=976553273]
 layout_mode = 2
@@ -146,23 +146,33 @@ text = "AA"
 label_settings = SubResource("LS_pvo_badge")
 
 [node name="MogButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=1077123114]
-custom_minimum_size = Vector2(140, 32)
+custom_minimum_size = Vector2(98, 34)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "МОГ (Мобильная огневая группа)
+Радиус: 340px
+Урон: пулеметная очередь
+Цена: 50$"
+text = "МОГ (50$)"
+
+[node name="StrelaButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=1077123115]
+custom_minimum_size = Vector2(98, 34)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Стрела-10
-Радиус: 180px
+Радиус: 460px
 Урон: 50
 Цена: 75$"
 text = "Strela-10 (75$)"
 
 [node name="OsaButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=406047732]
-custom_minimum_size = Vector2(140, 32)
+custom_minimum_size = Vector2(98, 34)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Оса СА-8
-Радиус: 360px
+Радиус: 1000px
 Урон: 100
-Цена: 175 монет"
+Цена: 175$"
 text = "OSA SA-8 (175$)"
 
 [node name="WaveTablet" type="Control" parent="Control" unique_id=2000000001]
