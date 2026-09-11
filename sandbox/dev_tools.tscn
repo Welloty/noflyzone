@@ -1,0 +1,476 @@
+[gd_scene format=3 uid="uid://devtoolssandbox01"]
+
+[ext_resource type="Script" path="res://sandbox/dev_tools.gd" id="1_devtools"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toggle"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.14, 0.16, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.75, 0.85, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toast"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.05, 0.09, 0.12, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.85, 0.5, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.06, 0.1, 0.13, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.65, 0.75, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_header"]
+font_size = 14
+font_color = Color(0.4, 0.95, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_stats"]
+font_size = 11
+font_color = Color(0.65, 0.85, 0.75, 0.9)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hp"]
+font_size = 12
+font_color = Color(0.35, 1, 0.5, 1)
+
+[node name="DevTools" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_devtools")
+
+[node name="RootControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ToggleBtn" type="Button" parent="RootControl"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 150.0
+offset_bottom = 44.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_toggle")
+text = "✖ СКРЫТЬ [~]"
+
+[node name="ToastLabel" type="Label" parent="RootControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_toast")
+text = "Уведомление"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainPanel" type="PanelContainer" parent="RootControl"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="RootControl/MainPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="RootControl/MainPanel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="RootControl/MainPanel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🛠 SANDBOX DEV CONSOLE"
+label_settings = SubResource("LabelSettings_header")
+
+[node name="CloseBtn" type="Button" parent="RootControl/MainPanel/VBox/Header"]
+custom_minimum_size = Vector2(28, 24)
+layout_mode = 2
+text = "✖"
+
+[node name="StatsLabel" type="Label" parent="RootControl/MainPanel/VBox/Header"]
+visible = false
+layout_mode = 2
+
+[node name="StatsLabelBar" type="Label" parent="RootControl/MainPanel/VBox"]
+layout_mode = 2
+text = "FPS: 60 | Враги: 0 | Деньги: 0$ | Завод: 1000 HP"
+label_settings = SubResource("LabelSettings_stats")
+
+[node name="HSeparator" type="HSeparator" parent="RootControl/MainPanel/VBox"]
+layout_mode = 2
+
+[node name="Content" type="Control" parent="RootControl/MainPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabContainer" type="TabContainer" parent="RootControl/MainPanel/VBox/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Enemies" type="ScrollContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer"]
+layout_mode = 2
+metadata/_tab_title = "Враги"
+
+[node name="VBox" type="VBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="EnemyGrid" type="GridContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+columns = 2
+
+[node name="Shahed136Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🟢 Шахед-136"
+
+[node name="FPVBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⚡ FPV-дрон"
+
+[node name="FP1Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🔶 FP-1"
+
+[node name="KalibrBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🚀 Калибр"
+
+[node name="Shahed238Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🟣 Шахед-238"
+
+[node name="PlaneBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✈️ Союзник"
+
+[node name="HSeparator1" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+
+[node name="PathLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Траектория пути:"
+
+[node name="PathHBox" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+
+[node name="PathOptionBtn" type="OptionButton" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/PathHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CountLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Количество спавна:"
+
+[node name="CountHBox" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+
+[node name="CountSpin" type="SpinBox" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox"]
+layout_mode = 2
+min_value = 1.0
+max_value = 50.0
+value = 1.0
+
+[node name="Btn1" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox"]
+layout_mode = 2
+text = "1"
+
+[node name="Btn3" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox"]
+layout_mode = 2
+text = "3"
+
+[node name="Btn5" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox"]
+layout_mode = 2
+text = "5"
+
+[node name="Btn10" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox"]
+layout_mode = 2
+text = "10"
+
+[node name="HSeparator2" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+
+[node name="ClearEnemiesBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+text = "💥 Уничтожить всех врагов"
+
+[node name="WaveHBox" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox"]
+layout_mode = 2
+
+[node name="NextWaveBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/WaveHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🌊 След. волна"
+
+[node name="AutoWaveBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/WaveHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Авто-волны: ВЫКЛ"
+
+[node name="Economy" type="ScrollContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Деньги"
+
+[node name="VBox" type="VBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="QuickMoneyLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Быстрое пополнение:"
+
+[node name="Grid" type="GridContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+columns = 2
+
+[node name="Add100Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+100 $"
+
+[node name="Add500Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+500 $"
+
+[node name="Add1000Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+1,000 $"
+
+[node name="Add10000Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+10,000 $"
+
+[node name="HSeparator1" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+
+[node name="CustomMoneyLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Задать точный баланс:"
+
+[node name="CustomMoneyHBox" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+
+[node name="MoneySpin" type="SpinBox" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/CustomMoneyHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 999999.0
+value = 1000.0
+
+[node name="SetMoneyBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/CustomMoneyHBox"]
+layout_mode = 2
+text = "Задать"
+
+[node name="ResetMoneyBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+text = "Обнулить баланс (0$)"
+
+[node name="HSeparator2" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+
+[node name="InfMoneyCheck" type="CheckBox" parent="RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox"]
+layout_mode = 2
+text = "♾️ Бесконечные деньги (99,999$)"
+
+[node name="Factory" type="ScrollContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Завод"
+
+[node name="VBox" type="VBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="HPHeader" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/HPHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Здоровье завода:"
+
+[node name="HPValueLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/HPHeader"]
+layout_mode = 2
+text = "1000 / 1000 HP"
+label_settings = SubResource("LabelSettings_hp")
+
+[node name="HPSlider" type="HSlider" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+max_value = 1000.0
+value = 1000.0
+
+[node name="PresetsLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Быстрые пресеты:"
+
+[node name="PresetsHBox" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+
+[node name="Hp100Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+
+[node name="Hp50Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "50%"
+
+[node name="Hp10Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10%"
+
+[node name="Hp1Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1 HP"
+
+[node name="Hp0Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 HP"
+
+[node name="HSeparator1" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+
+[node name="GodModeCheck" type="CheckBox" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+text = "🛡️ Режим Бога (бессмертие)"
+
+[node name="NetCheck" type="CheckBox" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+text = "🕸️ Антидроновая сетка (-75% FPV)"
+
+[node name="RelocateBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox"]
+layout_mode = 2
+text = "📍 Переместить завод (рандом)"
+
+[node name="System" type="ScrollContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_title = "Система"
+
+[node name="VBox" type="VBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/System"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="SpeedLabel" type="Label" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Скорость времени:"
+
+[node name="TimeHBox" type="HBoxContainer" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox"]
+layout_mode = 2
+
+[node name="Spd025Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.25x"
+
+[node name="Spd05Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.5x"
+
+[node name="Spd1Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1.0x"
+
+[node name="Spd2Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2.0x"
+
+[node name="Spd4Btn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "4.0x"
+
+[node name="PauseBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Пауза"
+
+[node name="HSeparator1" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox"]
+layout_mode = 2
+
+[node name="RestartBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox"]
+layout_mode = 2
+text = "🔄 Перезапустить Sandbox"
+
+[node name="MainMenuBtn" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/System/VBox"]
+layout_mode = 2
+text = "🏠 В главное меню"

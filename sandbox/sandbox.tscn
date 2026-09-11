@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8sandboxscene01"]
+
+[ext_resource type="PackedScene" uid="uid://bgkw2aevbtbpu" path="res://lvl1/scenes/level_1.tscn" id="1_level_base"]
+[ext_resource type="Script" path="res://sandbox/sandbox.gd" id="2_sandbox_script"]
+[ext_resource type="PackedScene" path="res://sandbox/dev_tools.tscn" id="3_dev_tools"]
+
+[node name="Sandbox" instance=ExtResource("1_level_base")]
+script = ExtResource("2_sandbox_script")
+
+[node name="DevTools" parent="UI" instance=ExtResource("3_dev_tools")]
