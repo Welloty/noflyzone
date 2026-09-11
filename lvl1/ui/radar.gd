@@ -12,8 +12,8 @@ extends Control
 @onready var pvo_icon: Sprite2D = $Pvo
 @onready var enemy_icon: Sprite2D = $Target
 
-var active_zrk_node: Node2D
-var target_node: Node2D
+var active_zrk_node: Node2D = null
+var target_node: Node2D = null
 
 var is_osa: bool = false
 var is_radar_visible: bool = true
@@ -26,10 +26,22 @@ func _ready() -> void:
 		strela_button.pressed.connect(func(): set_radar_mode(false))
 	if is_instance_valid(osa_button):
 		osa_button.pressed.connect(func(): set_radar_mode(true))
+		
+	update_active_zrk()
 
 func set_radar_mode(osa_mode: bool) -> void:
-	is_osa = osa_mode
+	if is_osa != osa_mode or not is_instance_valid(active_zrk_node):
+		is_osa = osa_mode
+		update_active_zrk()
+
+func update_active_zrk() -> void:
 	active_zrk_node = null
+	var selected_pvo_name: String = "Оса" if is_osa else "Стрела-10"
+	var zrks = get_tree().get_nodes_in_group("zrk")
+	for zrk in zrks:
+		if is_instance_valid(zrk) and "pvo_name" in zrk and zrk.pvo_name == selected_pvo_name:
+			active_zrk_node = zrk
+			break
 
 func _on_toggle_button_pressed() -> void:
 	is_radar_visible = !is_radar_visible
@@ -44,43 +56,47 @@ func _on_toggle_button_pressed() -> void:
 		
 	if is_instance_valid(toggle_button):
 		toggle_button.text = "► Скрыть" if is_radar_visible else "► Показать"
+
 func _process(_delta: float) -> void:
 	if not is_instance_valid(background) or not is_radar_visible:
-		if is_instance_valid(pvo_icon): pvo_icon.visible = false
-		if is_instance_valid(enemy_icon): enemy_icon.visible = false
+		_hide_icons()
 		return
 
-	var selected_pvo_name: String = "Оса" if is_osa else "Стрела-10"
-	
 	if not is_instance_valid(active_zrk_node):
-		var zrks = get_tree().get_nodes_in_group("zrk")
-		for zrk in zrks:
-			if is_instance_valid(zrk):
-				if "pvo_name" in zrk and zrk.pvo_name == selected_pvo_name:
-					active_zrk_node = zrk
-					break
+		update_active_zrk()
+		if not is_instance_valid(active_zrk_node):
+			_hide_icons()
+			return
 
-	if not is_instance_valid(active_zrk_node):
-		if is_instance_valid(pvo_icon): pvo_icon.visible = false
-		if is_instance_valid(enemy_icon): enemy_icon.visible = false
-		return
-
-	var bg_local_center: Vector2 = background.position
+	# Расчет центра UI радара
+	var bg_local_center: Vector2 = Vector2.ZERO
 	var radius_px: float = 0.0
 
-	if background is Sprite2D:
-		if background.texture:
+	# Если иконки PVO и Target являются ДОЧЕРНИМИ к Background:
+	if pvo_icon.get_parent() == background and enemy_icon.get_parent() == background:
+		if background is Sprite2D:
 			radius_px = (background.texture.get_size().x * background.scale.x) * 0.5
-		if not background.centered:
-			bg_local_center += Vector2(radius_px, radius_px)
-	elif background is Control:
-		radius_px = background.size.x * 0.5
-		bg_local_center += background.size * 0.5
+			bg_local_center = Vector2.ZERO if background.centered else Vector2(radius_px, radius_px)
+		elif background is Control:
+			radius_px = background.size.x * 0.5
+			bg_local_center = background.size * 0.5
+	else:
+		# Если иконки на одном уровне (сиблинги) с Background
+		bg_local_center = background.position
+		if background is Sprite2D:
+			if background.texture:
+				radius_px = (background.texture.get_size().x * background.scale.x) * 0.5
+			if not background.centered:
+				bg_local_center += Vector2(radius_px, radius_px)
+		elif background is Control:
+			radius_px = background.size.x * 0.5
+			bg_local_center += background.size * 0.5
 
 	if is_instance_valid(pvo_icon):
 		pvo_icon.visible = true
 		pvo_icon.position = bg_local_center
 
+	# Поиск ближайшей цели
 	target_node = null
 	var drones = get_tree().get_nodes_in_group("drones")
 	var min_d: float = INF
@@ -98,7 +114,6 @@ func _process(_delta: float) -> void:
 
 	var rel_world_pos: Vector2 = target_node.global_position - active_zrk_node.global_position
 	var dist_px: float = rel_world_pos.length()
-	
 	var max_range_px: float = osa_max_range_px if is_osa else strela_max_range_px
 
 	if dist_px <= max_range_px and dist_px >= min_visible_dist_px:
@@ -110,7 +125,11 @@ func _process(_delta: float) -> void:
 		var offset: Vector2 = dir * (dist_ratio * radius_px)
 
 		enemy_icon.position = bg_local_center + offset
-		
-		enemy_icon.rotation = target_node.global_rotation + deg_to_rad(90)
+		# Использование global_rotation предотвращает искажения от ротации UI
+		enemy_icon.global_rotation = target_node.global_rotation + deg_to_rad(90)
 	else:
 		enemy_icon.visible = false
+
+func _hide_icons() -> void:
+	if is_instance_valid(pvo_icon): pvo_icon.visible = false
+	if is_instance_valid(enemy_icon): enemy_icon.visible = false

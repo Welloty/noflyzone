@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://c8n4y2m1p0q7x"]
+[gd_scene format=3 uid="uid://bbpe1yjaftas5"]
 
-[ext_resource type="Script" uid="uid://oh6hk6yiv70g" path="res://lvl1/scenes/Endless_prep.gd" id="1_gf02t"]
+[ext_resource type="Script" uid="uid://eqlifxyo0nrt" path="res://lvl1/scenes/mission_prep.gd" id="1_3ykme"]
 
 [sub_resource type="LabelSettings" id="LS_title"]
 font_size = 72
@@ -45,14 +45,14 @@ font_color = Color(0.7, 0.7, 0.7, 1)
 font_size = 13
 font_color = Color(0.275, 0.36, 0.247, 1)
 
-[node name="EndlessPrep" type="Control" unique_id=317286058]
+[node name="MissionPrep" type="Control" unique_id=317286058]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gf02t")
+script = ExtResource("1_3ykme")
 
 [node name="BG" type="ColorRect" parent="." unique_id=1868776576]
 layout_mode = 1
@@ -86,7 +86,7 @@ offset_left = 70.0
 offset_top = 90.0
 offset_right = 800.0
 offset_bottom = 180.0
-text = "Endless mode"
+text = "MissionPreparation"
 label_settings = SubResource("LS_title")
 
 [node name="Subtitle" type="Label" parent="." unique_id=1051479620]
@@ -95,7 +95,7 @@ offset_left = 76.0
 offset_top = 185.0
 offset_right = 600.0
 offset_bottom = 225.0
-text = "Endless mode"
+text = "Mission 1"
 label_settings = SubResource("LS_subtitle")
 
 [node name="Tagline" type="Label" parent="." unique_id=1951753004]

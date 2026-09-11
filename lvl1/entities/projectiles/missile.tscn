@@ -6,6 +6,32 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3nmj"]
 size = Vector2(73.118286, 6)
 
+[sub_resource type="Gradient" id="Gradient_smoke_tex"]
+offsets = PackedFloat32Array(0, 0.35, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.85, 1, 1, 1, 0.3, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_smoke"]
+gradient = SubResource("Gradient_smoke_tex")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.0)
+
+[sub_resource type="Gradient" id="Gradient_flame"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 1, 0.75, 1, 1, 0.55, 0.1, 0.9, 0.85, 0.15, 0.02, 0)
+
+[sub_resource type="Curve" id="Curve_flame"]
+_data = [Vector2(0, 1), 0.0, -0.8, 0, 0, Vector2(1, 0.2), -0.8, 0.0, 0, 0]
+
+[sub_resource type="Gradient" id="Gradient_smoke_ramp"]
+offsets = PackedFloat32Array(0, 0.12, 0.65, 1)
+colors = PackedColorArray(1, 0.95, 0.88, 0.85, 0.92, 0.92, 0.95, 0.75, 0.82, 0.82, 0.85, 0.35, 0.75, 0.75, 0.78, 0)
+
+[sub_resource type="Curve" id="Curve_smoke"]
+_data = [Vector2(0, 0.35), 0.0, 1.8, 0, 0, Vector2(1, 1.8), 0.5, 0.0, 0, 0]
+
 [node name="Misslie" type="Area2D" unique_id=1477403538]
 script = ExtResource("1_0uoyr")
 
@@ -19,3 +45,42 @@ texture = ExtResource("2_quitx")
 position = Vector2(2.9999998, 0)
 scale = Vector2(0.465, 0.465)
 shape = SubResource("RectangleShape2D_r3nmj")
+
+[node name="Exhaust" type="Node2D" parent="." unique_id=1982736450]
+position = Vector2(-14, 0)
+
+[node name="SmokeTrail" type="CPUParticles2D" parent="Exhaust" unique_id=1582947192]
+z_index = -1
+amount = 90
+lifetime = 0.9
+local_coords = false
+texture = SubResource("GradientTexture2D_smoke")
+emission_shape = 0
+direction = Vector2(-1, 0)
+spread = 14.0
+gravity = Vector2(0, -14)
+initial_velocity_min = 20.0
+initial_velocity_max = 55.0
+damping_min = 20.0
+damping_max = 40.0
+scale_amount_min = 0.2
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_smoke")
+color_ramp = SubResource("Gradient_smoke_ramp")
+
+[node name="FlameTrail" type="CPUParticles2D" parent="Exhaust" unique_id=1849201948]
+amount = 25
+lifetime = 0.12
+local_coords = false
+texture = SubResource("GradientTexture2D_smoke")
+emission_shape = 0
+direction = Vector2(-1, 0)
+spread = 8.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+scale_amount_min = 0.15
+scale_amount_max = 0.28
+scale_amount_curve = SubResource("Curve_flame")
+color_ramp = SubResource("Gradient_flame")
+

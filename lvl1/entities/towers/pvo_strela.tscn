@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bkmbohiv6cxeg" path="res://lvl1/entities/towers/pvo_strela.gd" id="1_35aji"]
 [ext_resource type="Texture2D" uid="uid://c28r4k5x3fprg" path="res://lvl1/textures/pvo_strela_base.png" id="2_base_tex"]
 [ext_resource type="Texture2D" uid="uid://beyrvlxqnl31k" path="res://lvl1/textures/pvo_strela_head.png" id="3_head_tex"]
+[ext_resource type="Texture2D" uid="uid://qgcuqpux1c35" path="res://lvl1/textures/pvo_osa_radar.png" id="4_re02h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_click"]
 radius = 28.0
@@ -38,3 +39,12 @@ position = Vector2(9, 6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1880660341]
 shape = SubResource("CircleShape2D_click")
+
+[node name="Radar" type="Node2D" parent="." unique_id=707242425]
+position = Vector2(-8, 0.8)
+
+[node name="Radar" type="Sprite2D" parent="Radar" unique_id=2098715211]
+position = Vector2(8.52, -0.8)
+rotation = 4.712389
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_re02h")

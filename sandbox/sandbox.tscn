@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b046ct8py2cc7"]
+
+[ext_resource type="PackedScene" uid="uid://bgkw2aevbtbpu" path="res://lvl1/scenes/level_1.tscn" id="1_level_base"]
+[ext_resource type="Script" uid="uid://bxrhyg56frvjx" path="res://sandbox/sandbox.gd" id="2_sandbox_script"]
+[ext_resource type="PackedScene" uid="uid://qut6m4aucan5" path="res://sandbox/dev_tools.tscn" id="3_dev_tools"]
+
+[node name="Sandbox" unique_id=314060058 instance=ExtResource("1_level_base")]
+script = ExtResource("2_sandbox_script")
+
+[node name="DevTools2" parent="UI" parent_id_path=PackedInt32Array(249683269) index="4" unique_id=825831189 instance=ExtResource("3_dev_tools")]

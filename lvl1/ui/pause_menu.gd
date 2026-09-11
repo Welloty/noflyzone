@@ -7,6 +7,7 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	add_to_group("pause_menu")
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	visible = false

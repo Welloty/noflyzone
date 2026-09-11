@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://bse3nc3j0q25n"]
+[gd_scene format=3 uid="uid://c73o6qa8gp2ae"]
 
-[ext_resource type="Script" uid="uid://c15ihusqcgh2i" path="res://lvl1/ui/hud.gd" id="1_hud"]
-[ext_resource type="Script" uid="uid://c1b4jmk6orlr1" path="res://lvl1/ui/tablet_panel.gd" id="2_tablet"]
-[ext_resource type="Script" uid="uid://deesjcwtbnlp" path="res://lvl1/ui/radar.gd" id="3_x1k73"]
-[ext_resource type="Texture2D" uid="uid://c1r6ssxlehx7g" path="res://lvl1/textures/radar.png" id="4_0gim1"]
-[ext_resource type="Texture2D" uid="uid://d2tu3ab1dj7q3" path="res://lvl1/textures/target.png" id="5_da8o2"]
-[ext_resource type="Texture2D" uid="uid://c1lgvl1gq1o4h" path="res://lvl1/textures/pvo.png" id="6_if3iv"]
+[ext_resource type="Script" uid="uid://5i67or2ewlyn" path="res://Endless_mode/hud_endless_mode.gd" id="1_jfedk"]
+[ext_resource type="Script" uid="uid://c1b4jmk6orlr1" path="res://lvl1/ui/tablet_panel.gd" id="2_e5egq"]
+[ext_resource type="Script" uid="uid://deesjcwtbnlp" path="res://lvl1/ui/radar.gd" id="3_l1qi6"]
+[ext_resource type="Texture2D" uid="uid://c1r6ssxlehx7g" path="res://lvl1/textures/radar.png" id="4_b7trk"]
+[ext_resource type="Texture2D" uid="uid://d2tu3ab1dj7q3" path="res://lvl1/textures/target.png" id="5_qlx2g"]
+[ext_resource type="Texture2D" uid="uid://c1lgvl1gq1o4h" path="res://lvl1/textures/pvo.png" id="6_y84y6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 14.0
@@ -107,18 +107,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_hover"]
-bg_color = Color(0.12, 0.24, 0.08, 0.95)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.44, 0.71, 0.23, 0.95)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_pressed"]
 bg_color = Color(0.047, 0.098, 0.027, 0.95)
 border_width_left = 1
@@ -131,10 +119,22 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_hover"]
+bg_color = Color(0.12, 0.24, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.44, 0.71, 0.23, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pause_btn"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1855121295]
-script = ExtResource("1_hud")
+script = ExtResource("1_jfedk")
 
 [node name="Control" type="Control" parent="." unique_id=1637057291]
 layout_mode = 3
@@ -223,7 +223,7 @@ offset_top = 12.0
 offset_right = -12.0
 offset_bottom = 560.0
 grow_horizontal = 0
-script = ExtResource("2_tablet")
+script = ExtResource("2_e5egq")
 
 [node name="ToggleButton" type="Button" parent="Control/WaveTablet" unique_id=2000000002]
 unique_name_in_owner = true
@@ -295,7 +295,7 @@ label_settings = SubResource("LS_header")
 [node name="WaveValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000019]
 unique_name_in_owner = true
 layout_mode = 2
-text = "1 / 10"
+text = "1 / 1000"
 label_settings = SubResource("LS_tablet_val")
 
 [node name="MoneyTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000020]
@@ -363,11 +363,11 @@ offset_top = 10.0
 offset_right = -12.0
 offset_bottom = 44.0
 grow_horizontal = 0
-focus_mode = 0
 tooltip_text = "Пауза (Esc)"
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_pause_btn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pause_btn_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pause_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pause_btn_hover")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pause_btn")
 
 [node name="HBox" type="HBoxContainer" parent="Control/PauseButton" unique_id=2000000023]
@@ -403,7 +403,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("3_x1k73")
+script = ExtResource("3_l1qi6")
 
 [node name="ToggleButton" type="Button" parent="Radar" unique_id=593720450]
 layout_mode = 1
@@ -448,15 +448,15 @@ text = "ОСА СА-8"
 [node name="Background" type="Sprite2D" parent="Radar" unique_id=1286857360]
 position = Vector2(833.36945, 432.36942)
 scale = Vector2(0.050961647, 0.050961655)
-texture = ExtResource("4_0gim1")
+texture = ExtResource("4_b7trk")
 
 [node name="Target" type="Sprite2D" parent="Radar" unique_id=843437166]
 position = Vector2(807.705, 400)
 scale = Vector2(0.27, 0.27)
-texture = ExtResource("5_da8o2")
+texture = ExtResource("5_qlx2g")
 
 [node name="Pvo" type="Sprite2D" parent="Radar" unique_id=1849294948]
 z_index = 5
 position = Vector2(833.43, 432.58)
 scale = Vector2(0.13, 0.13)
-texture = ExtResource("6_if3iv")
+texture = ExtResource("6_y84y6")

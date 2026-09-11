@@ -5,6 +5,7 @@ extends Control
 @onready var settings_btn: Button = $SettingsButton
 @onready var abort_btn: Button = $AbortButton
 @onready var help_btn: Button = $HelpButton
+@onready var Endless_bth: Button = $Endless_modeButton
 
 @onready var settings_overlay: ColorRect = $SettingsOverlay
 @onready var settings_close_btn: Button = $SettingsOverlay/Panel/CloseButton
@@ -19,7 +20,7 @@ func _ready() -> void:
 	tween.tween_property(fade_overlay, "modulate:a", 0.0, 0.8).set_ease(Tween.EASE_OUT)
 
 	# Wire up hover animations
-	for btn: Button in [deploy_btn, settings_btn, help_btn, abort_btn]:
+	for btn: Button in [deploy_btn, settings_btn, help_btn, abort_btn, Endless_bth]:
 		_base_x[btn] = btn.position.x
 		btn.mouse_entered.connect(_on_btn_entered.bind(btn))
 		btn.mouse_exited.connect(_on_btn_exited.bind(btn))
@@ -106,3 +107,8 @@ func _on_language_options_pressed() -> void:
 func _on_help_button_pressed() -> void:
 	#_fade_and_go("res://main/help_pred.tscn")
 	pass
+
+
+func _on_endless_mode_button_pressed() -> void:
+	_fade_and_go("res://lvl1/scenes/mission_prep.tscn")
+	sound_mouse.play()

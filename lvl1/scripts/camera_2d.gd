@@ -6,8 +6,8 @@ extends Camera2D
 
 @export_group("Zoom")
 @export var zoom_speed: float = 0.15
-@export var min_zoom: float = 0.35
-@export var max_zoom: float = 2.5
+@export var min_zoom: float = 0.1
+@export var max_zoom: float = 3.0
 @export var zoom_smoothness: float = 15.0
 
 @export_group("Bounds")

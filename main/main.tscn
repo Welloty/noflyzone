@@ -9,7 +9,7 @@
 
 [sub_resource type="LabelSettings" id="LS_title"]
 font_size = 90
-font_color = Color(0.29, 0.486, 0.145, 1)
+font_color = Color(0.2901961, 0.4862745, 0.14509805, 1)
 
 [sub_resource type="StyleBoxFlat" id="SBF_btnGN"]
 content_margin_left = 20.0
@@ -169,7 +169,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.051, 0.122, 0.059, 1)
+color = Color(0.050980393, 0.12156863, 0.05882353, 1)
 
 [node name="AccentTop" type="ColorRect" parent="." unique_id=1927854874]
 layout_mode = 0
@@ -198,10 +198,10 @@ color = Color(0.29, 0.486, 0.145, 0.2)
 
 [node name="Title" type="Label" parent="." unique_id=1604381719]
 layout_mode = 0
-offset_left = 28.0
-offset_top = 71.0
-offset_right = 593.0
-offset_bottom = 155.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 597.0
+offset_bottom = 116.0
 scale = Vector2(0.9, 0.9)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 theme_override_font_sizes/font_size = 16
@@ -210,13 +210,30 @@ label_settings = SubResource("LS_title")
 
 [node name="Separator" type="ColorRect" parent="." unique_id=1123625411]
 layout_mode = 0
-offset_left = 70.72
-offset_top = 200.0
-offset_right = 540.7196
-offset_bottom = 202.0
+offset_left = 72.0
+offset_top = 136.0
+offset_right = 541.99963
+offset_bottom = 138.0
 color = Color(0.29, 0.486, 0.145, 0.35)
 
 [node name="DeployButton" type="Button" parent="." unique_id=1943171896]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 144.0
+offset_right = 512.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Start"
+
+[node name="Endless_modeButton" type="Button" parent="." unique_id=269857706]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 216.0
@@ -231,7 +248,7 @@ theme_override_styles/normal = SubResource("SBF_btnGN")
 theme_override_styles/pressed = SubResource("SBF_btnGP")
 theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
-text = "Start"
+text = "Endless_mode"
 
 [node name="SettingsButton" type="Button" parent="." unique_id=447485150]
 layout_mode = 0
@@ -573,6 +590,7 @@ stream = ExtResource("6_kfbq2")
 volume_db = 5.0
 
 [connection signal="pressed" from="DeployButton" to="." method="_on_deploy_pressed"]
+[connection signal="pressed" from="Endless_modeButton" to="." method="_on_endless_mode_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="AbortButton" to="." method="_on_abort_pressed"]

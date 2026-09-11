@@ -1,33 +1,33 @@
-[gd_scene format=3 uid="uid://bgkw2aevbtbpu"]
+[gd_scene format=3 uid="uid://cucdteqin478j"]
 
-[ext_resource type="Script" uid="uid://c808h2h17c8hb" path="res://lvl1/scripts/level_1.gd" id="1_lvl_script"]
-[ext_resource type="Texture2D" uid="uid://cp1qq77ehrnp8" path="res://lvl1/textures/map.png" id="2_173bv"]
-[ext_resource type="Script" uid="uid://6mn5xcik3wpx" path="res://lvl1/entities/factory/factory.gd" id="3_pv2c6"]
-[ext_resource type="Texture2D" uid="uid://t6vss6he2txx" path="res://lvl1/textures/Tree1.png" id="5_55vbm"]
-[ext_resource type="Texture2D" uid="uid://dbq1ghkrllb32" path="res://lvl1/textures/map2.png" id="5_no3qr"]
-[ext_resource type="Texture2D" uid="uid://bbev7s46faybk" path="res://lvl1/textures/map3.png" id="6_lcyvg"]
-[ext_resource type="Script" uid="uid://ce2l0oi4m1dcj" path="res://lvl1/scripts/camera_2d.gd" id="6_lyu8i"]
-[ext_resource type="PackedScene" uid="uid://bbsrj0i7up6bm" path="res://lvl1/ui/pause_menu.tscn" id="6_pause"]
-[ext_resource type="PackedScene" uid="uid://bse3nc3j0q25n" path="res://lvl1/ui/hud.tscn" id="7_hud"]
-[ext_resource type="Texture2D" uid="uid://frd6rww3ybjx" path="res://lvl1/textures/factory.png" id="7_rl3t3"]
-[ext_resource type="PackedScene" uid="uid://wt60prnybw2q" path="res://lvl1/ui/defeat_menu.tscn" id="7_xp86s"]
-[ext_resource type="Script" uid="uid://csg58wixkkmk1" path="res://lvl1/managers/pvo_placement_manager.gd" id="8_placement"]
-[ext_resource type="Script" uid="uid://c4dle7r8ap8bk" path="res://lvl1/managers/wave_manager.gd" id="9_wave_mgr"]
-[ext_resource type="Script" uid="uid://g77koijmkd5h" path="res://lvl1/managers/mission_generator.gd" id="10_mission_gen"]
-[ext_resource type="PackedScene" uid="uid://qut6m4aucan5" path="res://sandbox/dev_tools.tscn" id="15_lcyvg"]
+[ext_resource type="Script" uid="uid://c808h2h17c8hb" path="res://lvl1/scripts/level_1.gd" id="1_xi822"]
+[ext_resource type="Texture2D" uid="uid://cp1qq77ehrnp8" path="res://lvl1/textures/map.png" id="2_3lvgm"]
+[ext_resource type="Texture2D" uid="uid://frd6rww3ybjx" path="res://lvl1/textures/factory.png" id="3_smie2"]
+[ext_resource type="Script" uid="uid://6mn5xcik3wpx" path="res://lvl1/entities/factory/factory.gd" id="4_ivinu"]
+[ext_resource type="Texture2D" uid="uid://bbev7s46faybk" path="res://lvl1/textures/map3.png" id="5_r2cgf"]
+[ext_resource type="Texture2D" uid="uid://dbq1ghkrllb32" path="res://lvl1/textures/map2.png" id="6_fjrxt"]
+[ext_resource type="Texture2D" uid="uid://t6vss6he2txx" path="res://lvl1/textures/Tree1.png" id="7_oejqb"]
+[ext_resource type="Script" uid="uid://csg58wixkkmk1" path="res://lvl1/managers/pvo_placement_manager.gd" id="8_txwjh"]
+[ext_resource type="Script" uid="uid://due8ag8bglhdl" path="res://lvl1/managers/wave_manager_Endless_mode.gd" id="9_u6kd2"]
+[ext_resource type="Script" uid="uid://g77koijmkd5h" path="res://lvl1/managers/mission_generator.gd" id="10_ecb61"]
+[ext_resource type="Script" uid="uid://ce2l0oi4m1dcj" path="res://lvl1/scripts/camera_2d.gd" id="11_ulnb1"]
+[ext_resource type="PackedScene" uid="uid://c73o6qa8gp2ae" path="res://Endless_mode/hudEndless_mode.tscn" id="12_u6kd2"]
+[ext_resource type="PackedScene" uid="uid://bbsrj0i7up6bm" path="res://lvl1/ui/pause_menu.tscn" id="13_mrata"]
+[ext_resource type="PackedScene" uid="uid://wt60prnybw2q" path="res://lvl1/ui/defeat_menu.tscn" id="14_aja8f"]
+[ext_resource type="PackedScene" uid="uid://qut6m4aucan5" path="res://sandbox/dev_tools.tscn" id="15_t28ax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_173bv"]
-texture = ExtResource("2_173bv")
+texture = ExtResource("2_3lvgm")
 texture_region_size = Vector2i(1280, 1280)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_no3qr"]
-texture = ExtResource("6_lcyvg")
+texture = ExtResource("5_r2cgf")
 texture_region_size = Vector2i(1280, 1280)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i3cgr"]
-texture = ExtResource("5_no3qr")
+texture = ExtResource("6_fjrxt")
 texture_region_size = Vector2i(1280, 1280)
 use_texture_padding = false
 0:0/0 = 0
@@ -39,7 +39,7 @@ sources/3 = SubResource("TileSetAtlasSource_i3cgr")
 sources/1 = SubResource("TileSetAtlasSource_no3qr")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ipph"]
-texture = ExtResource("5_55vbm")
+texture = ExtResource("7_oejqb")
 texture_region_size = Vector2i(738, 899)
 0:0/0 = 0
 
@@ -77,27 +77,27 @@ _data = {
 }
 point_count = 5
 
-[node name="level_1" type="Node2D" unique_id=365493064]
-script = ExtResource("1_lvl_script")
+[node name="Endless_mode" type="Node2D" unique_id=365493064]
+script = ExtResource("1_xi822")
 
 [node name="Environment" type="Node2D" parent="." unique_id=723922786]
 
 [node name="MapSprite" type="Sprite2D" parent="Environment" unique_id=911213680]
 visible = false
 show_behind_parent = true
-texture = ExtResource("2_173bv")
+texture = ExtResource("2_3lvgm")
 
 [node name="Factory" type="Sprite2D" parent="Environment" unique_id=1926544056]
 z_index = 1
 position = Vector2(295.99997, 404.99997)
 rotation = -0.24454078
 scale = Vector2(0.18359375, 0.18359375)
-texture = ExtResource("7_rl3t3")
-script = ExtResource("3_pv2c6")
+texture = ExtResource("3_smie2")
+script = ExtResource("4_ivinu")
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Environment/Factory" unique_id=837118274]
 position = Vector2(-637.0247, -641.74884)
-texture_normal = ExtResource("7_rl3t3")
+texture_normal = ExtResource("3_smie2")
 
 [node name="Ground" type="TileMapLayer" parent="Environment" unique_id=1417737838]
 z_index = -10
@@ -142,26 +142,26 @@ curve = SubResource("Curve2D_lcyvg")
 [node name="Managers" type="Node2D" parent="." unique_id=1035655298]
 
 [node name="PvoPlacementManager" type="Node2D" parent="Managers" unique_id=99001123]
-script = ExtResource("8_placement")
+script = ExtResource("8_txwjh")
 
 [node name="WaveManager" type="Node2D" parent="Managers" unique_id=99001124]
-script = ExtResource("9_wave_mgr")
+script = ExtResource("9_u6kd2")
 
 [node name="MissionGenerator" type="Node2D" parent="Managers" unique_id=99001125]
-script = ExtResource("10_mission_gen")
+script = ExtResource("10_ecb61")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1493913428]
-script = ExtResource("6_lyu8i")
+script = ExtResource("11_ulnb1")
 
 [node name="UI" type="Node2D" parent="." unique_id=249683269]
 
-[node name="HUD" parent="UI" unique_id=1870249777 instance=ExtResource("7_hud")]
+[node name="HUD" parent="UI" unique_id=1855121295 instance=ExtResource("12_u6kd2")]
 
-[node name="PauseMenu" parent="UI" unique_id=1536623147 instance=ExtResource("6_pause")]
+[node name="PauseMenu" parent="UI" unique_id=1536623147 instance=ExtResource("13_mrata")]
 
-[node name="DefeatMenu" parent="UI" unique_id=2047928806 instance=ExtResource("7_xp86s")]
+[node name="DefeatMenu" parent="UI" unique_id=2047928806 instance=ExtResource("14_aja8f")]
 
-[node name="DevTools" parent="UI" unique_id=1344897245 instance=ExtResource("15_lcyvg")]
+[node name="DevTools" parent="UI" unique_id=1344897245 instance=ExtResource("15_t28ax")]
 visible = false
 
 [connection signal="pressed" from="Environment/Factory/TouchScreenButton" to="Environment/Factory" method="_on_touch_screen_button_pressed"]
