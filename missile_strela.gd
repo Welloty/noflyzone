@@ -1,6 +1,18 @@
 extends Area2D
+ 
+@export_group("Скорость и разгон (Speed & Acceleration)")
+@export var max_speed: float = 550.0 # Максимальная скорость ракеты
+@export var initial_speed: float = 140.0 # Начальная скорость при пуске (сход с направляющей)
+@export var acceleration: float = 650.0 # Ускорение двигателя (px/s²)
 
-@export var speed: float = 450.0
+# Обратная совместимость: если внешние скрипты устанавливают missile.speed
+var speed: float:
+	get:
+		return max_speed
+	set(val):
+		max_speed = val
+
+@export_group("Боевые характеристики (Combat Stats)")
 @export var damage: float = 1000.0
 @export var turn_speed: float = 3.5
 @export var max_g: float = 15.0 # Перегрузка
@@ -24,28 +36,37 @@ var initial_rotation: float = 0.0
 var total_turn_accumulated: float = 0.0
 var lost_tracking_timer: float = 0.0
 
+var current_speed: float = 0.0
+var is_destroying: bool = false
+
 func _ready() -> void:
 	initial_rotation = rotation
+	current_speed = initial_speed
 	# При створенні ракети вираховуємо, чи буде промах
 	if randf() * 100.0 > accuracy:
 		# Генеруємо випадкову точку навколо цілі
 		target_offset = Vector2.RIGHT.rotated(randf() * TAU) * randf_range(max_miss_offset * 0.5, max_miss_offset)
 
 func _process(delta: float) -> void:
+	if is_destroying:
+		return
 		
 	current_lifetime += delta
 	if current_lifetime >= lifetime:
-		queue_free()
+		_destroy()
 		return
 
 	if tracking_lost:
 		lost_tracking_timer += delta
 		if lost_tracking_timer >= lost_tracking_grace_time:
-			queue_free()
+			_destroy()
 			return
 
+	# Механика плавного набора скорости (разгон двигателем)
+	current_speed = move_toward(current_speed, max_speed, acceleration * delta)
+
 	var forward_dir = Vector2.RIGHT.rotated(rotation)
-	global_position += forward_dir * speed * delta
+	global_position += forward_dir * current_speed * delta
 
 	# Перевірка влучання або наведення
 	if is_instance_valid(target) and target.is_inside_tree() and target.is_in_group("drones"):
@@ -81,6 +102,41 @@ func _process(delta: float) -> void:
 		tracking_lost = true
 
 func _hit_target() -> void:
+	if is_destroying:
+		return
 	if is_instance_valid(target) and target.has_method("take_damage"):
 		target.take_damage(damage)
-	queue_free()
+	_destroy()
+
+func _destroy() -> void:
+	if is_destroying:
+		return
+	is_destroying = true
+	set_process(false)
+
+	# Отключаем коллизию и скрываем видимость корпуса ракеты
+	for child in get_children():
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", true)
+		elif child is Sprite2D:
+			child.visible = false
+
+	# Останавливаем создание новых частиц дыма и пламени
+	var smoke = get_node_or_null("Exhaust/SmokeTrail")
+	var flame = get_node_or_null("Exhaust/FlameTrail")
+	var wait_time: float = 0.1
+
+	if smoke and smoke is CPUParticles2D:
+		smoke.emitting = false
+		wait_time = max(wait_time, smoke.lifetime)
+	if flame and flame is CPUParticles2D:
+		flame.emitting = false
+		wait_time = max(wait_time, flame.lifetime)
+
+	# Ожидаем, пока оставшийся в воздухе дымовой след плавно растворится
+	var tree = get_tree()
+	if tree:
+		var timer = tree.create_timer(wait_time)
+		timer.timeout.connect(queue_free)
+	else:
+		queue_free()
