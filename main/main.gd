@@ -46,7 +46,7 @@ func _ready() -> void:
 		Ach1_true.set_pressed_no_signal(true)
 
 	# Wire up hover animations
-	for btn: Button in [deploy_btn, settings_btn, help_btn, abort_btn, Endless_bth, Endless_bth]:
+	for btn: Button in [deploy_btn, settings_btn, help_btn, abort_btn, Endless_bth]:
 		_base_x[btn] = btn.position.x
 		btn.mouse_entered.connect(_on_btn_entered.bind(btn))
 		btn.mouse_exited.connect(_on_btn_exited.bind(btn))

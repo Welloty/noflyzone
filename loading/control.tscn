@@ -127,7 +127,7 @@ offset_left = 21.0
 offset_top = 521.0
 offset_right = 401.0
 offset_bottom = 541.0
-text = "No fly zone  |  v0.1.6 beta"
+text = "No fly zone  |  v0.1.7 beta"
 label_settings = SubResource("LS_version")
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1167030754]
