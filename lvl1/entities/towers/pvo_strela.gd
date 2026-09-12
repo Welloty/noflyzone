@@ -69,7 +69,9 @@ func _fire() -> void:
 	missile.rotation = turret_head.rotation
 	missile.target = current_target
 	missile.damage = damage
-	missile.speed = missile_speed
+	missile.max_speed = missile_speed
+	missile.initial_speed = missile_initial_speed
+	missile.acceleration = missile_acceleration
 	missile.turn_speed = missile_turn_speed
 	missile.max_g = missile_max_g
 	missile.lifetime = missile_lifetime
