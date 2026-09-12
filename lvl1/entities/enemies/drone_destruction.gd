@@ -4,7 +4,8 @@ extends Node2D
 @export var explosion_force_min: float = 60.0
 @export var explosion_force_max: float = 180.0
 @export var sun_direction := Vector2(15, 20)
-
+var Ach1 = Ach.Ach1
+var data_path = "user://Saves.save"
 var fragments: Array[Dictionary] = []
 var current_time: float = 0.0
 var initial_velocity: Vector2 = Vector2.ZERO
@@ -15,11 +16,25 @@ func setup(drone_velocity: Vector2) -> void:
 	if _initialized:
 		_apply_initial_velocity_to_fragments()
 
+func _save():
+	var config = ConfigFile.new()
+	config.set_value("Main","Ach1", Ach1)
+	config.save(data_path)
+	
+func _load():
+	var config = ConfigFile.new()
+	config.load(data_path)
+	Ach1 = config.get_value("Main", "Ach1", Ach1)
+
+
+
 func _ready() -> void:
 	var burst = get_node_or_null("ExplosionBurst") as CPUParticles2D
 	if burst:
 		burst.restart()
 		burst.emitting = true
+		Ach1 += 1
+		_save()
 
 	# обломки
 	var parts = [

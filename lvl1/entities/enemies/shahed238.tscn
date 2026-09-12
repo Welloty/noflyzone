@@ -7,6 +7,34 @@
 radius = 99.99999
 height = 204.99998
 
+[sub_resource type="Gradient" id="Gradient_smoke_tex"]
+offsets = PackedFloat32Array(0, 0.35, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.85, 1, 1, 1, 0.3, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yo8o3"]
+gradient = SubResource("Gradient_smoke_tex")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Curve" id="Curve_nn4gb"]
+_data = [Vector2(0, 0.35), 0.0, 1.8, 0, 0, Vector2(1, 1.8), 0.5, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_7sug5"]
+offsets = PackedFloat32Array(0, 0.12, 0.65, 1)
+colors = PackedColorArray(1, 0.95, 0.88, 0.85, 0.92, 0.92, 0.95, 0.75, 0.82, 0.82, 0.85, 0.35, 0.75, 0.75, 0.78, 0)
+
+[sub_resource type="Curve" id="Curve_t0nqc"]
+_data = [Vector2(0, 1), 0.0, -0.8, 0, 0, Vector2(1, 0.2), -0.8, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_apq8o"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 1, 0.75, 1, 1, 0.55, 0.1, 0.9, 0.85, 0.15, 0.02, 0)
+
 [node name="Shahed238" type="CharacterBody2D" unique_id=869318561]
 script = ExtResource("1_ka7em")
 
@@ -28,3 +56,37 @@ position = Vector2(-3.9999998, 0.99999994)
 rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_mx1ku")
+
+[node name="Exhaust" type="Node2D" parent="." unique_id=963943490]
+position = Vector2(-42.1, 0)
+
+[node name="SmokeTrail" type="CPUParticles2D" parent="Exhaust" unique_id=508035603]
+z_index = -1
+amount = 90
+texture = SubResource("GradientTexture2D_yo8o3")
+lifetime = 0.9
+direction = Vector2(-1, 0)
+spread = 14.0
+gravity = Vector2(0, -14)
+initial_velocity_min = 20.0
+initial_velocity_max = 55.0
+damping_min = 20.0
+damping_max = 40.0
+scale_amount_min = 0.2
+scale_amount_max = 0.45
+scale_amount_curve = SubResource("Curve_nn4gb")
+color_ramp = SubResource("Gradient_7sug5")
+
+[node name="FlameTrail" type="CPUParticles2D" parent="Exhaust" unique_id=1533782242]
+amount = 25
+texture = SubResource("GradientTexture2D_yo8o3")
+lifetime = 0.12
+direction = Vector2(-1, 0)
+spread = 8.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+scale_amount_min = 0.15
+scale_amount_max = 0.28
+scale_amount_curve = SubResource("Curve_t0nqc")
+color_ramp = SubResource("Gradient_apq8o")

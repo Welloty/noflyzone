@@ -1,0 +1,462 @@
+[gd_scene format=3 uid="uid://c73o6qa8gp2ae"]
+
+[ext_resource type="Script" uid="uid://5i67or2ewlyn" path="res://Endless_mode/hud_endless_mode.gd" id="1_jfedk"]
+[ext_resource type="Script" uid="uid://c1b4jmk6orlr1" path="res://lvl1/ui/tablet_panel.gd" id="2_e5egq"]
+[ext_resource type="Script" uid="uid://deesjcwtbnlp" path="res://lvl1/ui/radar.gd" id="3_l1qi6"]
+[ext_resource type="Texture2D" uid="uid://c1r6ssxlehx7g" path="res://lvl1/textures/radar.png" id="4_b7trk"]
+[ext_resource type="Texture2D" uid="uid://d2tu3ab1dj7q3" path="res://lvl1/textures/target.png" id="5_qlx2g"]
+[ext_resource type="Texture2D" uid="uid://c1lgvl1gq1o4h" path="res://lvl1/textures/pvo.png" id="6_y84y6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.063, 0.133, 0.071, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvo_badge"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.15, 0.35, 0.18, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.8, 0.3, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LS_pvo_badge"]
+font_size = 13
+font_color = Color(0.4, 0.95, 0.35, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tablet"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.055, 0.115, 0.065, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="LabelSettings" id="LS_tablet_title"]
+font_size = 14
+font_color = Color(0.9, 0.95, 0.9, 1)
+
+[sub_resource type="LabelSettings" id="LS_header"]
+font_size = 11
+font_color = Color(0.741, 0.765, 0.78, 0.75)
+
+[sub_resource type="LabelSettings" id="LS_tablet_channel"]
+font_size = 10
+font_color = Color(0.35, 0.85, 0.3, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tablet_inner"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.038, 0.078, 0.045, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.38, 0.14, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LS_tablet_val"]
+font_size = 12
+font_color = Color(0.85, 0.9, 0.87, 1)
+
+[sub_resource type="LabelSettings" id="LS_tablet_money"]
+font_size = 12
+font_color = Color(0.44, 0.85, 0.25, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn"]
+bg_color = Color(0.063, 0.133, 0.071, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.486, 0.145, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_pressed"]
+bg_color = Color(0.047, 0.098, 0.027, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.31, 0.09, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_hover"]
+bg_color = Color(0.12, 0.24, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.44, 0.71, 0.23, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pause_btn"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1855121295]
+script = ExtResource("1_jfedk")
+
+[node name="Control" type="Control" parent="." unique_id=1637057291]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopAccent" type="ColorRect" parent="Control" unique_id=1824846959]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.29, 0.486, 0.145, 0.45)
+
+[node name="TopPvoBar" type="MarginContainer" parent="Control" unique_id=1354742572]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -295.0
+offset_top = 12.0
+offset_right = 175.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TopPvoBar" unique_id=1342108310]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/TopPvoBar/PanelContainer" unique_id=619433852]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PvoBadge" type="PanelContainer" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=976553273]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_pvo_badge")
+
+[node name="PvoTitle" type="Label" parent="Control/TopPvoBar/PanelContainer/HBoxContainer/PvoBadge" unique_id=1766396758]
+layout_mode = 2
+text = "AA"
+label_settings = SubResource("LS_pvo_badge")
+
+[node name="MogButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=1077123114]
+custom_minimum_size = Vector2(98, 34)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "МОГ (Мобильная огневая группа)
+Радиус: 340px
+Урон: пулеметная очередь
+Цена: 50$"
+text = "МОГ (50$)"
+
+[node name="StrelaButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=1077123115]
+custom_minimum_size = Vector2(98, 34)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Стрела-10
+Радиус: 460px
+Урон: 50
+Цена: 75$"
+text = "Strela-10 (75$)"
+
+[node name="OsaButton" type="Button" parent="Control/TopPvoBar/PanelContainer/HBoxContainer" unique_id=406047732]
+custom_minimum_size = Vector2(98, 34)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Оса СА-8
+Радиус: 1000px
+Урон: 100
+Цена: 175$"
+text = "OSA SA-8 (175$)"
+
+[node name="WaveTablet" type="Control" parent="Control" unique_id=2000000001]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -285.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 560.0
+grow_horizontal = 0
+script = ExtResource("2_e5egq")
+
+[node name="ToggleButton" type="Button" parent="Control/WaveTablet" unique_id=2000000002]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = -2.0
+offset_right = -46.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "▶ Скрыть"
+
+[node name="TabletPanel" type="PanelContainer" parent="Control/WaveTablet" unique_id=2000000003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 38.0
+offset_bottom = -250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tablet")
+
+[node name="VBox" type="VBoxContainer" parent="Control/WaveTablet/TabletPanel" unique_id=2000000004]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeaderBox" type="HBoxContainer" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000005]
+layout_mode = 2
+
+[node name="HeaderTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/HeaderBox" unique_id=2000000006]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Командование"
+label_settings = SubResource("LS_tablet_title")
+
+[node name="TargetsTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/HeaderBox" unique_id=2000000012]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Целей:"
+label_settings = SubResource("LS_header")
+
+[node name="ChannelLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000007]
+unique_name_in_owner = true
+layout_mode = 2
+text = "● Информация"
+label_settings = SubResource("LS_tablet_channel")
+
+[node name="StatusCard" type="PanelContainer" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000008]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tablet_inner")
+
+[node name="Grid" type="GridContainer" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard" unique_id=2000000009]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="WaveTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000018]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Волна:"
+label_settings = SubResource("LS_header")
+
+[node name="WaveValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000019]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1 / 1000"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="MoneyTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000020]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Деньги:"
+label_settings = SubResource("LS_header")
+
+[node name="MoneyValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000021]
+unique_name_in_owner = true
+layout_mode = 2
+text = "200$"
+label_settings = SubResource("LS_tablet_money")
+
+[node name="StatusTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000010]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Статус:"
+label_settings = SubResource("LS_header")
+
+[node name="StatusValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000011]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Перерыв"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="TargetsValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000013]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="TimerTitle" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000014]
+unique_name_in_owner = true
+layout_mode = 2
+text = "След. атака:"
+label_settings = SubResource("LS_header")
+
+[node name="TimerValueLabel" type="Label" parent="Control/WaveTablet/TabletPanel/VBox/StatusCard/Grid" unique_id=2000000015]
+unique_name_in_owner = true
+layout_mode = 2
+text = "--"
+label_settings = SubResource("LS_tablet_val")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/WaveTablet/TabletPanel/VBox" unique_id=2000000016]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MessagesVBox" type="VBoxContainer" parent="Control/WaveTablet/TabletPanel/VBox/ScrollContainer" unique_id=2000000017]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="PauseButton" type="Button" parent="Control" unique_id=2000000022]
+custom_minimum_size = Vector2(40, 34)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 44.0
+grow_horizontal = 0
+tooltip_text = "Пауза (Esc)"
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_pause_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pause_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pause_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pause_btn")
+
+[node name="HBox" type="HBoxContainer" parent="Control/PauseButton" unique_id=2000000023]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Bar1" type="ColorRect" parent="Control/PauseButton/HBox" unique_id=2000000024]
+custom_minimum_size = Vector2(4, 16)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.95, 0.35, 1)
+
+[node name="Bar2" type="ColorRect" parent="Control/PauseButton/HBox" unique_id=2000000025]
+custom_minimum_size = Vector2(4, 16)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.4, 0.95, 0.35, 1)
+
+[node name="Radar" type="Control" parent="." unique_id=366577308]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_l1qi6")
+
+[node name="ToggleButton" type="Button" parent="Radar" unique_id=593720450]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 821.0
+offset_top = 311.0
+offset_right = 901.0
+offset_bottom = 335.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "▶ Скрыть"
+
+[node name="Strela" type="Button" parent="Radar" unique_id=947237867]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 612.0
+offset_top = 403.0
+offset_right = 692.0
+offset_bottom = 427.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "Стрела-10
+"
+
+[node name="Osa" type="Button" parent="Radar" unique_id=1926467799]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 612.0
+offset_top = 440.045
+offset_right = 692.0
+offset_bottom = 464.045
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 11
+text = "ОСА СА-8"
+
+[node name="Background" type="Sprite2D" parent="Radar" unique_id=1286857360]
+position = Vector2(833.36945, 432.36942)
+scale = Vector2(0.050961647, 0.050961655)
+texture = ExtResource("4_b7trk")
+
+[node name="Target" type="Sprite2D" parent="Radar" unique_id=843437166]
+position = Vector2(807.705, 400)
+scale = Vector2(0.27, 0.27)
+texture = ExtResource("5_qlx2g")
+
+[node name="Pvo" type="Sprite2D" parent="Radar" unique_id=1849294948]
+z_index = 5
+position = Vector2(833.43, 432.58)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("6_y84y6")

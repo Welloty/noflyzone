@@ -4,7 +4,8 @@ extends Area2D
 @export var max_speed: float = 550.0 # Максимальная скорость ракеты
 @export var initial_speed: float = 140.0 # Начальная скорость при пуске (сход с направляющей)
 @export var acceleration: float = 650.0 # Ускорение двигателя (px/s²)
-
+var data_path = Ach.data_path
+var ach1 = Ach.Ach1
 # Обратная совместимость: если внешние скрипты устанавливают missile.speed
 var speed: float:
 	get:
@@ -108,11 +109,15 @@ func _hit_target() -> void:
 		target.take_damage(damage)
 	_destroy()
 
+
+
+
 func _destroy() -> void:
 	if is_destroying:
 		return
 	is_destroying = true
 	set_process(false)
+	ach1 += 1
 
 	# Отключаем коллизию и скрываем видимость корпуса ракеты
 	for child in get_children():

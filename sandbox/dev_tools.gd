@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal notification_posted(text: String, color: Color)
 
-# Preloaded enemy scenes
+# Загруженные сцены с юнитами
 const SCENE_SHAHED136 = preload("res://lvl1/entities/enemies/drone.tscn")
 const SCENE_FPV = preload("res://lvl1/entities/enemies/fpv.tscn")
 const SCENE_FP1 = preload("res://lvl1/entities/enemies/fp-1.tscn")
@@ -10,7 +10,7 @@ const SCENE_KALIBR = preload("res://lvl1/entities/enemies/Roctetks.tscn")
 const SCENE_SHAHED238 = preload("res://lvl1/entities/enemies/shahed238.tscn")
 const SCENE_FRIENDLY_PLANE = preload("res://lvl1/entities/planes/FriendlyPlane.tscn")
 
-# State
+# Состояние
 var is_god_mode: bool = false
 var is_infinite_money: bool = false
 var is_auto_wave_active: bool = false
@@ -18,29 +18,31 @@ var selected_enemy_type: String = "shahed136"
 var selected_path_name: String = "auto"
 var spawn_batch_count: int = 1
 
-# UI Nodes
+# Узлы интерфейса
 @onready var main_panel: PanelContainer = $RootControl/MainPanel
 @onready var toggle_btn: Button = $RootControl/ToggleBtn
 @onready var toast_label: Label = $RootControl/ToastLabel
 @onready var stats_label: Label = $RootControl/MainPanel/VBox/StatsLabelBar
 @onready var close_btn: Button = $RootControl/MainPanel/VBox/Header/CloseBtn
 
-# Enemy UI
+# Интерфейс целей
 @onready var path_option_btn: OptionButton = $RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/PathHBox/PathOptionBtn
 @onready var enemy_count_spin: SpinBox = $RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox/CountSpin
 @onready var auto_wave_btn: Button = $RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/WaveHBox/AutoWaveBtn
+@onready var timer_spawn: Timer = $RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox/CountSpin/Timer
+@onready var health_spin: SpinBox = $RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/Customhealth/HealthSpin
 
-# Money UI
+# Интерфейс денег
 @onready var money_spin: SpinBox = $RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/CustomMoneyHBox/MoneySpin
 @onready var inf_money_check: CheckBox = $RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/InfMoneyCheck
 
-# Factory UI
+# Интерфейс завода
 @onready var hp_slider: HSlider = $RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/HPSlider
 @onready var hp_value_label: Label = $RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/HPHeader/HPValueLabel
 @onready var god_mode_check: CheckBox = $RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/GodModeCheck
 @onready var net_upgrade_check: CheckBox = $RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/NetCheck
 
-# Time UI
+# Интерфейс управления временем
 @onready var pause_btn: Button = $RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox/PauseBtn
 
 var _toast_tween: Tween = null
@@ -62,7 +64,7 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	_update_telemetry()
 	
-	# God Mode lock
+	# Блокировка режима бога
 	if is_god_mode:
 		var factory = _get_factory()
 		if factory and factory.current_health < factory.max_health:
@@ -70,7 +72,7 @@ func _process(_delta: float) -> void:
 			if factory.has_signal("health_changed"):
 				factory.health_changed.emit(factory.current_health, factory.max_health)
 	
-	# Infinite money lock
+	# Бесконечные деньги
 	if is_infinite_money:
 		var hud = _get_hud()
 		if hud and "money" in hud and hud.money < 99999:
@@ -97,7 +99,7 @@ func _setup_signals() -> void:
 	if path_option_btn:
 		path_option_btn.item_selected.connect(_on_path_selected)
 
-	# Enemy buttons
+	# Кнопки целей
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/Shahed136Btn", _on_enemy_btn_pressed.bind("shahed136"))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/FPVBtn", _on_enemy_btn_pressed.bind("fpv"))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/FP1Btn", _on_enemy_btn_pressed.bind("fp1"))
@@ -115,7 +117,7 @@ func _setup_signals() -> void:
 	if auto_wave_btn:
 		auto_wave_btn.pressed.connect(_on_toggle_auto_waves_pressed)
 
-	# Economy buttons
+	# Кнопки Экономики
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid/Add100Btn", _on_add_money_pressed.bind(100))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid/Add500Btn", _on_add_money_pressed.bind(500))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Economy/VBox/Grid/Add1000Btn", _on_add_money_pressed.bind(1000))
@@ -125,21 +127,25 @@ func _setup_signals() -> void:
 	if inf_money_check:
 		inf_money_check.toggled.connect(_on_inf_money_toggled)
 
-	# Factory buttons
+	# Кнопки Завода
 	if hp_slider:
 		hp_slider.value_changed.connect(_on_hp_slider_value_changed)
+	if health_spin:
+		health_spin.value_changed.connect(_on_custom_hp_custom)
+
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox/Hp100Btn", _on_preset_hp_pressed.bind(1.0))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox/Hp50Btn", _on_preset_hp_pressed.bind(0.5))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox/Hp10Btn", _on_preset_hp_pressed.bind(0.1))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox/Hp1Btn", _on_preset_hp_custom.bind(1.0))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/PresetsHBox/Hp0Btn", _on_preset_hp_custom.bind(0.0))
+	
 	if god_mode_check:
 		god_mode_check.toggled.connect(_on_god_mode_toggled)
 	if net_upgrade_check:
 		net_upgrade_check.toggled.connect(_on_net_upgrade_toggled)
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Factory/VBox/RelocateBtn", _on_relocate_factory_pressed)
 
-	# System buttons
+	# Кнопки системы
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox/Spd025Btn", _on_set_time_scale.bind(0.25))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox/Spd05Btn", _on_set_time_scale.bind(0.5))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/System/VBox/TimeHBox/Spd1Btn", _on_set_time_scale.bind(1.0))
@@ -160,6 +166,10 @@ func _on_preset_hp_custom(hp_amount: float) -> void:
 		hp_slider.value = hp_amount
 	_set_factory_hp(hp_amount)
 
+func _on_custom_hp_custom(hp_amount: float) -> void:
+	if hp_slider:
+		hp_slider.value = hp_amount
+	_set_factory_hp(hp_amount)
 
 func toggle_panel() -> void:
 	if not main_panel:
@@ -224,15 +234,18 @@ func _get_factory() -> Node:
 func _get_wave_manager() -> Node:
 	return get_tree().get_first_node_in_group("wave_manager")
 
-# ==============================================================================
-# SPWANING ENEMIES
-# ==============================================================================
+# Спавн целей
 func _on_enemy_btn_pressed(enemy_type: String) -> void:
 	var count = int(enemy_count_spin.value) if enemy_count_spin else 1
 	var spawned = 0
+	
 	for i in range(count):
 		if _spawn_single_enemy(enemy_type):
 			spawned += 1
+			if timer_spawn:
+				timer_spawn.start()
+				await timer_spawn.timeout
+			
 	post_toast("Заспавнено: %d x %s" % [spawned, _get_enemy_title(enemy_type)], Color(0.4, 1.0, 0.5))
 
 func _spawn_single_enemy(enemy_type: String) -> bool:
@@ -368,9 +381,7 @@ func _on_toggle_auto_waves_pressed() -> void:
 		auto_wave_btn.text = "Авто-волны: ВКЛ" if is_auto_wave_active else "Авто-волны: ВЫКЛ"
 	post_toast("Авто-волны: " + ("ВКЛЮЧЕНЫ" if is_auto_wave_active else "ОСТАНОВЛЕНЫ"), Color(0.9, 0.7, 0.2))
 
-# ==============================================================================
-# ECONOMY / MONEY
-# ==============================================================================
+# Экономика / Деньги
 func _on_add_money_pressed(amount: int) -> void:
 	var hud = _get_hud()
 	if hud and hud.has_method("add_money"):
@@ -402,9 +413,7 @@ func _on_inf_money_toggled(toggled: bool) -> void:
 	else:
 		post_toast("Бесконечные деньги: ВЫКЛ", Color.WHITE)
 
-# ==============================================================================
-# FACTORY CONTROLS
-# ==============================================================================
+# Управление заводом
 func _on_hp_slider_value_changed(value: float) -> void:
 	_set_factory_hp(value)
 
@@ -428,12 +437,10 @@ func _set_factory_hp(new_val: float) -> void:
 	_update_hp_label(factory.current_health, factory.max_health)
 	
 	if factory.current_health > 0:
-		# Revive / hide defeat menu if factory was revived
 		var defeat_menu = get_tree().get_first_node_in_group("defeat_menu")
 		if defeat_menu:
 			defeat_menu.visible = false
 	else:
-		# 0 HP trigger destruction
 		if factory.has_method("take_damage"):
 			factory.take_damage(1.0)
 			
@@ -476,9 +483,7 @@ func _on_relocate_factory_pressed() -> void:
 	else:
 		post_toast("Не удалось найти factory_positions в уровне", Color.RED)
 
-# ==============================================================================
-# SYSTEM & TIME
-# ==============================================================================
+# Система & Время
 func _on_set_time_scale(scale_val: float) -> void:
 	Engine.time_scale = scale_val
 	post_toast("Скорость времени: %.2fx" % scale_val, Color(0.5, 1.0, 0.8))
@@ -499,3 +504,9 @@ func _on_main_menu_pressed() -> void:
 	get_tree().paused = false
 	Engine.time_scale = 1.0
 	get_tree().change_scene_to_file("res://main/main.tscn")
+
+func _on_set_health_pressed() -> void:
+	if not health_spin:
+		return
+	var val = float(health_spin.value)
+	_set_factory_hp(val)
