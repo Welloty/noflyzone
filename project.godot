@@ -22,6 +22,8 @@ Global="*uid://bvvb3ymjcjkru"
 DiscordRPCLoader="*uid://bl73nb1dnhy2b"
 Rpc="*uid://blcf7k44sfui0"
 H="*uid://bxfwp2hbbgute"
+Display="*uid://cm71pc3am3j2i"
+Ach="*uid://dnikefyc7ikk4"
 
 [compression]
 
@@ -34,6 +36,7 @@ window/size/viewport_height=548
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 

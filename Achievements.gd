@@ -1,0 +1,4 @@
+extends Node
+
+var Ach1 = 0
+var Ach2 = 0
