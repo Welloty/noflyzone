@@ -10,6 +10,7 @@ split_build_log.txt
 #game
 *.apk
 *.aab
+*.idsig
 *.exe
 *.zip
 export/

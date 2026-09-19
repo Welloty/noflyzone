@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ds80b2qhc107u"]
 
-[ext_resource type="Script" uid="uid://dl36a7yplpxla" path="res://missile_strela.gd" id="1_0cfp5"]
+[ext_resource type="Script" uid="uid://dl36a7yplpxla" path="res://lvl1/entities/projectiles/missile_strela.gd" id="1_0cfp5"]
 [ext_resource type="Texture2D" uid="uid://bdbbrll7jbabr" path="res://lvl1/textures/raketa.png" id="2_llwlu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8336"]

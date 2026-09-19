@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://3pckuvsb6kf4" path="res://main/fonts/ColossusExpandedRUS.ttf" id="1_08ei8"]
 [ext_resource type="Script" uid="uid://dii487rkxqatj" path="res://helps/os_ainfo.gd" id="1_q6ar4"]
-[ext_resource type="Script" uid="uid://ujbjpsx1j4pn" path="res://os_ainfo.gd" id="2_q6ar4"]
+[ext_resource type="Script" uid="uid://ujbjpsx1j4pn" path="res://helps/osa_label.gd" id="2_q6ar4"]
 [ext_resource type="AudioStream" uid="uid://b6dw2bqbis882" path="res://sounds/546167__grcekh__keyboard-typing-10-whitefox-mechanical.mp3" id="3_6tdy4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_whutv"]

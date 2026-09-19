@@ -8,9 +8,9 @@ extends Node2D
 @export var missile_scene: PackedScene = preload("res://lvl1/entities/projectiles/missile.tscn")
 @export var radar_speed: float = 3.0
 @export var missile_speed: float = 550.0
-@export var missile_initial_speed: float = 140.0
+@export var missile_initial_speed: float = 200.0
 @export var missile_acceleration: float = 650.0
-@export var missile_turn_speed: float = 3.5
+@export var missile_turn_speed: float = 4.0
 @export var missile_max_g: float = 25.0
 @export var missile_lifetime: float = 4.5
 
@@ -121,6 +121,7 @@ func _fire() -> void:
 	missile.max_g = missile_max_g
 	missile.lifetime = missile_lifetime
 	get_tree().current_scene.add_child(missile)
+	missile.global_position = spawn_pos
 
 func _draw() -> void:
 	if is_ghost:
