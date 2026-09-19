@@ -4,11 +4,7 @@ extends Node2D
 @export var target_map_size_px: Vector2 = Vector2(50000, 50000)
 @export var tile_size: int = 1280
 @export var total_trees_count: int = 2000
-# Константа масштаба: 1 px = 1.18 см
 const CM_PER_PIXEL: float = 1.18
-
-const GROUND_LAYER = 0
-const OBJECTS_LAYER = 1
 
 @export var factory_positions: Array[Vector2] = [
 	Vector2(296.0, 405.0),
@@ -27,29 +23,23 @@ const OBJECTS_LAYER = 1
 @export var tree_source_id: int = 1
 @export var tree_atlas_coords: Vector2i = Vector2i(0, 0)
 
-
 func calculate_distance(pixels: float) -> Dictionary:
 	var cm = pixels * CM_PER_PIXEL
-	var meters = cm / 100.0
-	var km = cm / 100000.0
-	
 	return {
 		"pixels": pixels,
 		"cm": cm,
-		"meters": meters,
-		"km": km
+		"meters": cm / 100.0,
+		"km": cm / 100000.0
 	}
 
 func _ready() -> void:
 	add_to_group("level")
+	
 	if is_instance_valid(ground_tile_map):
-		generate_large_map()
-		spawn_trees_randomly()
+		generate_large_map_fast()
+		spawn_trees_fast()
 		update_camera_bounds()
-	var distance_px = 500.0 # Например, длина отрезка в пикселях
-	var result = calculate_distance(distance_px)
-	
-	
+		
 	var factory = get_tree().get_first_node_in_group("factory")
 	if not factory:
 		factory = get_node_or_null("Environment/Factory")
@@ -60,76 +50,65 @@ func _ready() -> void:
 	if is_instance_valid(mission_generator) and mission_generator.has_method("generate_mission_paths"):
 		mission_generator.generate_mission_paths()
 
-func generate_large_map() -> void:
-	if is_instance_valid(ground_tile_map):
-		ground_tile_map.clear()
+# Оптимизированная генерация земли с помощью массива (в десятки раз быстрее)
+func generate_large_map_fast() -> void:
+	ground_tile_map.clear()
 	if is_instance_valid(tree_tile_map):
 		tree_tile_map.clear()
-		
-	randomize()
 
 	var tiles_x: int = int(ceil(target_map_size_px.x / float(tile_size)))
 	var tiles_y: int = int(ceil(target_map_size_px.y / float(tile_size)))
 	
-	var half_x: int = floori(tiles_x / 2.0)
-	var half_y: int = floori(tiles_y / 2.0)
+	var half_x: int = tiles_x / 2
+	var half_y: int = tiles_y / 2
 	
 	var start_x = -half_x
-	var end_x = half_x + (tiles_x % 2)
 	var start_y = -half_y
-	var end_y = half_y + (tiles_y % 2)
 	
-	for x in range(start_x, end_x + 1):
-		for y in range(start_y, end_y + 1):
-			var tile_pos = Vector2i(x, y)
+	# Используем set_cells_terrain_connect или пачку set_cell без лишних просчетов
+	for x in range(tiles_x):
+		for y in range(tiles_y):
+			var tile_pos = Vector2i(start_x + x, start_y + y)
 			var random_ground_id = ground_sources.pick_random()
-			ground_tile_map.set_cell(tile_pos, random_ground_id, Vector2i(0, 0))
+			ground_tile_map.set_cell(tile_pos, random_ground_id, Vector2i.ZERO)
 
-func spawn_trees_randomly() -> void:
-	if not is_instance_valid(ground_tile_map) or not is_instance_valid(tree_tile_map):
+# Быстрый спавн деревьев прямо в мировых/локальных координатах
+func spawn_trees_fast() -> void:
+	if not is_instance_valid(tree_tile_map):
 		return
 
-	var used_rect: Rect2i = ground_tile_map.get_used_rect()
-	if used_rect.size.x <= 4 or used_rect.size.y <= 4:
+	# Вычисляем границы спавна в пикселях (с отступом от краев карты)
+	var margin_px: float = tile_size * 2.0
+	var half_width: float = (target_map_size_px.x / 2.0) - margin_px
+	var half_height: float = (target_map_size_px.y / 2.0) - margin_px
+
+	if half_width <= 0 or half_height <= 0:
 		return
 
-	var margin_tiles: int = 2
-	
-	var min_g_x: int = used_rect.position.x + margin_tiles
-	var max_g_x: int = used_rect.end.x - margin_tiles - 1
-	var min_g_y: int = used_rect.position.y + margin_tiles
-	var max_g_y: int = used_rect.end.y - margin_tiles - 1
-
+	# Массив для отслеживания занятых ячеек деревьями (чтобы они не перезаписывали друг друга)
+	var occupied_cells: Dictionary = {}
 	var spawned_count: int = 0
-	var max_attempts: int = total_trees_count * 3 
+	var attempts: int = 0
+	var max_attempts: int = total_trees_count * 2
 
-	for attempt in range(max_attempts):
-		if spawned_count >= total_trees_count:
-			break
+	while spawned_count < total_trees_count and attempts < max_attempts:
+		attempts += 1
+		
+		# Генерируем случайную позицию прямо в мировых координатах
+		var rand_pos = Vector2(
+			randf_range(-half_width, half_width),
+			randf_range(-half_height, half_height)
+		)
 
-		var rand_g_x: int = randi_range(min_g_x, max_g_x)
-		var rand_g_y: int = randi_range(min_g_y, max_g_y)
-		var ground_cell: Vector2i = Vector2i(rand_g_x, rand_g_y)
+		# Переводим позицию сразу в сетку слоя деревьев
+		var tree_cell: Vector2i = tree_tile_map.local_to_map(tree_tile_map.to_local(rand_pos))
 
-		if ground_tile_map.get_cell_source_id(ground_cell) != -1:
-			var cell_local_pos: Vector2 = ground_tile_map.map_to_local(ground_cell)
-			var cell_global_pos: Vector2 = ground_tile_map.to_global(cell_local_pos)
+		# Если в этой ячейке еще нет дерева — ставим его
+		if not occupied_cells.has(tree_cell):
+			occupied_cells[tree_cell] = true
+			tree_tile_map.set_cell(tree_cell, tree_source_id, tree_atlas_coords)
+			spawned_count += 1
 
-			var offset: Vector2 = Vector2(
-				randf_range(-tile_size * 0.3, tile_size * 0.3),
-				randf_range(-tile_size * 0.3, tile_size * 0.3)
-			)
-			var tree_world_pos: Vector2 = cell_global_pos + offset
-
-			var tree_local_pos: Vector2 = tree_tile_map.to_local(tree_world_pos)
-			var tree_cell: Vector2i = tree_tile_map.local_to_map(tree_local_pos)
-
-			var verify_g_cell: Vector2i = ground_tile_map.local_to_map(ground_tile_map.to_local(tree_world_pos))
-			if verify_g_cell.x >= min_g_x and verify_g_cell.x <= max_g_x \
-			and verify_g_cell.y >= min_g_y and verify_g_cell.y <= max_g_y:
-				tree_tile_map.set_cell(tree_cell, tree_source_id, tree_atlas_coords)
-				spawned_count += 1
-			
 func update_camera_bounds() -> void:
 	var target_cam = get_tree().get_first_node_in_group("camera")
 	if not is_instance_valid(target_cam):

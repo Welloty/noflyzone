@@ -95,9 +95,8 @@ func _process(_delta: float) -> void:
 	if selected_tower != null and not is_instance_valid(selected_tower):
 		deselect_tower()
 
-	if is_instance_valid(selected_tower) and is_instance_valid(sell_panel):
-		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
-		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
+	# ПРИМЕЧАНИЕ: Привязчик панели sell_panel к координатам selected_tower убран,
+	# чтобы интерфейс оставался статичным внизу экрана.
 
 	if not is_instance_valid(ghost_instance):
 		return
@@ -484,6 +483,14 @@ func _create_sell_ui() -> void:
 	sell_panel = PanelContainer.new()
 	sell_panel.name = "SellPanel"
 	
+	# Центрируем панель внизу экрана (фиксированная позиция UI)
+	sell_panel.anchor_left = 0.5
+	sell_panel.anchor_right = 0.5
+	sell_panel.anchor_top = 0.80
+	sell_panel.anchor_bottom = 0.88
+	sell_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	sell_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
+
 	var panel_style = StyleBoxFlat.new()
 	panel_style.bg_color = Color(0.08, 0.11, 0.16, 0.94)
 	panel_style.corner_radius_top_left = 12
@@ -542,11 +549,11 @@ func _create_sell_ui() -> void:
 	if is_instance_valid(selected_plane) or (is_instance_valid(selected_tower) and selected_tower.is_in_group("friendly_units")):
 		var plane_ref = selected_plane if is_instance_valid(selected_plane) else selected_tower
 		var has_route = ("patrol_points" in plane_ref and not plane_ref.patrol_points.is_empty())
-		var btn_label = " ✈  Изменить патруль " if has_route else " ✈  Задать патруль "
+		var btn_label = " Изменить патруль " if has_route else " ✈  Задать патруль "
 		patrol_btn = Button.new()
 		patrol_btn.text = btn_label
 		patrol_btn.tooltip_text = "Нарисовать новый маршрут патрулирования"
-		patrol_btn.custom_minimum_size = Vector2(150, 36)
+		patrol_btn.custom_minimum_size = Vector2(300, 100)
 		patrol_btn.focus_mode = Control.FOCUS_NONE
 		_style_button(patrol_btn, Color(0.2, 0.55, 0.85, 0.95), Color(0.25, 0.68, 0.98, 1.0), Color(0.15, 0.4, 0.65, 1.0))
 		patrol_btn.pressed.connect(_on_patrol_button_pressed)
@@ -568,10 +575,6 @@ func _create_sell_ui() -> void:
 	_style_button(close_btn, Color(0.25, 0.28, 0.32, 0.8), Color(0.35, 0.4, 0.45, 1.0), Color(0.18, 0.2, 0.24, 1.0))
 	close_btn.pressed.connect(deselect_tower)
 	hbox.add_child(close_btn)
-
-	if is_instance_valid(selected_tower):
-		var screen_pos = get_viewport().get_canvas_transform() * selected_tower.global_position
-		sell_panel.position = screen_pos + Vector2(-sell_panel.size.x * 0.5, -95.0)
 
 func _on_patrol_button_pressed() -> void:
 	start_patrol_drawing()
@@ -633,7 +636,7 @@ func _create_patrol_ui() -> void:
 	panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 
 	var panel_style = StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.06, 0.12, 0.18, 0.94)
+	panel_style.bg_color = Color(1.0, 1.0, 1.0, 0.94)
 	panel_style.corner_radius_top_left = 16
 	panel_style.corner_radius_top_right = 16
 	panel_style.corner_radius_bottom_left = 16
@@ -643,7 +646,7 @@ func _create_patrol_ui() -> void:
 	panel_style.border_width_right = 2
 	panel_style.border_width_bottom = 2
 	panel_style.border_color = Color(0.25, 0.65, 0.9, 0.7)
-	panel_style.shadow_color = Color(0.0, 0.0, 0.0, 0.5)
+	panel_style.shadow_color = Color(0.638, 0.638, 0.638, 0.5)
 	panel_style.shadow_size = 14
 	panel.add_theme_stylebox_override("panel", panel_style)
 	patrol_ui_layer.add_child(panel)

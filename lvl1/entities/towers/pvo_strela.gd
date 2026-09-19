@@ -3,10 +3,12 @@ extends Node2D
 @export var pvo_name: String = "Стрела-10"
 @export var cost: int = 75
 @export var range_radius: float = 460.0
-@export var damage: float = 50.0
+@export var damage: float = 75.0
 @export var fire_rate: float = 1.0
 @export var missile_scene: PackedScene = preload("res://lvl1/entities/projectiles/missile_strela.tscn")
 @export var missile_speed: float = 400.0
+@export var missile_initial_speed: float = 140.0
+@export var missile_acceleration: float = 650.0
 @export var missile_turn_speed: float = 3.0
 @export var missile_max_g: float = 7.0
 @export var missile_lifetime: float = 9.0
@@ -69,7 +71,9 @@ func _fire() -> void:
 	missile.rotation = turret_head.rotation
 	missile.target = current_target
 	missile.damage = damage
-	missile.speed = missile_speed
+	missile.max_speed = missile_speed
+	missile.initial_speed = missile_initial_speed
+	missile.acceleration = missile_acceleration
 	missile.turn_speed = missile_turn_speed
 	missile.max_g = missile_max_g
 	missile.lifetime = missile_lifetime

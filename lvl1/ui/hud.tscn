@@ -107,18 +107,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_hover"]
-bg_color = Color(0.12, 0.24, 0.08, 0.95)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.44, 0.71, 0.23, 0.95)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_pressed"]
 bg_color = Color(0.047, 0.098, 0.027, 0.95)
 border_width_left = 1
@@ -126,6 +114,18 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.18, 0.31, 0.09, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_btn_hover"]
+bg_color = Color(0.12, 0.24, 0.08, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.44, 0.71, 0.23, 0.95)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -363,11 +363,11 @@ offset_top = 10.0
 offset_right = -12.0
 offset_bottom = 44.0
 grow_horizontal = 0
-focus_mode = 0
 tooltip_text = "Пауза (Esc)"
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_pause_btn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_pause_btn_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pause_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pause_btn_hover")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_pause_btn")
 
 [node name="HBox" type="HBoxContainer" parent="Control/PauseButton" unique_id=2000000023]
@@ -460,3 +460,8 @@ z_index = 5
 position = Vector2(833.43, 432.58)
 scale = Vector2(0.13, 0.13)
 texture = ExtResource("6_if3iv")
+
+[node name="FPS" type="Label" parent="." unique_id=144066453]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FPS"

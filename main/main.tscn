@@ -11,6 +11,13 @@
 font_size = 90
 font_color = Color(0.2901961, 0.4862745, 0.14509805, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gur5"]
+bg_color = Color(0.20274815, 0.37147403, 0.2213068, 0.627451)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [sub_resource type="StyleBoxFlat" id="SBF_btnGN"]
 content_margin_left = 20.0
 content_margin_top = 10.0
@@ -60,13 +67,6 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxEmpty" id="SBF_focus"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkkej"]
-bg_color = Color(0.17232963, 0.32197565, 0.18884349, 1)
-corner_radius_top_left = 11
-corner_radius_top_right = 11
-corner_radius_bottom_right = 11
-corner_radius_bottom_left = 11
 
 [sub_resource type="StyleBoxFlat" id="SBF_btnRN"]
 content_margin_left = 20.0
@@ -141,7 +141,7 @@ cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
 [sub_resource type="StyleBoxFlat" id="SBF_overlayPanel"]
-bg_color = Color(0.063, 0.133, 0.071, 1)
+bg_color = Color(0.0627451, 0.13333334, 0.07058824, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -159,6 +159,9 @@ font_color = Color(0.29, 0.486, 0.145, 1)
 [sub_resource type="LabelSettings" id="LS_overlayLabel"]
 font_size = 18
 font_color = Color(0.741, 0.765, 0.78, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfbq2"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Control" type="Control" unique_id=2077169234]
 layout_mode = 3
@@ -195,27 +198,26 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.29, 0.486, 0.145, 0.55)
 
-[node name="VerticalDivider" type="ColorRect" parent="." unique_id=523042324]
-layout_mode = 0
-offset_left = 555.0
-offset_top = 30.0
-offset_right = 556.0
-offset_bottom = 618.0
-color = Color(0.29, 0.486, 0.145, 0.2)
-
 [node name="Title" type="Label" parent="." unique_id=1604381719]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 597.0
-offset_bottom = 116.0
-scale = Vector2(0.9, 0.9)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.50600004
+anchor_top = 0.117000006
+anchor_right = 0.50600004
+anchor_bottom = 0.117000006
+offset_left = -201.71204
+offset_top = -0.116004944
+offset_right = 363.28796
+offset_bottom = 83.883995
+grow_horizontal = 2
+scale = Vector2(0.715, 0.715)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 theme_override_font_sizes/font_size = 16
 text = "No fly zone"
 label_settings = SubResource("LS_title")
 
 [node name="Separator" type="ColorRect" parent="." unique_id=1123625411]
+visible = false
 layout_mode = 0
 offset_left = 72.0
 offset_top = 136.0
@@ -223,54 +225,34 @@ offset_right = 541.99963
 offset_bottom = 138.0
 color = Color(0.29, 0.486, 0.145, 0.35)
 
-[node name="DeployButton" type="Button" parent="." unique_id=1943171896]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 144.0
-offset_right = 512.0
-offset_bottom = 200.0
-theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
-theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
-theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
-theme_override_fonts/font = ExtResource("2_3wy1v")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("SBF_btnGN")
-theme_override_styles/pressed = SubResource("SBF_btnGP")
-theme_override_styles/hover = SubResource("SBF_btnGH")
-theme_override_styles/focus = SubResource("SBF_focus")
-text = "Start"
-
-[node name="AchPanel" type="Panel" parent="." unique_id=1367374663]
+[node name="Panel" type="Panel" parent="." unique_id=1117508102]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 616.0
-offset_top = 552.0
-offset_bottom = 156.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -138.0
+offset_right = 228.0
+offset_bottom = 255.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hkkej")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3gur5")
 
-[node name="ACH1Label" type="Label" parent="AchPanel" unique_id=448077106]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "ACH1:"
-
-[node name="ACH1True" type="CheckBox" parent="AchPanel/ACH1Label" unique_id=143108195]
-layout_mode = 0
-offset_left = 264.0
-offset_right = 288.0
-offset_bottom = 24.0
-disabled = true
-
-[node name="AchButton" type="Button" parent="." unique_id=581412607]
-layout_mode = 0
-offset_left = 616.0
-offset_top = 488.0
-offset_right = 952.0
-offset_bottom = 543.9999
+[node name="AchButton" type="Button" parent="Panel" unique_id=581412607]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -218.0
+offset_top = -128.0
+offset_right = 222.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
@@ -282,12 +264,29 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Achievements"
 
-[node name="Endless_modeButton" type="Button" parent="." unique_id=269857706]
+[node name="DeployButton" type="Button" parent="Panel" unique_id=1943171896]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 216.0
-offset_right = 512.0
-offset_bottom = 272.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 448.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.2901961, 0.4862745, 0.14509805, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Start"
+
+[node name="Endless_modeButton" type="Button" parent="Panel" unique_id=269857706]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 448.0
+offset_bottom = 128.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
@@ -299,12 +298,12 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Endless_mode"
 
-[node name="SettingsButton" type="Button" parent="." unique_id=447485150]
+[node name="SettingsButton" type="Button" parent="Panel" unique_id=447485150]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 288.0
-offset_right = 512.0
-offset_bottom = 344.0
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 448.0
+offset_bottom = 192.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
@@ -316,12 +315,12 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Settings"
 
-[node name="HelpButton" type="Button" parent="." unique_id=281811274]
+[node name="HelpButton" type="Button" parent="Panel" unique_id=281811274]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 360.0
-offset_right = 512.0
-offset_bottom = 416.0
+offset_left = 8.0
+offset_top = 200.0
+offset_right = 448.0
+offset_bottom = 256.0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
 theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
 theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
@@ -333,12 +332,12 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Help (в разработке)"
 
-[node name="AbortButton" type="Button" parent="." unique_id=282283821]
+[node name="AbortButton" type="Button" parent="Panel" unique_id=282283821]
 layout_mode = 0
-offset_left = 72.0
-offset_top = 432.0
-offset_right = 512.0
-offset_bottom = 488.0
+offset_left = 8.0
+offset_top = 328.0
+offset_right = 448.0
+offset_bottom = 384.0
 theme_override_colors/font_color = Color(0.753, 0.224, 0.169, 1)
 theme_override_colors/font_pressed_color = Color(0.5, 0.15, 0.12, 1)
 theme_override_colors/font_hover_color = Color(0.88, 0.29, 0.22, 1)
@@ -356,7 +355,7 @@ offset_left = 8.0
 offset_top = 528.0
 offset_right = 478.0
 offset_bottom = 548.0
-text = "No fly zone  |  v0.1.7 beta"
+text = "No fly zone  |  v0.1.8 beta"
 label_settings = SubResource("LS_version")
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=1237362566]
@@ -371,11 +370,15 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Github" type="Label" parent="." unique_id=299251057]
-layout_mode = 0
-offset_left = 538.0
-offset_top = 56.0
-offset_right = 1043.0
-offset_bottom = 78.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 64.0
+offset_right = 185.0
+offset_bottom = 86.0
+grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   github]"
 label_settings = SubResource("LS_status")
@@ -402,11 +405,15 @@ scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_c651c")
 
 [node name="Discord" type="Label" parent="." unique_id=63998221]
-layout_mode = 0
-offset_left = 538.0
-offset_top = 81.0
-offset_right = 1043.0
-offset_bottom = 103.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 88.0
+offset_right = 185.0
+offset_bottom = 110.0
+grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   Discord]"
 label_settings = SubResource("LS_status")
@@ -433,11 +440,15 @@ scale = Vector2(0.025, 0.025)
 texture = ExtResource("3_3wy1v")
 
 [node name="Telegram" type="Label" parent="." unique_id=720527111]
-layout_mode = 0
-offset_left = 538.0
-offset_top = 106.0
-offset_right = 1043.0
-offset_bottom = 128.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 112.0
+offset_right = 185.0
+offset_bottom = 134.0
+grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   Telegram]"
 label_settings = SubResource("LS_status")
@@ -463,77 +474,85 @@ scale = Vector2(0.025, 0.025)
 texture = ExtResource("4_kfbq2")
 
 [node name="links" type="Label" parent="." unique_id=549604796]
-layout_mode = 0
-offset_left = 743.0
-offset_top = 31.0
-offset_right = 832.0
-offset_bottom = 53.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 40.0
+offset_right = -23.0
+offset_bottom = 62.0
+grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Game links"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 
 [node name="devs" type="Label" parent="." unique_id=1838138771]
-layout_mode = 0
-offset_left = 671.0
-offset_top = 196.0
-offset_right = 806.0
-offset_bottom = 218.0
+layout_mode = 1
+offset_right = 135.0
+offset_bottom = 22.0
 scale = Vector2(1.47, 1.47)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Game Developers"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="welloty" type="Label" parent="." unique_id=930467072]
-layout_mode = 0
-offset_left = 671.0
-offset_top = 231.0
-offset_right = 878.0
-offset_bottom = 253.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -258.0
+offset_right = 207.0
+offset_bottom = -236.0
+grow_vertical = 2
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Welloty – Project owner"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="warmt" type="Label" parent="." unique_id=2131642667]
 layout_mode = 0
-offset_left = 671.0
-offset_top = 256.0
-offset_right = 855.0
-offset_bottom = 278.0
+offset_top = 32.0
+offset_right = 184.0
+offset_bottom = 54.0
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Warmt – Lead designer"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="artur" type="Label" parent="." unique_id=1669983088]
 layout_mode = 0
-offset_left = 671.0
-offset_top = 281.0
-offset_right = 859.0
-offset_bottom = 303.0
+offset_top = 48.0
+offset_right = 222.0
+offset_bottom = 70.0
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "dmitjjtpc – Lead developer"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="karas" type="Label" parent="." unique_id=408478099]
 layout_mode = 0
-offset_left = 671.0
-offset_top = 306.0
-offset_right = 911.0
-offset_bottom = 328.0
+offset_top = 64.0
+offset_right = 240.0
+offset_bottom = 86.0
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "karas – Senior designer & dev"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="FPS" type="Label" parent="." unique_id=1738609334]
+visible = false
 layout_mode = 0
 offset_right = 144.0
 offset_bottom = 56.0
@@ -566,10 +585,10 @@ theme_override_styles/panel = SubResource("SBF_overlayPanel")
 
 [node name="CheckBox" type="CheckBox" parent="SettingsOverlay/Panel" unique_id=1518146647]
 layout_mode = 0
-offset_left = 142.0
-offset_top = 166.0
-offset_right = 182.0
-offset_bottom = 206.0
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 190.0
+offset_bottom = 190.0
 scale = Vector2(2.485, 2.485)
 
 [node name="Title" type="Label" parent="SettingsOverlay/Panel" unique_id=300000003]
@@ -611,13 +630,73 @@ vertical_alignment = 1
 
 [node name="VSYNC" type="Label" parent="SettingsOverlay/Panel" unique_id=980596440]
 layout_mode = 0
-offset_left = 54.0
-offset_top = 198.0
-offset_right = 204.0
-offset_bottom = 238.0
+offset_left = 73.0
+offset_top = 174.0
+offset_right = 131.0
+offset_bottom = 214.0
 text = "VSYNC"
 label_settings = SubResource("LS_overlayLabel")
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SoundOn" type="Label" parent="SettingsOverlay/Panel" unique_id=186524291]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0025
+anchor_bottom = 0.0025
+offset_left = 65.0
+offset_top = 225.0
+offset_right = 153.0
+offset_bottom = 265.0
+text = "SoundOn"
+label_settings = SubResource("LS_overlayLabel")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckSounds" type="CheckBox" parent="SettingsOverlay/Panel/SoundOn" unique_id=325342433]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.97700006
+anchor_top = 0.49500006
+anchor_right = 0.97700006
+anchor_bottom = 0.49500006
+offset_left = 0.023994446
+offset_top = -29.800003
+offset_right = 24.023994
+offset_bottom = -5.800003
+scale = Vector2(2.485, 2.485)
+metadata/_edit_use_anchors_ = true
+
+[node name="SoundVolume" type="Label" parent="SettingsOverlay/Panel" unique_id=1030984533]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.026
+anchor_right = 0.01
+offset_left = 46.0
+offset_top = 278.0
+offset_right = 150.0
+offset_bottom = 318.0
+text = "SoundVolume"
+label_settings = SubResource("LS_overlayLabel")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" type="HSlider" parent="SettingsOverlay/Panel/SoundVolume" unique_id=64728607]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.064
+anchor_top = 0.55
+anchor_right = 1.064
+anchor_bottom = 0.55
+offset_left = 0.000869751
+offset_top = -16.0
+offset_right = 240.00089
+offset_bottom = 16.000004
+min_value = 0.1
+max_value = 1.0
+step = 0.01
+value = 1.0
+metadata/_edit_use_anchors_ = true
 
 [node name="LanguageOptions" type="OptionButton" parent="SettingsOverlay/Panel" unique_id=300000006]
 layout_mode = 0
@@ -657,16 +736,142 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Close"
 
+[node name="AchOverlay" type="ColorRect" parent="." unique_id=840846748]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="AchPanel" type="Panel" parent="AchOverlay" unique_id=145837694]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49600002
+anchor_top = 0.49600002
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.19202
+offset_top = -199.80801
+offset_right = 250.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SBF_overlayPanel")
+
+[node name="ACH1True" type="CheckBox" parent="AchOverlay/AchPanel" unique_id=143108195]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.777702
+anchor_right = -1.6837226
+anchor_bottom = 0.017499981
+offset_left = 902.851
+offset_top = 8.0
+offset_right = 926.8511
+offset_bottom = 32.000008
+scale = Vector2(1.465, 1.465)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_kfbq2")
+disabled = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ACH1Label" type="Label" parent="AchOverlay/AchPanel/ACH1True" unique_id=448077106]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.008403618
+anchor_top = -0.06605751
+anchor_right = -0.008403585
+anchor_bottom = -0.06605751
+offset_left = 16.978834
+offset_top = 5.4607496
+offset_right = 88.97886
+offset_bottom = 37.460743
+text = "ACH1:"
+metadata/_edit_use_anchors_ = true
+
+[node name="ACH2True" type="CheckBox" parent="AchOverlay/AchPanel" unique_id=1691854253]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.7777021
+anchor_top = 0.08
+anchor_right = -1.7777021
+anchor_bottom = 0.09749998
+offset_left = 902.851
+offset_top = 8.0
+offset_right = 926.8511
+offset_bottom = 32.000008
+scale = Vector2(1.465, 1.465)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_kfbq2")
+disabled = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ACH2Label" type="Label" parent="AchOverlay/AchPanel/ACH2True" unique_id=139368462]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.22753239
+anchor_top = -0.08807668
+anchor_right = -0.22753239
+anchor_bottom = -0.08807668
+offset_left = 21.843023
+offset_top = 5.4607544
+offset_right = 93.843025
+offset_bottom = 37.460754
+text = "ACH2:"
+metadata/_edit_use_anchors_ = true
+
+[node name="AchCloseButton" type="Button" parent="AchOverlay/AchPanel" unique_id=58521230]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -52.0
+offset_right = 102.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Close"
+
+[node name="UpdateButton" type="Button" parent="AchOverlay/AchPanel" unique_id=330798278]
+visible = false
+layout_mode = 0
+offset_left = 427.0
+offset_top = 367.0
+offset_right = 492.0
+offset_bottom = 398.0
+text = "Update"
+
 [node name="SoundsMouse" type="AudioStreamPlayer2D" parent="." unique_id=332691226]
 position = Vector2(-154, 281)
 stream = ExtResource("6_kfbq2")
 volume_db = 5.0
 
-[connection signal="pressed" from="DeployButton" to="." method="_on_deploy_pressed"]
-[connection signal="pressed" from="AchButton" to="." method="_on_ach_button_pressed"]
-[connection signal="pressed" from="Endless_modeButton" to="." method="_on_endless_mode_button_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="HelpButton" to="." method="_on_help_button_pressed"]
-[connection signal="pressed" from="AbortButton" to="." method="_on_abort_pressed"]
+[connection signal="pressed" from="Panel/AchButton" to="." method="_on_ach_button_pressed"]
+[connection signal="pressed" from="Panel/DeployButton" to="." method="_on_deploy_pressed"]
+[connection signal="pressed" from="Panel/Endless_modeButton" to="." method="_on_endless_mode_button_pressed"]
+[connection signal="pressed" from="Panel/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="pressed" from="Panel/AbortButton" to="." method="_on_abort_pressed"]
+[connection signal="pressed" from="Telegram/TelegramLink" to="." method="_on_telegram_link_pressed"]
 [connection signal="toggled" from="SettingsOverlay/Panel/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="SettingsOverlay/Panel/SoundOn/CheckSounds" to="." method="_on_check_sounds_toggled"]
+[connection signal="value_changed" from="SettingsOverlay/Panel/SoundVolume/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="SettingsOverlay/Panel/LanguageOptions" to="." method="_on_language_options_pressed"]
+[connection signal="pressed" from="AchOverlay/AchPanel/UpdateButton" to="." method="_on_update_button_pressed"]

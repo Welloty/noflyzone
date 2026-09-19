@@ -29,3 +29,9 @@ position = Vector2(-3.9999998, 0.99999994)
 rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CapsuleShape2D_ifeun")
+
+[node name="Label" type="Label" parent="." unique_id=1168065744]
+offset_left = 13.0
+offset_top = 19.0
+offset_right = 53.0
+offset_bottom = 42.0

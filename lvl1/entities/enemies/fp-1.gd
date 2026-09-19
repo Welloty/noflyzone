@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var sun_direction := Vector2(15, 20)
 @export var destruction_scene: PackedScene = preload("res://lvl1/entities/enemies/drone_destruction.tscn")
 @export var factory_explosion_scene: PackedScene = preload("res://lvl1/entities/enemies/factory_explosion.tscn")
+@onready var Height_Label: Label = $Label
+var HeightDrone = H.Hdrone
 
 @onready var shadow_sprite: Sprite2D = $Shadow
 
@@ -33,6 +35,7 @@ func _process(_delta: float) -> void:
 	if is_instance_valid(shadow_sprite):
 		shadow_sprite.global_rotation = global_rotation + deg_to_rad(90)
 		shadow_sprite.global_position = global_position + sun_direction
+	Height_Label.text = str(HeightDrone)
 
 
 func _physics_process(delta: float) -> void:

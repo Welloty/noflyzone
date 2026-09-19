@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://uhjhyfschiih"]
+
+[ext_resource type="Script" uid="uid://bjgcrtqts5w3l" path="res://lvl1/entities/planes/KalibrTest.gd" id="1_xrguw"]
+[ext_resource type="Texture2D" uid="uid://ctiuwogkdjmm8" path="res://lvl1/textures/Kalibr.png" id="3_nuta0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 35.510563
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
+radius = 132.09845
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_click"]
+radius = 64.0
+
+[node name="KalibrTest" type="CharacterBody2D" unique_id=125044412]
+z_index = 10
+script = ExtResource("1_xrguw")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1958184232]
+modulate = Color(0, 0, 0, 0.50980395)
+position = Vector2(-7.9999995, 7.9999995)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_nuta0")
+offset = Vector2(-100, -40)
+
+[node name="Kalibr" type="Sprite2D" parent="." unique_id=1825462116]
+scale = Vector2(0.1, 0.076)
+texture = ExtResource("3_nuta0")
+offset = Vector2(-100, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1574779097]
+visible = false
+shape = SubResource("CircleShape2D_body")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=2029971933]
+visible = false
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1624062127]
+shape = SubResource("CircleShape2D_detection")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1950279631]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=912910917]
+shape = SubResource("CircleShape2D_click")
+
+[connection signal="area_entered" from="DetectionZone" to="." method="_on_detection_zone_area_entered"]

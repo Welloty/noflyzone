@@ -72,6 +72,11 @@ func _ready() -> void:
 
 	_update_money_ui()
 
+
+func _process(delta: float) -> void:
+	var fps = Engine.get_frames_per_second()
+	$FPS.text = "FPS: %d" % fps
+
 func _on_pause_pressed() -> void:
 	if get_tree().paused:
 		return

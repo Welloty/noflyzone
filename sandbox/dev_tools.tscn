@@ -211,6 +211,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = " Союзник"
 
+[node name="ShahedTest" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid" unique_id=1220040617]
+layout_mode = 2
+text = "Shahed"
+
+[node name="KalibrTest" type="Button" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid" unique_id=843151273]
+layout_mode = 2
+text = "Kalibr"
+
 [node name="HSeparator1" type="HSeparator" parent="RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox" unique_id=24293548]
 layout_mode = 2
 
