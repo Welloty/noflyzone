@@ -32,7 +32,7 @@ func _load_sound() -> void:
 # Вызывай эту функцию, когда игрок переключает звук в настройках
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_load_sound()
 	if sounds:
 		if not sound.playing:

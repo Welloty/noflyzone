@@ -20,8 +20,8 @@ var is_down: bool = false
 func _ready() -> void:
 	add_to_group("drones")
 	health = max_health
-	#if not shahed_sound.playing:
-		#shahed_sound.play()
+	if is_instance_valid(shahed_sound):
+		shahed_sound.play()
 
 func _exit_tree() -> void:
 	_cleanup_path_follower()

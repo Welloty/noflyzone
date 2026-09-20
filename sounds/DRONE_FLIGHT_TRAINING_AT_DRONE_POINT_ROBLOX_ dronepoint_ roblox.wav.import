@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://e7n0vfeim85m"
+path="res://.godot/imported/DRONE_FLIGHT_TRAINING_AT_DRONE_POINT_ROBLOX_ dronepoint_ roblox.wav-ae9457833ef24ca454b16fc952ebdd94.sample"
+
+[deps]
+
+source_file="res://sounds/DRONE_FLIGHT_TRAINING_AT_DRONE_POINT_ROBLOX_ dronepoint_ roblox.wav"
+dest_files=["res://.godot/imported/DRONE_FLIGHT_TRAINING_AT_DRONE_POINT_ROBLOX_ dronepoint_ roblox.wav-ae9457833ef24ca454b16fc952ebdd94.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

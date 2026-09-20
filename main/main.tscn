@@ -241,6 +241,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3gur5")
 
 [node name="AchButton" type="Button" parent="Panel" unique_id=581412607]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -501,25 +502,27 @@ metadata/_edit_use_anchors_ = true
 
 [node name="welloty" type="Label" parent="." unique_id=930467072]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -258.0
+anchors_preset = -1
+anchor_top = 0.029000001
+anchor_bottom = 0.029000001
+offset_top = 0.1079998
 offset_right = 207.0
-offset_bottom = -236.0
+offset_bottom = 22.108
 grow_vertical = 2
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Welloty – Project owner"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="warmt" type="Label" parent="." unique_id=2131642667]
-layout_mode = 0
-offset_top = 32.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.058000002
+anchor_bottom = 0.058000002
+offset_top = 0.2159996
 offset_right = 184.0
-offset_bottom = 54.0
+offset_bottom = 22.216
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Warmt – Lead designer"
@@ -527,11 +530,14 @@ label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="artur" type="Label" parent="." unique_id=1669983088]
-layout_mode = 0
-offset_top = 48.0
+[node name="dmitjjtpc" type="Label" parent="." unique_id=1669983088]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.08800001
+anchor_bottom = 0.08800001
+offset_top = -0.22400284
 offset_right = 222.0
-offset_bottom = 70.0
+offset_bottom = 21.775997
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "dmitjjtpc – Lead developer"
@@ -539,11 +545,28 @@ label_settings = SubResource("LS_status")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="artur" type="Label" parent="." unique_id=162963516]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.14600001
+anchor_bottom = 0.14600001
+offset_top = -0.008003235
+offset_right = 222.0
+offset_bottom = 21.991997
+scale = Vector2(1.08, 1.08)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+text = "Artur – Lead developer"
+label_settings = SubResource("LS_status")
+metadata/_edit_use_anchors_ = true
+
 [node name="karas" type="Label" parent="." unique_id=408478099]
-layout_mode = 0
-offset_top = 64.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.117000006
+anchor_bottom = 0.117000006
+offset_top = -0.116004944
 offset_right = 240.0
-offset_bottom = 86.0
+offset_bottom = 21.883995
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "karas – Senior designer & dev"
