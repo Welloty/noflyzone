@@ -11,13 +11,6 @@
 font_size = 90
 font_color = Color(0.2901961, 0.4862745, 0.14509805, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gur5"]
-bg_color = Color(0.20274815, 0.37147403, 0.2213068, 0.627451)
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
-
 [sub_resource type="StyleBoxFlat" id="SBF_btnGN"]
 content_margin_left = 20.0
 content_margin_top = 10.0
@@ -29,7 +22,7 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.29, 0.486, 0.145, 0.65)
-corner_radius_top_left = 2
+corner_radius_top_left = 5
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
@@ -67,6 +60,13 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxEmpty" id="SBF_focus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gur5"]
+bg_color = Color(0.20274815, 0.37147403, 0.2213068, 0.627451)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id="SBF_btnRN"]
 content_margin_left = 20.0
@@ -146,7 +146,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.29, 0.486, 0.145, 0.8)
+border_color = Color(0.2901961, 0.4862745, 0.14509805, 0.8)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -162,6 +162,18 @@ font_color = Color(0.741, 0.765, 0.78, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfbq2"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dugh"]
+bg_color = Color(0.0627451, 0.13333334, 0.07058824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2901961, 0.4862745, 0.14509805, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="Control" type="Control" unique_id=2077169234]
 layout_mode = 3
@@ -225,32 +237,52 @@ offset_right = 541.99963
 offset_bottom = 138.0
 color = Color(0.29, 0.486, 0.145, 0.35)
 
+[node name="SettingsButton" type="Button" parent="." unique_id=447485150]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.004
+anchor_right = 1.0
+anchor_bottom = 0.004
+offset_left = -82.0
+offset_top = -0.19200015
+offset_right = -1.0
+offset_bottom = 48.808
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "⚙️"
+metadata/_edit_use_anchors_ = true
+
 [node name="Panel" type="Panel" parent="." unique_id=1117508102]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.54
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.54
 offset_left = -228.0
-offset_top = -138.0
+offset_top = -131.92001
 offset_right = 228.0
-offset_bottom = 255.0
+offset_bottom = 132.07999
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3gur5")
 
 [node name="AchButton" type="Button" parent="Panel" unique_id=581412607]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -218.0
-offset_top = -128.0
-offset_right = 222.0
-offset_bottom = -72.0
+anchors_preset = -1
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 448.0
+offset_bottom = 192.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
@@ -281,7 +313,7 @@ theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
 text = "Start"
 
-[node name="Endless_modeButton" type="Button" parent="Panel" unique_id=269857706]
+[node name="HelpButton" type="Button" parent="Panel" unique_id=281811274]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
@@ -296,48 +328,14 @@ theme_override_styles/normal = SubResource("SBF_btnGN")
 theme_override_styles/pressed = SubResource("SBF_btnGP")
 theme_override_styles/hover = SubResource("SBF_btnGH")
 theme_override_styles/focus = SubResource("SBF_focus")
-text = "Endless_mode"
-
-[node name="SettingsButton" type="Button" parent="Panel" unique_id=447485150]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 136.0
-offset_right = 448.0
-offset_bottom = 192.0
-theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
-theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
-theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
-theme_override_fonts/font = ExtResource("2_3wy1v")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("SBF_btnGN")
-theme_override_styles/pressed = SubResource("SBF_btnGP")
-theme_override_styles/hover = SubResource("SBF_btnGH")
-theme_override_styles/focus = SubResource("SBF_focus")
-text = "Settings"
-
-[node name="HelpButton" type="Button" parent="Panel" unique_id=281811274]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 200.0
-offset_right = 448.0
-offset_bottom = 256.0
-theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
-theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
-theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
-theme_override_fonts/font = ExtResource("2_3wy1v")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("SBF_btnGN")
-theme_override_styles/pressed = SubResource("SBF_btnGP")
-theme_override_styles/hover = SubResource("SBF_btnGH")
-theme_override_styles/focus = SubResource("SBF_focus")
 text = "Help (в разработке)"
 
 [node name="AbortButton" type="Button" parent="Panel" unique_id=282283821]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 328.0
+offset_top = 200.0
 offset_right = 448.0
-offset_bottom = 384.0
+offset_bottom = 256.0
 theme_override_colors/font_color = Color(0.753, 0.224, 0.169, 1)
 theme_override_colors/font_pressed_color = Color(0.5, 0.15, 0.12, 1)
 theme_override_colors/font_hover_color = Color(0.88, 0.29, 0.22, 1)
@@ -371,13 +369,15 @@ color = Color(0, 0, 0, 1)
 
 [node name="Github" type="Label" parent="." unique_id=299251057]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -320.0
-offset_top = 64.0
-offset_right = 185.0
-offset_bottom = 86.0
+anchors_preset = -1
+anchor_left = 0.50600004
+anchor_top = 0.86100006
+anchor_right = 0.50600004
+anchor_bottom = 0.86100006
+offset_left = -252.71204
+offset_top = -10.828033
+offset_right = 252.28796
+offset_bottom = 11.171967
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   github]"
@@ -387,11 +387,14 @@ horizontal_alignment = 1
 [node name="GithubLink" type="LinkButton" parent="Github" unique_id=729937652]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.017
-offset_left = 216.0
-offset_top = 4.0
-offset_right = 279.415
-offset_bottom = 23.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -7.0
+offset_right = 35.5
+offset_bottom = 12.0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 uri = "https://github.com/Welloty/noflyzone"
 
@@ -406,13 +409,15 @@ texture = ExtResource("2_c651c")
 
 [node name="Discord" type="Label" parent="." unique_id=63998221]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -320.0
-offset_top = 88.0
-offset_right = 185.0
-offset_bottom = 110.0
+anchors_preset = -1
+anchor_left = 0.50600004
+anchor_top = 0.90500003
+anchor_right = 0.50600004
+anchor_bottom = 0.90500003
+offset_left = -252.71204
+offset_top = -10.940002
+offset_right = 252.28796
+offset_bottom = 11.059998
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   Discord]"
@@ -422,11 +427,14 @@ horizontal_alignment = 1
 [node name="DiscordLink" type="LinkButton" parent="Discord" unique_id=1889831105]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.017
-offset_left = 213.0
-offset_top = 3.0
-offset_right = 284.415
-offset_bottom = 22.0
+anchor_left = 0.50100005
+anchor_top = 0.568
+anchor_right = 0.50100005
+anchor_bottom = 0.568
+offset_left = -40.00502
+offset_top = -9.496
+offset_right = 39.99498
+offset_bottom = 9.504
 theme_override_fonts/font = SubResource("FontFile_h8yf2")
 uri = "https://discord.gg/tUDJJU9AzA"
 
@@ -442,12 +450,14 @@ texture = ExtResource("3_3wy1v")
 [node name="Telegram" type="Label" parent="." unique_id=720527111]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -320.0
-offset_top = 112.0
-offset_right = 185.0
-offset_bottom = 134.0
+anchor_left = 0.50600004
+anchor_top = 0.94900006
+anchor_right = 0.50600004
+anchor_bottom = 0.94900006
+offset_left = -252.71204
+offset_top = -11.052063
+offset_right = 252.28796
+offset_bottom = 10.947937
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "[   Telegram]"
@@ -457,11 +467,14 @@ horizontal_alignment = 1
 [node name="TelegramLink" type="LinkButton" parent="Telegram" unique_id=329433732]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.017
-offset_left = 207.0
-offset_top = 3.0
-offset_right = 289.415
-offset_bottom = 22.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -8.0
+offset_right = 45.5
+offset_bottom = 11.0
 uri = "https://t.me/NoFlyZoneofficial"
 
 [node name="TextureRect" type="TextureRect" parent="Telegram" unique_id=1099002677]
@@ -475,13 +488,15 @@ texture = ExtResource("4_kfbq2")
 
 [node name="links" type="Label" parent="." unique_id=549604796]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -112.0
-offset_top = 40.0
-offset_right = -23.0
-offset_bottom = 62.0
+anchors_preset = -1
+anchor_left = 0.50600004
+anchor_top = 0.818
+anchor_right = 0.50600004
+anchor_bottom = 0.818
+offset_left = -44.712036
+offset_top = -11.264008
+offset_right = 44.287964
+offset_bottom = 10.735992
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Game links"
@@ -490,23 +505,24 @@ horizontal_alignment = 1
 
 [node name="devs" type="Label" parent="." unique_id=1838138771]
 layout_mode = 1
-offset_right = 135.0
-offset_bottom = 22.0
+anchors_preset = -1
+anchor_top = 0.002
+anchor_bottom = 0.002
+offset_top = -0.096000075
+offset_right = 135.00002
+offset_bottom = 14.904
 scale = Vector2(1.47, 1.47)
 theme_override_fonts/font = ExtResource("2_3wy1v")
 text = "Game Developers"
 label_settings = SubResource("LS_status")
 horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="welloty" type="Label" parent="." unique_id=930467072]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -258.0
+anchors_preset = -1
+offset_top = 16.0
 offset_right = 207.0
-offset_bottom = -236.0
+offset_bottom = 38.0
 grow_vertical = 2
 scale = Vector2(1.08, 1.08)
 theme_override_fonts/font = ExtResource("2_3wy1v")
@@ -591,6 +607,20 @@ offset_right = 190.0
 offset_bottom = 190.0
 scale = Vector2(2.485, 2.485)
 
+[node name="CheckSounds" type="CheckBox" parent="SettingsOverlay/Panel" unique_id=325342433]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.97700006
+anchor_top = 0.49500006
+anchor_right = 0.97700006
+anchor_bottom = 0.49500006
+offset_left = -336.50003
+offset_top = 18.99997
+offset_right = -312.5
+offset_bottom = 42.99997
+scale = Vector2(2.485, 2.485)
+metadata/_edit_use_anchors_ = true
+
 [node name="Title" type="Label" parent="SettingsOverlay/Panel" unique_id=300000003]
 layout_mode = 1
 anchors_preset = 5
@@ -642,29 +672,17 @@ metadata/_edit_use_anchors_ = true
 [node name="SoundOn" type="Label" parent="SettingsOverlay/Panel" unique_id=186524291]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.0025
-anchor_bottom = 0.0025
-offset_left = 65.0
-offset_top = 225.0
-offset_right = 153.0
-offset_bottom = 265.0
+anchor_left = 0.30800003
+anchor_top = 0.588
+anchor_right = 0.30800003
+anchor_bottom = 0.588
+offset_left = -88.000015
+offset_top = -8.199997
+offset_right = -1.5258789e-05
+offset_bottom = 31.800003
 text = "SoundOn"
 label_settings = SubResource("LS_overlayLabel")
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="CheckSounds" type="CheckBox" parent="SettingsOverlay/Panel/SoundOn" unique_id=325342433]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.97700006
-anchor_top = 0.49500006
-anchor_right = 0.97700006
-anchor_bottom = 0.49500006
-offset_left = 0.023994446
-offset_top = -29.800003
-offset_right = 24.023994
-offset_bottom = -5.800003
-scale = Vector2(2.485, 2.485)
 metadata/_edit_use_anchors_ = true
 
 [node name="SoundVolume" type="Label" parent="SettingsOverlay/Panel" unique_id=1030984533]
@@ -863,15 +881,102 @@ position = Vector2(-154, 281)
 stream = ExtResource("6_kfbq2")
 volume_db = 5.0
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1981019083]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel2" type="Panel" parent="ColorRect" unique_id=1480650568]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.53300005
+anchor_right = 0.5
+anchor_bottom = 0.53300005
+offset_left = -228.5
+offset_top = -155.01804
+offset_right = 229.5
+offset_bottom = 156.982
+theme_override_styles/panel = SubResource("StyleBoxFlat_4dugh")
+
+[node name="lvl1_button" type="Button" parent="ColorRect/Panel2" unique_id=971283582]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.2901961, 0.4862745, 0.14509805, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Level 1"
+
+[node name="Endless_modeButton" type="Button" parent="ColorRect/Panel2" unique_id=1592273741]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02183406
+anchor_top = -0.0064102565
+anchor_right = 0.02183406
+anchor_bottom = -0.0064102565
+offset_top = 72.0
+offset_right = 440.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_fonts/font = ExtResource("2_3wy1v")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Endless_mode"
+metadata/_edit_use_anchors_ = true
+
+[node name="LvlClose" type="Button" parent="ColorRect/Panel2" unique_id=1869279758]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.92300004
+anchor_right = 0.5
+anchor_bottom = 0.92300004
+offset_left = -99.5
+offset_top = -23.042023
+offset_right = 100.5
+offset_bottom = 22.957977
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.29, 0.486, 0.145, 1)
+theme_override_colors/font_pressed_color = Color(0.18, 0.31, 0.09, 1)
+theme_override_colors/font_hover_color = Color(0.44, 0.71, 0.23, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("SBF_btnGN")
+theme_override_styles/pressed = SubResource("SBF_btnGP")
+theme_override_styles/hover = SubResource("SBF_btnGH")
+theme_override_styles/focus = SubResource("SBF_focus")
+text = "Close"
+
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Panel/AchButton" to="." method="_on_ach_button_pressed"]
 [connection signal="pressed" from="Panel/DeployButton" to="." method="_on_deploy_pressed"]
-[connection signal="pressed" from="Panel/Endless_modeButton" to="." method="_on_endless_mode_button_pressed"]
-[connection signal="pressed" from="Panel/SettingsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Panel/HelpButton" to="." method="_on_help_button_pressed"]
 [connection signal="pressed" from="Panel/AbortButton" to="." method="_on_abort_pressed"]
 [connection signal="pressed" from="Telegram/TelegramLink" to="." method="_on_telegram_link_pressed"]
 [connection signal="toggled" from="SettingsOverlay/Panel/CheckBox" to="." method="_on_check_box_toggled"]
-[connection signal="toggled" from="SettingsOverlay/Panel/SoundOn/CheckSounds" to="." method="_on_check_sounds_toggled"]
+[connection signal="toggled" from="SettingsOverlay/Panel/CheckSounds" to="." method="_on_check_sounds_toggled"]
 [connection signal="value_changed" from="SettingsOverlay/Panel/SoundVolume/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="SettingsOverlay/Panel/LanguageOptions" to="." method="_on_language_options_pressed"]
 [connection signal="pressed" from="AchOverlay/AchPanel/UpdateButton" to="." method="_on_update_button_pressed"]
+[connection signal="pressed" from="ColorRect/Panel2/lvl1_button" to="." method="_on_lvl_1_button_pressed"]
+[connection signal="pressed" from="ColorRect/Panel2/Endless_modeButton" to="." method="_on_endless_mode_button_pressed"]
+[connection signal="pressed" from="ColorRect/Panel2/LvlClose" to="." method="_on_lvl_close_pressed"]

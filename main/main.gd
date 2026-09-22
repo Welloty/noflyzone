@@ -2,10 +2,10 @@ extends Control
 
 @onready var fade_overlay: ColorRect = $FadeOverlay
 @onready var deploy_btn: Button = $Panel/DeployButton
-@onready var settings_btn: Button = $Panel/SettingsButton
+@onready var settings_btn: Button = $SettingsButton
 @onready var abort_btn: Button = $Panel/AbortButton
 @onready var help_btn: Button = $Panel/HelpButton
-@onready var Endless_bth: Button = $Panel/Endless_modeButton
+@onready var Endless_bth: Button = $ColorRect/Panel2/Endless_modeButton
 var data_path = "user://Saves.save"
 var setting_path = "user://Settings.save"
 var sound_path = "user://Sound.save"
@@ -23,6 +23,8 @@ var pressed_title: int = 0
 #@onready var Ach_Label: Label = $AchOverlay/AchPanel/ACH1Label
 var music = S_script.music
 @onready var Hslider2 = $SettingsOverlay/Panel/SoundVolume/HSlider
+@onready var lvlpanel: ColorRect = $ColorRect
+@onready var lvl_bth: Button = $ColorRect/Panel2/lvl1_button
 
 
 @onready var settings_overlay: ColorRect = $SettingsOverlay
@@ -54,9 +56,9 @@ func _ready() -> void:
 		$SettingsOverlay/Panel/CheckBox.set_pressed_no_signal(true)
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	if sounds == false:
-		$SettingsOverlay/Panel/SoundOn/CheckSounds.set_pressed_no_signal(false)
+		$SettingsOverlay/Panel/CheckSounds.set_pressed_no_signal(false)
 	else:
-		$SettingsOverlay/Panel/SoundOn/CheckSounds.set_pressed_no_signal(true)
+		$SettingsOverlay/Panel/CheckSounds.set_pressed_no_signal(true)
 		
 	if Ach1 == 0:
 		Ach1_true.set_pressed_no_signal(false)
@@ -70,7 +72,7 @@ func _ready() -> void:
 		Ach2 = 1
 
 	# Wire up hover animations
-	for btn: Button in [deploy_btn, settings_btn, help_btn, abort_btn, Endless_bth]:
+	for btn: Button in [deploy_btn, settings_btn, help_btn, abort_btn, Endless_bth, lvl_bth]:
 		#_base_x[btn] = btn.position.x
 		btn.mouse_entered.connect(_on_btn_entered.bind(btn))
 		#btn.mouse_exited.connect(_on_btn_exited.bind(btn))
@@ -108,9 +110,7 @@ func _on_btn_entered(btn: Button) -> void:
 	#tween.tween_property(btn, "position:x", _base_x[btn], 0.15).set_ease(Tween.EASE_OUT)
 
 func _on_deploy_pressed() -> void:
-	#lvl 1
-	_fade_and_go("res://lvl1/scenes/mission_prep.tscn")
-	sound_mouse.play()
+	_on_lvl_pressed()
 
 func _on_settings_pressed() -> void:
 	_update_language_dropdown()
@@ -228,6 +228,21 @@ func slide_exit():
 	var tween = create_tween()
 	tween.parallel().tween_property(AchPanel, "position", Vector2(616, 392), 0.3)
 	tween.parallel().tween_property(Ach_Button, "position", Vector2(616, 335.19), 0.3)
+	
+func _on_lvl_pressed() -> void:
+	_update_language_dropdown()
+	lvlpanel.visible = true
+	lvlpanel.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(lvlpanel, "modulate:a", 1.0, 0.25).set_ease(Tween.EASE_OUT)
+	sound_mouse.play()
+
+func _on_lvlclose_pressed() -> void:
+	sound_mouse.play()
+	var tween := create_tween()
+	tween.tween_property(lvlpanel, "modulate:a", 0.0, 0.2).set_ease(Tween.EASE_IN)
+	await tween.finished
+	lvlpanel.visible = false
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	if toggled_on:
@@ -278,3 +293,13 @@ func _on_update_button_pressed() -> void:
 func _on_h_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(music, linear_to_db(value))
 	_save_sound()
+
+
+func _on_lvl_1_button_pressed() -> void:
+	#lvl 1
+	_fade_and_go("res://lvl1/scenes/mission_prep.tscn")
+	sound_mouse.play()
+
+
+func _on_lvl_close_pressed() -> void:
+	_on_lvlclose_pressed()

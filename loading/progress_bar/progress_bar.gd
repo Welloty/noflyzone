@@ -9,7 +9,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if done:
 		return
-	value += 25 * delta
+	value += 50 * delta
 	if value >= max_value:
 		done = true
 		_finish_loading()

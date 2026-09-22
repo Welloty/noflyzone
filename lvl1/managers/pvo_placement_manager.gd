@@ -549,7 +549,7 @@ func _create_sell_ui() -> void:
 	if is_instance_valid(selected_plane) or (is_instance_valid(selected_tower) and selected_tower.is_in_group("friendly_units")):
 		var plane_ref = selected_plane if is_instance_valid(selected_plane) else selected_tower
 		var has_route = ("patrol_points" in plane_ref and not plane_ref.patrol_points.is_empty())
-		var btn_label = " Изменить патруль " if has_route else " ✈  Задать патруль "
+		var btn_label = " Изменить патруль " if has_route else " Задать патруль "
 		patrol_btn = Button.new()
 		patrol_btn.text = btn_label
 		patrol_btn.tooltip_text = "Нарисовать новый маршрут патрулирования"
@@ -636,7 +636,7 @@ func _create_patrol_ui() -> void:
 	panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 
 	var panel_style = StyleBoxFlat.new()
-	panel_style.bg_color = Color(1.0, 1.0, 1.0, 0.94)
+	panel_style.bg_color = Color(0.06, 0.12, 0.18, 0.94)
 	panel_style.corner_radius_top_left = 16
 	panel_style.corner_radius_top_right = 16
 	panel_style.corner_radius_bottom_left = 16
@@ -666,7 +666,7 @@ func _create_patrol_ui() -> void:
 	patrol_info_label = Label.new()
 	patrol_info_label.text = "Кликайте по карте (Точек: 0)"
 	patrol_info_label.add_theme_font_size_override("font_size", 16)
-	patrol_info_label.add_theme_color_override("font_color", Color(0.85, 0.95, 1.0))
+	patrol_info_label.add_theme_color_override("font_color", Color(0.128, 0.773, 1.0, 1.0))
 	hbox.add_child(patrol_info_label)
 
 	patrol_confirm_btn = Button.new()

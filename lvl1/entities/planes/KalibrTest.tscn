@@ -33,14 +33,12 @@ visible = false
 shape = SubResource("CircleShape2D_body")
 
 [node name="DetectionZone" type="Area2D" parent="." unique_id=2029971933]
-visible = false
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1624062127]
 shape = SubResource("CircleShape2D_detection")
 
 [node name="ClickArea" type="Area2D" parent="." unique_id=1950279631]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=912910917]
 shape = SubResource("CircleShape2D_click")
