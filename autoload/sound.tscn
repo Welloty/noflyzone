@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drdlkjxl1l5wb"]
 
-[ext_resource type="Script" uid="uid://donnyvvx4g87j" path="res://sound.gd" id="1_7ywqe"]
+[ext_resource type="Script" uid="uid://donnyvvx4g87j" path="res://autoload/sound.gd" id="1_7ywqe"]
 [ext_resource type="AudioStream" uid="uid://b0p1rh532ubla" path="res://sounds/locking_onto_target.mp3" id="2_tdv2v"]
 
 [node name="Sound" type="AudioStreamPlayer2D" unique_id=1418114635]
