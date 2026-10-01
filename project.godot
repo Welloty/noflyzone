@@ -24,6 +24,8 @@ Rpc="*uid://blcf7k44sfui0"
 H="*uid://bxfwp2hbbgute"
 Display="*uid://cm71pc3am3j2i"
 Ach="*uid://dnikefyc7ikk4"
+S_scene="*uid://drdlkjxl1l5wb"
+S_script="*uid://donnyvvx4g87j"
 
 [compression]
 
@@ -36,6 +38,7 @@ window/size/viewport_height=548
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/stretch/scale=0.99
 window/vsync/vsync_mode=0
 
 [editor_plugins]

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bnmqysh3n6hon"]
+
+[ext_resource type="Script" uid="uid://gis1mtab7spw" path="res://lvl1/entities/planes/ShahedTest.gd" id="1_cam4q"]
+[ext_resource type="Texture2D" uid="uid://cq1hwoiptjvf1" path="res://lvl1/textures/Drone.png" id="2_du267"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 35.510563
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detection"]
+radius = 132.09845
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_click"]
+radius = 61.008198
+
+[node name="ShahedTest" type="CharacterBody2D" unique_id=125044412]
+z_index = 10
+script = ExtResource("1_cam4q")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1933748152]
+modulate = Color(0, 0, 0, 0.4)
+position = Vector2(-10.000002, 6.999999)
+rotation = 1.5707964
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_du267")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=811124891]
+modulate = Color(0.8497684, 0.8339317, 0.81570166, 1)
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_du267")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1574779097]
+shape = SubResource("CircleShape2D_body")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=2029971933]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone" unique_id=1624062127]
+shape = SubResource("CircleShape2D_detection")
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1950279631]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=912910917]
+shape = SubResource("CircleShape2D_click")
+
+[connection signal="area_entered" from="DetectionZone" to="." method="_on_detection_zone_area_entered"]

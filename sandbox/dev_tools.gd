@@ -9,6 +9,8 @@ const SCENE_FP1 = preload("res://lvl1/entities/enemies/fp-1.tscn")
 const SCENE_KALIBR = preload("res://lvl1/entities/enemies/Roctetks.tscn")
 const SCENE_SHAHED238 = preload("res://lvl1/entities/enemies/shahed238.tscn")
 const SCENE_FRIENDLY_PLANE = preload("res://lvl1/entities/planes/FriendlyPlane.tscn")
+const SCENE_SHAHED = preload("res://lvl1/entities/planes/ShahedTest.tscn")
+const SCENE_KALIBR_CONTROLLED = preload("res://lvl1/entities/planes/KalibrTest.tscn")
 
 # Состояние
 var is_god_mode: bool = false
@@ -107,6 +109,8 @@ func _setup_signals() -> void:
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/Shahed238Btn", _on_enemy_btn_pressed.bind("shahed238"))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/PlaneBtn", _on_spawn_friendly_plane_pressed)
 
+	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/ShahedTest", _on_spawn_shahed_pressed)
+	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/EnemyGrid/KalibrTest", _on_spawn_Kalibr_pressed)
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox/Btn1", _on_set_batch_count.bind(1))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox/Btn3", _on_set_batch_count.bind(3))
 	_connect_btn("RootControl/MainPanel/VBox/Content/TabContainer/Enemies/VBox/CountHBox/Btn5", _on_set_batch_count.bind(5))
@@ -364,6 +368,42 @@ func _on_spawn_friendly_plane_pressed() -> void:
 	else:
 		get_parent().add_child(plane)
 	post_toast("✈️ Дружественный самолет заспавнен!", Color(0.4, 0.8, 1.0))
+
+func _on_spawn_shahed_pressed() -> void:
+	var scene = SCENE_SHAHED
+	var level = get_tree().get_first_node_in_group("level")
+	var container = level.get_node_or_null("Containers/TowersContainer") if level else null
+	var plane = scene.instantiate()
+	
+	var camera = get_viewport().get_camera_2d()
+	var spawn_pos = camera.get_screen_center_position() if camera else Vector2.ZERO
+	plane.global_position = spawn_pos
+	
+	if container:
+		container.add_child(plane)
+	elif level:
+		level.add_child(plane)
+	else:
+		get_parent().add_child(plane)
+	post_toast("Управляемый шахед создан!", Color(0.729, 0.071, 0.0, 1.0))
+
+func _on_spawn_Kalibr_pressed() -> void:
+	var scene = SCENE_KALIBR_CONTROLLED
+	var level = get_tree().get_first_node_in_group("level")
+	var container = level.get_node_or_null("Containers/TowersContainer") if level else null
+	var plane = scene.instantiate()
+	
+	var camera = get_viewport().get_camera_2d()
+	var spawn_pos = camera.get_screen_center_position() if camera else Vector2.ZERO
+	plane.global_position = spawn_pos
+	
+	if container:
+		container.add_child(plane)
+	elif level:
+		level.add_child(plane)
+	else:
+		get_parent().add_child(plane)
+	post_toast("Управляемый шахед создан!", Color(0.729, 0.071, 0.0, 1.0))
 
 func _on_next_wave_pressed() -> void:
 	var wm = _get_wave_manager()

@@ -78,6 +78,7 @@ func _spawn_single_drone() -> void:
 	# выбор типа дрона
 	var scene: PackedScene = drone_scene
 	var path_node: Path2D = main_path
+	var Height = H.Hdrone
 	
 	if current_wave >= 2:
 		var roll := randf()
@@ -87,6 +88,7 @@ func _spawn_single_drone() -> void:
 		elif roll < 0.70:
 			scene = fp1_scene
 			path_node = fp1_path
+			Height
 	if current_wave >= 6:
 		var roll := randf()
 		if roll < 0.25:
